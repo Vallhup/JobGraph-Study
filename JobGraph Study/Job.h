@@ -51,16 +51,3 @@ struct MoveJob : public IJob {
 #endif
 	}
 };
-
-struct ComponentUpdateJob : public IJob {
-	Component* comp;
-	float deltaTime;
-
-	explicit ComponentUpdateJob(Component* c, float dT)
-		: comp(c), deltaTime(dT) {}
-	static void Execute(void* ctx)
-	{
-		ComponentUpdateJob* job = static_cast<ComponentUpdateJob*>(ctx);
-		job->comp->Update(job->deltaTime);
-	}
-};

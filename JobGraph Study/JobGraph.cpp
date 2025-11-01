@@ -52,8 +52,8 @@ void JobGraph::Build()
 
 void JobGraph::Run()
 {
-	if (_latch) delete _latch;
-	_latch = new std::latch(static_cast<int>(_nodes.size()));
+	if (_latch) _latch.reset();
+	_latch.emplace(static_cast<int>(_nodes.size()));
 
 	for (JobNode* node : _nodes)
 		node->ResetDeps();
@@ -65,9 +65,6 @@ void JobGraph::Run()
 	}
 
 	_latch->wait();
-
-	delete _latch;
-	_latch = nullptr;
 }
 
 void JobGraph::NotifyJobDone()

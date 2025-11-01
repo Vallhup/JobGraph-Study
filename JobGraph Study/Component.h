@@ -1,27 +1,16 @@
 #pragma once
 
-class GameObject;
-
-class Component {
+struct Component {
 public:
 	virtual ~Component() = default;
-	virtual void Update(const float deltaTime) = 0;
-
-protected:
-	Component(GameObject* owner) : _owner(owner) {}
-
-	GameObject* _owner;
 };
 
-class TransformComponent : public Component {
-public:
-	explicit TransformComponent(GameObject* owner)
-		: Component(owner), x(0), y(0) {}
-	virtual ~TransformComponent() = default;
+struct Transform : public Component {
+	float x{ 0.0f };
+	float y{ 0.0f };
+};
 
-	virtual void Update(const float deltaTime) override;
-
-private:
-	float x;
-	float y;
+struct Velocity : public Component {
+	float dx{ 0.0f };
+	float dy{ 0.0f };
 };

@@ -2,52 +2,36 @@
 #include "JobGraph.h"
 #include "ThreadPool.h"
 
+#include "ECS.h"
+#include "System.h"
+
 #include <array>
 
-const int playerCount = 1'000;
-std::array<Player, playerCount> players;
-std::array<JobNode*, playerCount> inputs;
-std::array<JobNode*, playerCount> moves;
+const int playerCount = 20'000;
 
 int main()
 {
-	ThreadPool pool(1);
-	JobGraph graph(pool);
+	ECS ecs;
+	ecs.systemMng.RegisterSystem<MovementSystem>(ecs);
 
-	for (int i = 0; i < playerCount; ++i)
+	Entity e1 = ecs.entityMng.Create();
+	Entity e2 = ecs.entityMng.Create();
+
+	auto* t1 = ecs.GetStorage<Transform>().AddComponent(e1);
+	auto* v1 = ecs.GetStorage<Velocity>().AddComponent(e1);
+	v1->dx = 1.0f; v1->dy = 0.0f;
+
+	auto* t2 = ecs.GetStorage<Transform>().AddComponent(e2);
+	auto* v2 = ecs.GetStorage<Velocity>().AddComponent(e2);
+	v2->dx = -0.5f; v2->dy = 0.0f;
+
+	for (int frame = 0; frame < 5; ++frame)
 	{
-		players[i].id = i;
-		
-		inputs[i] = graph.CreateNode<InputJob>(&players[i]);
-		moves[i] = graph.CreateNode<MoveJob>(&players[i]);
+		ecs.Update(1.0f);
 
-		moves[i]->AddDependency(inputs[i]);
+		std::cout << "Frame " << frame << ": \n";
+		for (auto& [id, t] : ecs.GetStorage<Transform>().GetComponents())
+			std::cout << "  Entity " << id << " pos = ("
+			<< t.x << ", " << t.y << ")\n";
 	}
-
-	auto start = std::chrono::steady_clock::now();
-
-	graph.Build();
-
-	auto end = std::chrono::steady_clock::now();
-
-	std::cout << "Elapsed: "
-		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-		<< " ms\n";
-
-	pool.Stop();
 }
-
-// 1. hardware_concurrency()
-//  - 1904ms
-// 
-// 2. 8 threads
-//  - 3849ms
-// 
-// 3. 4 threads
-//  - 7672ms
-// 
-// 4. 2 threads
-//  - 15423ms
-// 
-// 5. 1 thread
-//  - 30754ms

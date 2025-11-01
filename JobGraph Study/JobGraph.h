@@ -3,6 +3,7 @@
 #include <vector>
 #include <atomic>
 #include <latch>
+#include <optional>
 
 struct IJob;
 class ThreadPool;
@@ -41,7 +42,7 @@ class JobGraph {
 	friend class JobNode;
 
 public:
-	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(nullptr) {}
+	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(std::nullopt) {}
 	~JobGraph();
 
 	template<JobType Job, typename... Args>
@@ -53,12 +54,14 @@ public:
 
 	void NotifyJobDone();
 
+	const std::vector<IJob*>& GetJobs() const { return _allocatedJobs; }
+
 private:
 	ThreadPool& _pool;
 	std::vector<JobNode*> _nodes;
 	std::vector<IJob*> _allocatedJobs;
 
-	std::latch* _latch;
+	std::optional<std::latch> _latch;
 };
 
 template<JobType Job, typename... Args>
