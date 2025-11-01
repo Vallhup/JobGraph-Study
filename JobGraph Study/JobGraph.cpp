@@ -1,6 +1,8 @@
 #include "JobGraph.h"
 #include "ThreadPool.h"
 
+/*--------------------[ JobNode ]--------------------*/
+
 void JobNode::AddDependency(JobNode* dependency)
 {
 	_deps.fetch_add(1);
@@ -17,6 +19,17 @@ void JobNode::Execute()
 	}
 }
 
+/*--------------------[ JobGraph ]--------------------*/
+
+JobGraph::~JobGraph()
+{
+	for (IJob* job : _allocatedJobs)
+		delete job;
+
+	for (JobNode* node : _nodes)
+		delete node;
+}
+
 void JobGraph::Schedule(JobNode* node)
 {
 	JobData job{
@@ -27,4 +40,13 @@ void JobGraph::Schedule(JobNode* node)
 		}, node };
 
 	_pool.Push(job);
+}
+
+void JobGraph::Build()
+{
+	for (JobNode* node : _nodes)
+	{
+		if (node->Ready())
+			Schedule(node);
+	}
 }
