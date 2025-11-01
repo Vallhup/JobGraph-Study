@@ -1,12 +1,13 @@
 #pragma once
 
 #include <iostream>
+#include <thread>
+#include <functional>
 
 struct Player {
+	int id;
 	int x{ 0 };
-	int y{ 0 };
-	int inputX{ 0 };
-	int inputY{ 0 };
+	int input{ 0 };
 };
 
 struct IJob {
@@ -20,10 +21,14 @@ struct InputJob : public IJob {
 	static void Execute(void* ctx)
 	{
 		InputJob* job = static_cast<InputJob*>(ctx);
-		job->player->inputX = 1;
-		job->player->inputY = 0;
-		printf("[InputJob] Input set: (%d, %d)\n",
-			job->player->inputX, job->player->inputY);
+		job->player->input = 1;
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+#ifdef _DEBUG
+		printf("[T%zu] InputJob %d done\n",
+			std::hash<std::thread::id>{}(std::this_thread::get_id()) % 100,
+			job->player->id);
+#endif
 	}
 };
 
@@ -34,9 +39,13 @@ struct MoveJob : public IJob {
 	static void Execute(void* ctx)
 	{
 		MoveJob* job = static_cast<MoveJob*>(ctx);
-		job->player->x += job->player->inputX;
-		job->player->y += job->player->inputY;
-		printf("[MoveJob] Player moved to (%d, %d)\n",
-			job->player->x, job->player->y);
+		job->player->x += job->player->input;
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+#ifdef _DEBUG
+		printf("[T%zu] MoveJob %d done\n",
+			std::hash<std::thread::id>{}(std::this_thread::get_id()) % 100,
+			job->player->id);
+#endif
 	}
 };

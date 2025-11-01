@@ -17,6 +17,8 @@ void JobNode::Execute()
 		if (dep->_deps.fetch_sub(1) == 1)
 			_graph->Schedule(dep);
 	}
+
+	_graph->NotifyJobDone();
 }
 
 /*--------------------[ JobGraph ]--------------------*/
@@ -44,9 +46,23 @@ void JobGraph::Schedule(JobNode* node)
 
 void JobGraph::Build()
 {
+	if (_latch) delete _latch;
+	_latch = new std::latch(static_cast<int>(_nodes.size()));
+
 	for (JobNode* node : _nodes)
 	{
 		if (node->Ready())
 			Schedule(node);
 	}
+
+	_latch->wait();
+
+	delete _latch;
+	_latch = nullptr;
+}
+
+void JobGraph::NotifyJobDone()
+{
+	if (_latch)
+		_latch->count_down();
 }

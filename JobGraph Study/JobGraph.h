@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <atomic>
+#include <latch>
 
 struct IJob;
 class ThreadPool;
@@ -34,7 +35,7 @@ concept JobType = std::is_base_of_v<IJob, T>;
 
 class JobGraph {
 public:
-	explicit JobGraph(ThreadPool& pool) : _pool(pool) {}
+	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(nullptr) {}
 	~JobGraph();
 
 	template<JobType Job, typename... Args>
@@ -43,10 +44,14 @@ public:
 	void Schedule(JobNode* node);
 	void Build();
 
+	void NotifyJobDone();
+
 private:
 	ThreadPool& _pool;
 	std::vector<JobNode*> _nodes;
 	std::vector<IJob*> _allocatedJobs;
+
+	std::latch* _latch;
 };
 
 template<JobType Job, typename... Args>
