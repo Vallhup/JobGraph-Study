@@ -4,6 +4,8 @@
 #include <thread>
 #include <functional>
 
+#include "Component.h"
+
 struct Player {
 	int id;
 	int x{ 0 };
@@ -47,5 +49,18 @@ struct MoveJob : public IJob {
 			std::hash<std::thread::id>{}(std::this_thread::get_id()) % 100,
 			job->player->id);
 #endif
+	}
+};
+
+struct ComponentUpdateJob : public IJob {
+	Component* comp;
+	float deltaTime;
+
+	explicit ComponentUpdateJob(Component* c, float dT)
+		: comp(c), deltaTime(dT) {}
+	static void Execute(void* ctx)
+	{
+		ComponentUpdateJob* job = static_cast<ComponentUpdateJob*>(ctx);
+		job->comp->Update(job->deltaTime);
 	}
 };

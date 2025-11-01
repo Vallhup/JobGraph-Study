@@ -14,26 +14,32 @@ struct JobData {
 };
 
 class JobNode {
+	friend class JobGraph;
+
 public:
 	explicit JobNode(JobData& job, JobGraph* graph) 
-		: _job(job), _graph(graph), _deps(0) {}
+		: _job(job), _graph(graph), _deps(0), _initDeps(0) {}
 
 	void AddDependency(JobNode* dependency);
 	void Execute();
 
 	bool Ready() const { return _deps == 0; }
+	void ResetDeps() { _deps = _initDeps; }
 
 private:
 	JobData _job;
 	JobGraph* _graph;
 	std::vector<JobNode*> _dependents;
 	std::atomic<int> _deps;
+	int _initDeps;
 };
 
 template<typename T>
 concept JobType = std::is_base_of_v<IJob, T>;
 
 class JobGraph {
+	friend class JobNode;
+
 public:
 	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(nullptr) {}
 	~JobGraph();
@@ -43,6 +49,7 @@ public:
 
 	void Schedule(JobNode* node);
 	void Build();
+	void Run();
 
 	void NotifyJobDone();
 

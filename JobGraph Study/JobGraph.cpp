@@ -12,7 +12,7 @@ void JobNode::AddDependency(JobNode* dependency)
 void JobNode::Execute()
 {
 	_job.func(_job.context);
-	for (auto* dep : _dependents)
+	for (JobNode* dep : _dependents)
 	{
 		if (dep->_deps.fetch_sub(1) == 1)
 			_graph->Schedule(dep);
@@ -46,8 +46,17 @@ void JobGraph::Schedule(JobNode* node)
 
 void JobGraph::Build()
 {
+	for (JobNode* node : _nodes)
+		node->_initDeps = node->_deps;
+}
+
+void JobGraph::Run()
+{
 	if (_latch) delete _latch;
 	_latch = new std::latch(static_cast<int>(_nodes.size()));
+
+	for (JobNode* node : _nodes)
+		node->ResetDeps();
 
 	for (JobNode* node : _nodes)
 	{

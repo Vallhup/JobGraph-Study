@@ -2,13 +2,54 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ThreadPool.cpp" />
-    <ClCompile Include="JobGraph.cpp" />
-    <ClCompile Include="Job.cpp" />
+    <ClCompile Include="Job.cpp">
+      <Filter>JobGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="JobGraph.cpp">
+      <Filter>JobGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>ECS\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>ECS\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ThreadPool.h" />
-    <ClInclude Include="JobGraph.h" />
-    <ClInclude Include="Job.h" />
+    <ClInclude Include="Job.h">
+      <Filter>JobGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="JobGraph.h">
+      <Filter>JobGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>ECS\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>ECS\Component</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="JobGraph">
+      <UniqueIdentifier>{0c149f4c-a0dd-49fb-b40b-290d1aa124cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{d89229e0-f27f-471d-bd51-36fdccfb24b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{ac3bee26-5c26-4f0d-907e-ea3294877df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Object">
+      <UniqueIdentifier>{47d69cb9-d40a-44c3-a539-7718e8c5795d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\Component">
+      <UniqueIdentifier>{577ca66f-db3c-4cd4-8551-d0e2db310646}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
