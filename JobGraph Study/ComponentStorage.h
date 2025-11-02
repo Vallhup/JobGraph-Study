@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "Entity.h"
 
-class Component;
+struct Component;
 
 template<typename T>
 concept CompT = std::is_base_of_v<Component, T>;

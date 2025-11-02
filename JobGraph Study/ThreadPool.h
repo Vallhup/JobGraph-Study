@@ -7,9 +7,9 @@
 
 #include <concurrent_queue.h>
 
-using namespace concurrency;
+#include "JobGraph.h"
 
-struct JobData;
+using namespace concurrency;
 
 class ThreadPool {
 public:
@@ -26,8 +26,4 @@ private:
 	std::atomic<bool> _running;
 	std::vector<std::thread> _workers;
 	concurrent_queue<JobData> _jobQueue;
-
-	std::shared_mutex _mtx;
-	std::condition_variable _cv;
 };
-

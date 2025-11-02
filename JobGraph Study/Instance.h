@@ -1,22 +1,20 @@
 #pragma once
 
-#include <memory>
-#include "JobGraph.h"
+#include "ECS.h"
+#include "SystemManager.h"
 
 class ThreadPool;
 
-//class Instance {
-//public:
-//	explicit Instance(ThreadPool& pool) : _pool(pool), _graph(pool) {}
-//
-//	void AddObject(std::unique_ptr<GameObject> obj);
-//	void BuildGraph();
-//	void Tick(const float deltaTime);
-//
-//private:
-//	ThreadPool& _pool;
-//	JobGraph _graph;
-//
-//	std::vector<std::unique_ptr<GameObject>> _objects;
-//};
+class Instance {
+public:
+	Instance(ThreadPool& pool, SystemManager& sys) 
+		: _threadPool(pool), _ecs(sys) {}
 
+	void Initalize() { _ecs.Initialize(); }
+	void Update(const float dT) { _ecs.Update(dT); }
+	void UpdateParallel(const float dT) { _ecs.UpdateParallel(dT); }
+
+private:
+	ECS _ecs;
+	ThreadPool& _threadPool;
+};

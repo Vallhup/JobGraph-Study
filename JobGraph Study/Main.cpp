@@ -4,6 +4,7 @@
 
 #include "ECS.h"
 #include "System.h"
+#include "GameFramework.h"
 
 #include <array>
 
@@ -11,27 +12,25 @@ const int playerCount = 20'000;
 
 int main()
 {
-	ECS ecs;
-	ecs.systemMng.RegisterSystem<MovementSystem>(ecs);
+	GameFramework game{ 8 };
 
-	Entity e1 = ecs.entityMng.Create();
-	Entity e2 = ecs.entityMng.Create();
+	for(int i = 0; i < 500; ++i)
+		game.AddInstance();
 
-	auto* t1 = ecs.GetStorage<Transform>().AddComponent(e1);
-	auto* v1 = ecs.GetStorage<Velocity>().AddComponent(e1);
-	v1->dx = 1.0f; v1->dy = 0.0f;
-
-	auto* t2 = ecs.GetStorage<Transform>().AddComponent(e2);
-	auto* v2 = ecs.GetStorage<Velocity>().AddComponent(e2);
-	v2->dx = -0.5f; v2->dy = 0.0f;
+	game.UpdateParallel(0.016f);
 
 	for (int frame = 0; frame < 5; ++frame)
 	{
-		ecs.Update(1.0f);
+		printf("=== Frame %d ===\n", frame);
 
-		std::cout << "Frame " << frame << ": \n";
-		for (auto& [id, t] : ecs.GetStorage<Transform>().GetComponents())
-			std::cout << "  Entity " << id << " pos = ("
-			<< t.x << ", " << t.y << ")\n";
+		auto start = std::chrono::steady_clock::now();
+
+		game.UpdateParallel(0.016f);
+
+		auto end = std::chrono::steady_clock::now();
+
+		std::cout << "Frame time: "
+			<< std::chrono::duration<float, std::milli>(end - start).count()
+			<< " ms\n";
 	}
 }

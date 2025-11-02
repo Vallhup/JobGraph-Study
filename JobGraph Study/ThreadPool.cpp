@@ -16,7 +16,7 @@ void ThreadPool::Stop()
 {
 	_running = false;
 	for (auto& w : _workers) {
-		if(w.joinable())
+		if (w.joinable())
 			w.join();
 	}
 }

@@ -6,31 +6,22 @@
 #include <optional>
 #include <barrier>
 
-struct Job;
+#include "ObjectPool.h"
+#include "Job.h"
+
 class ThreadPool;
 class JobGraph;
-
-template<typename T>
-concept JobT = std::is_base_of_v<Job, T>;
-
-template<JobT T>
-struct JobDataT {
-	static void Execute(void* ctx)
-	{
-		static_cast<T*>(ctx)->Execute();
-	}
-};
 
 struct JobData {
 	void (*func)(void*);
 	void* context;
 };
 
-class JobNode {
+class alignas(64) JobNode {
 	friend class JobGraph;
 
 public:
-	explicit JobNode(JobData& job, JobGraph* graph) 
+	explicit JobNode(const JobData& job, JobGraph* graph) 
 		: _job(job), _graph(graph), _deps(0), _initDeps(0) {}
 
 	void AddDependency(JobNode* dependency);
@@ -38,7 +29,7 @@ public:
 
 	bool Ready() const { return _deps == 0; }
 	void ResetDeps() { _deps = _initDeps; }
-
+	
 private:
 	JobData _job;
 	JobGraph* _graph;
@@ -47,12 +38,18 @@ private:
 	int _initDeps;
 };
 
+template<typename T>
+concept JobT = std::is_base_of_v<Job, T>;
+
 class JobGraph {
 	friend class JobNode;
 
 public:
 	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(std::nullopt) {}
 	~JobGraph();
+
+	JobGraph(const JobGraph&) = delete;
+	JobGraph& operator=(const JobGraph&) = delete;
 
 	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
@@ -79,9 +76,9 @@ inline JobNode* JobGraph::CreateNode(Args&&... args)
 	T* job = new T(std::forward<Args>(args)...);
 	_allocatedJobs.push_back(job);
 
-	JobData data{ &JobDataT<T>::Execute, job };
+	JobData data{ T::Execute, job };							
 	JobNode* node = new JobNode(data, this);
-	_nodes.push_back(node);
+	_nodes.emplace_back(node);
 
 	return node;
 }

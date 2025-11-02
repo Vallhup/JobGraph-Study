@@ -5,6 +5,7 @@
 #include <functional>
 
 #include "Component.h"
+#include "System.h"
 
 struct Player {
 	int id;
@@ -49,5 +50,17 @@ struct MoveJob : public Job {
 			std::hash<std::thread::id>{}(std::this_thread::get_id()) % 100,
 			job->player->id);
 #endif
+	}
+};
+
+struct SystemJob : public Job {
+	System* system;
+	float* dTRef;
+
+	SystemJob(System* s, float* ref) : system(s), dTRef(ref) {}
+	static void Execute(void* ctx)
+	{
+		SystemJob* job = static_cast<SystemJob*>(ctx);
+		job->system->Update(*job->dTRef);
 	}
 };

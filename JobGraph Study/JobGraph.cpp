@@ -12,6 +12,7 @@ void JobNode::AddDependency(JobNode* dependency)
 void JobNode::Execute()
 {
 	_job.func(_job.context);
+
 	for (JobNode* dep : _dependents)
 	{
 		if (dep->_deps.fetch_sub(1) == 1)

@@ -2,6 +2,9 @@
 #include "ECS.h"
 #include "Component.h"
 
+#include <thread>
+#include <iostream>
+
 void MovementSystem::Update(const float dT)
 {
 	auto& transforms = _ecs.GetStorage<Transform>().GetComponents();
@@ -16,4 +19,25 @@ void MovementSystem::Update(const float dT)
 			t.y += it->second.dy * dT;
 		}
 	}
+
+#ifdef _DEBUG
+	std::cout << "[MovementSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
+}
+
+void TestSystem::Update(const float dT)
+{
+	volatile float x{ 0.0f };
+	for (int i = 0; i < 1000; ++i)
+	{
+		x += sin(x * i);
+	}
+
+#ifdef _DEBUG
+	std::cout << "[TestSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }

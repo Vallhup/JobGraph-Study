@@ -32,6 +32,8 @@
     <ClCompile Include="ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
+    <ClCompile Include="GameFramework.cpp" />
+    <ClCompile Include="ObjectPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -64,6 +66,8 @@
     <ClInclude Include="ECS.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="GameFramework.h" />
+    <ClInclude Include="ObjectPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JobGraph">

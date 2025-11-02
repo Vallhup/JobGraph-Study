@@ -39,3 +39,10 @@ public:
 private:
 	ECS& _ecs;
 };
+
+class TestSystem : public System {
+public: 
+	virtual ~TestSystem() = default;
+
+	virtual void Update(const float) override;
+};
