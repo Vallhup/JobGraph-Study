@@ -25,7 +25,7 @@ void JobNode::Execute()
 
 JobGraph::~JobGraph()
 {
-	for (IJob* job : _allocatedJobs)
+	for (Job* job : _allocatedJobs)
 		delete job;
 
 	for (JobNode* node : _nodes)

@@ -3,6 +3,7 @@
 #include <thread>
 #include <atomic>
 #include <vector>
+#include <shared_mutex>
 
 #include <concurrent_queue.h>
 
@@ -25,5 +26,8 @@ private:
 	std::atomic<bool> _running;
 	std::vector<std::thread> _workers;
 	concurrent_queue<JobData> _jobQueue;
+
+	std::shared_mutex _mtx;
+	std::condition_variable _cv;
 };
 

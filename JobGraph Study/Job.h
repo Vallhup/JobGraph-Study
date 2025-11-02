@@ -12,11 +12,11 @@ struct Player {
 	int input{ 0 };
 };
 
-struct IJob {
-	virtual ~IJob() = default;
+struct Job {
+	virtual ~Job() = default;
 };
 
-struct InputJob : public IJob {
+struct InputJob : public Job {
 	Player* player;
 	
 	InputJob(Player* p) : player(p) {}
@@ -34,7 +34,7 @@ struct InputJob : public IJob {
 	}
 };
 
-struct MoveJob : public IJob {
+struct MoveJob : public Job {
 	Player* player;
 
 	MoveJob(Player* p) : player(p) {}

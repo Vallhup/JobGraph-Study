@@ -37,3 +37,5 @@ private:
 	std::unordered_map<int, T> _comps;
 };
 
+// TODO : 나중에 unordered_map -> vector로 바꾸기
+

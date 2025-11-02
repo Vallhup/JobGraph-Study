@@ -4,10 +4,22 @@
 #include <atomic>
 #include <latch>
 #include <optional>
+#include <barrier>
 
-struct IJob;
+struct Job;
 class ThreadPool;
 class JobGraph;
+
+template<typename T>
+concept JobT = std::is_base_of_v<Job, T>;
+
+template<JobT T>
+struct JobDataT {
+	static void Execute(void* ctx)
+	{
+		static_cast<T*>(ctx)->Execute();
+	}
+};
 
 struct JobData {
 	void (*func)(void*);
@@ -35,9 +47,6 @@ private:
 	int _initDeps;
 };
 
-template<typename T>
-concept JobType = std::is_base_of_v<IJob, T>;
-
 class JobGraph {
 	friend class JobNode;
 
@@ -45,7 +54,7 @@ public:
 	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(std::nullopt) {}
 	~JobGraph();
 
-	template<JobType Job, typename... Args>
+	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
 
 	void Schedule(JobNode* node);
@@ -54,23 +63,23 @@ public:
 
 	void NotifyJobDone();
 
-	const std::vector<IJob*>& GetJobs() const { return _allocatedJobs; }
+	const std::vector<Job*>& GetJobs() const { return _allocatedJobs; }
 
 private:
 	ThreadPool& _pool;
 	std::vector<JobNode*> _nodes;
-	std::vector<IJob*> _allocatedJobs;
+	std::vector<Job*> _allocatedJobs;
 
 	std::optional<std::latch> _latch;
 };
 
-template<JobType Job, typename... Args>
+template<JobT T, typename... Args>
 inline JobNode* JobGraph::CreateNode(Args&&... args)
 {
-	Job* job = new Job(std::forward<Args>(args)...);
+	T* job = new T(std::forward<Args>(args)...);
 	_allocatedJobs.push_back(job);
 
-	JobData data{ Job::Execute, job };
+	JobData data{ &JobDataT<T>::Execute, job };
 	JobNode* node = new JobNode(data, this);
 	_nodes.push_back(node);
 
