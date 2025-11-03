@@ -2,6 +2,7 @@
 
 #include <typeindex>
 #include <vector>
+#include <atomic>
 
 class System {
 public:
@@ -49,13 +50,88 @@ private:
 	ECS& _ecs;
 };
 
-class TestSystem : public System {
-public: 
-	explicit TestSystem(ECS& ecs) : _ecs(ecs) {}
-	virtual ~TestSystem() = default;
+class InputSystem : public System {
+public:
+	explicit InputSystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~InputSystem() = default;
 
 	virtual void Update(const float) override;
 
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
 private:
 	ECS& _ecs;
+};
+
+class AISystem : public System {
+public:
+	explicit AISystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~AISystem() = default;
+
+	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
+private:
+	ECS& _ecs;
+};
+
+class CollisionSystem : public System {
+public:
+	explicit CollisionSystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~CollisionSystem() = default;
+
+	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
+private:
+	ECS& _ecs;
+	std::atomic<int> _collisions{ 0 };
+};
+
+class CombatSystem : public System {
+public:
+	explicit CombatSystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~CombatSystem() = default;
+
+	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
+private:
+	ECS& _ecs;
+};
+
+class StatRegenSystem : public System {
+public:
+	explicit StatRegenSystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~StatRegenSystem() = default;
+
+	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
+private:
+	ECS& _ecs;
+};
+
+class VisibilitySystem : public System {
+public:
+	explicit VisibilitySystem(ECS& ecs) : _ecs(ecs) {}
+	virtual ~VisibilitySystem() = default;
+
+	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
+
+private:
+	ECS& _ecs;
+	float _viewRadiusSq{ 100.0f * 100.0f };
 };

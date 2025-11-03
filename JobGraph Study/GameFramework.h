@@ -12,7 +12,7 @@ class GameFramework {
 public:
 	static GameFramework& Get()
 	{
-		static GameFramework instance{ 16 };
+		static GameFramework instance;
 		return instance;
 	}
 

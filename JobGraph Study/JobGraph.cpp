@@ -116,6 +116,14 @@ void JobGraph::Build()
 {
 	for (JobNode* node : _nodes)
 		node->_initDeps = node->_deps;
+
+#ifdef _DEBUG
+	for (JobNode* node : _nodes)
+	{
+		std::cout << "deps = " << node->_deps.load()
+			<< (node->Ready() ? " [READY]" : " [WAIT]") << std::endl;
+	}
+#endif
 }
 
 void JobGraph::Run()
