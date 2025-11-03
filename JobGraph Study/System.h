@@ -1,6 +1,7 @@
 #pragma once
 
 #include <typeindex>
+#include <vector>
 
 class System {
 public:
@@ -50,7 +51,11 @@ private:
 
 class TestSystem : public System {
 public: 
+	explicit TestSystem(ECS& ecs) : _ecs(ecs) {}
 	virtual ~TestSystem() = default;
 
 	virtual void Update(const float) override;
+
+private:
+	ECS& _ecs;
 };

@@ -55,16 +55,17 @@ public:
 	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
 
-	void AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef);
+	void AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& systems, float* dTRef);
 	void AddManualDependency(System* before, System* after);
 
-	void Schedule(JobNode* node);
-	void Build();
 	void Run();
 
-	void NotifyJobDone();
-
 	const std::vector<Job*>& GetJobs() const { return _allocatedJobs; }
+
+private:
+	void Schedule(JobNode* node);
+	void Build();
+	void NotifyJobDone();
 
 private:
 	ThreadPool& _pool;
@@ -82,7 +83,7 @@ inline JobNode* JobGraph::CreateNode(Args&&... args)
 
 	JobData data{ T::Execute, job };							
 	JobNode* node = new JobNode(data, this);
-	_nodes.emplace_back(node);
+	_nodes.push_back(node);
 
 	return node;
 }

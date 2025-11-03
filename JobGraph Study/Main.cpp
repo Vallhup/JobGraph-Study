@@ -8,29 +8,30 @@
 
 #include <array>
 
-const int playerCount = 20'000;
+int max_threads{ 16 };
 
 int main()
 {
-	GameFramework game{ 8 };
-
-	for(int i = 0; i < 500; ++i)
-		game.AddInstance();
-
-	game.Update(0.016f);
-
-	for (int frame = 0; frame < 5; ++frame)
+	for (size_t num_threads = 1; num_threads <= max_threads; num_threads *= 2)
 	{
-		printf("=== Frame %d ===\n", frame);
+		GameFramework game(num_threads);
 
-		auto start = std::chrono::steady_clock::now();
+		double total{ 0.0f };
+		for (int frame = 0; frame < 100; ++frame)
+			game.Update(0.016f);
 
-		game.Update(0.016f);
+		for (int frame = 0; frame < 10000; ++frame)
+		{
+			auto start = std::chrono::steady_clock::now();
 
-		auto end = std::chrono::steady_clock::now();
+			game.Update(0.016f);
 
-		std::cout << "Frame time: "
-			<< std::chrono::duration<float, std::milli>(end - start).count()
-			<< " ms\n";
+			auto end = std::chrono::steady_clock::now();
+
+			total += std::chrono::duration<double, std::milli>(end - start).count();
+		}
+
+		std::cout << num_threads << "threads Frame time Avg: "
+			<< total / 10000.0 << " ms\n";
 	}
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <thread>
 #include <functional>
+#include <latch>
 
 #include "Component.h"
 #include "System.h"
@@ -62,5 +63,25 @@ struct SystemJob : public Job {
 	{
 		SystemJob* job = static_cast<SystemJob*>(ctx);
 		job->system->Update(*job->dTRef);
+	}
+};
+
+extern std::atomic<int> activeJobs;
+extern std::atomic<int> peak;
+
+struct ParallelForJob : public Job {
+	int begin;
+	int end;
+	std::function<void(int, int)> func;
+	std::latch* latch;
+
+	ParallelForJob(int b, int e, const std::function<void(int, int)>& f, std::latch* l)
+		: begin(b), end(e), func(f), latch(l) {}
+	static void Execute(void* ctx)
+	{
+		ParallelForJob* job = static_cast<ParallelForJob*>(ctx);
+		job->func(job->begin, job->end);
+		job->latch->count_down();
+		delete job;
 	}
 };

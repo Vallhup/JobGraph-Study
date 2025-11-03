@@ -3,8 +3,9 @@
 #include <thread>
 #include <atomic>
 #include <vector>
-#include <shared_mutex>
-
+#include <mutex>
+#include <condition_variable>
+#include <queue>
 #include <concurrent_queue.h>
 
 #include "JobGraph.h"
@@ -19,11 +20,16 @@ public:
 	void Push(const JobData& job);
 	void Stop();
 
+	void ParallelFor(int count, int minPerJob, const std::function<void(int, int)>& func);
+
 private:
 	void WorkerLoop();
 
 private:
 	std::atomic<bool> _running;
 	std::vector<std::thread> _workers;
-	concurrent_queue<JobData> _jobQueue;
+	std::queue<JobData> _jobQueue;
+
+	std::mutex _mtx;
+	std::condition_variable _cv;
 };

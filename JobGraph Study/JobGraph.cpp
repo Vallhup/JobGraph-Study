@@ -1,6 +1,8 @@
 #include "JobGraph.h"
 #include "ThreadPool.h"
 
+#include <ranges>
+
 /*--------------------[ JobNode ]--------------------*/
 
 void JobNode::AddDependency(JobNode* dependency)
@@ -33,28 +35,29 @@ JobGraph::~JobGraph()
 		delete node;
 }
 
-void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef)
+void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& systems, float* dTRef)
 {
 	std::unordered_map<System*, JobNode*> nodeMap;
 
-	for (System* sys : systems)
-		nodeMap[sys] = CreateNode<SystemJob>(sys, dTRef);
+	for (auto& sys : systems)
+		nodeMap[sys.get()] = CreateNode<SystemJob>(sys.get(), dTRef);
 
-	for (System* A : systems)
+	// TODO : O(N^2) 순회 
+	//     -> 나중에 시간나면 고치기... 어짜피 런타임에 돌아갈 함수 아님
+	for (auto& A : systems)
 	{
-		for (System* B : systems)
+		for (auto& B : systems)
 		{
 			if (A == B) continue;
 
 			bool conflict{ false };
 			for (auto& write : A->WriteComponents())
 			{
-				if (std::find(B->ReadComponents().begin(),
-					B->ReadComponents().end(),
-					write) != B->ReadComponents().end()
-					or std::find(B->WriteComponents().begin(),
-						B->WriteComponents().end(),
-						write) != B->WriteComponents().end())
+				const auto& bReads = B->ReadComponents();
+				const auto& bWrites = B->WriteComponents();
+
+				if(std::find(bReads.begin(), bReads.end(), write) != bReads.end()
+					or std::find(bWrites.begin(), bWrites.end(), write) != bWrites.end())
 				{
 					conflict = true;
 					break;
@@ -62,7 +65,15 @@ void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* d
 			}
 
 			if (conflict)
-				nodeMap[B]->AddDependency(nodeMap[A]);
+				nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+#ifdef _DEBUG
+			if (conflict)
+			{
+				std::cout << "[Dependency] "
+					<< typeid(*A).name() << " -> "
+					<< typeid(*B).name() << std::endl;
+			}
+#endif
 		}
 	}
 
