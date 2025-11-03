@@ -11,12 +11,13 @@ public:
 	GameFramework(size_t size = std::thread::hardware_concurrency());
 
 	void Update(const float dT);
-	void UpdateParallel(const float dT);
 
 	void AddInstance();
 
 private:
+	ECS _ecs;
+	JobGraph _graph;
 	ThreadPool _threadPool;
-	SystemManager _systemMng;
+	
 	std::vector<std::unique_ptr<Instance>> _instances;
 };

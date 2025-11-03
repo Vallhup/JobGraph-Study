@@ -5,6 +5,8 @@
 #include <thread>
 #include <iostream>
 
+/*--------------------[ MovementSystem ]--------------------*/
+
 void MovementSystem::Update(const float dT)
 {
 	auto& transforms = _ecs.GetStorage<Transform>().GetComponents();
@@ -26,6 +28,18 @@ void MovementSystem::Update(const float dT)
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 #endif
 }
+
+std::vector<std::type_index> MovementSystem::ReadComponents() const
+{
+	return { typeid(Velocity) };
+}
+
+std::vector<std::type_index> MovementSystem::WriteComponents() const
+{
+	return { typeid(Transform) };
+}
+
+/*--------------------[ TestSystem ]--------------------*/
 
 void TestSystem::Update(const float dT)
 {

@@ -33,6 +33,62 @@ JobGraph::~JobGraph()
 		delete node;
 }
 
+void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef)
+{
+	std::unordered_map<System*, JobNode*> nodeMap;
+
+	for (System* sys : systems)
+		nodeMap[sys] = CreateNode<SystemJob>(sys, dTRef);
+
+	for (System* A : systems)
+	{
+		for (System* B : systems)
+		{
+			if (A == B) continue;
+
+			bool conflict{ false };
+			for (auto& write : A->WriteComponents())
+			{
+				if (std::find(B->ReadComponents().begin(),
+					B->ReadComponents().end(),
+					write) != B->ReadComponents().end()
+					or std::find(B->WriteComponents().begin(),
+						B->WriteComponents().end(),
+						write) != B->WriteComponents().end())
+				{
+					conflict = true;
+					break;
+				}
+			}
+
+			if (conflict)
+				nodeMap[B]->AddDependency(nodeMap[A]);
+		}
+	}
+
+	Build();
+}
+
+void JobGraph::AddManualDependency(System* before, System* after)
+{
+	auto beforeIt = std::find_if(_nodes.begin(), _nodes.end(), 
+		[&](auto* n) 
+		{
+			auto* job = static_cast<SystemJob*>(n->_job.context);
+			return job->system == before;
+		});
+
+	auto afterIt = std::find_if(_nodes.begin(), _nodes.end(), 
+		[&](auto* n) 
+		{
+			auto* job = static_cast<SystemJob*>(n->_job.context);
+			return job->system == after;
+		});
+
+	if (beforeIt != _nodes.end() && afterIt != _nodes.end())
+		(*afterIt)->AddDependency(*beforeIt);
+}
+
 void JobGraph::Schedule(JobNode* node)
 {
 	JobData job{

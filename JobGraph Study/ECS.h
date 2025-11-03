@@ -7,8 +7,6 @@
 class ThreadPool;
 
 struct ECS {
-	ECS(SystemManager& sys) : systemMng(sys) {}
-
 	template<CompT T>
 	ComponentStorage<T>& GetStorage()
 	{
@@ -16,12 +14,6 @@ struct ECS {
 		return storage;
 	}
 
-	void Initialize();
-
-	void Update(const float dT);
-	void UpdateParallel(float dT);
-
 	EntityManager entityMng;
-	SystemManager& systemMng;
+	SystemManager systemMng;
 };
-

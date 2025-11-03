@@ -1,9 +1,14 @@
 #pragma once
 
+#include <typeindex>
+
 class System {
 public:
 	virtual ~System() = default;
 	virtual void Update(const float dT) = 0;
+
+	virtual std::vector<std::type_index> ReadComponents() const { return {}; }
+	virtual std::vector<std::type_index> WriteComponents() const { return {}; }
 };
 
 // System 설계 원칙
@@ -35,6 +40,9 @@ public:
 	virtual ~MovementSystem() = default;
 
 	virtual void Update(const float) override;
+
+	virtual std::vector<std::type_index> ReadComponents() const override;
+	virtual std::vector<std::type_index> WriteComponents() const override;
 
 private:
 	ECS& _ecs;

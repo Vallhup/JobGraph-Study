@@ -45,7 +45,8 @@ class JobGraph {
 	friend class JobNode;
 
 public:
-	explicit JobGraph(ThreadPool& pool) : _pool(pool), _latch(std::nullopt) {}
+	explicit JobGraph(ThreadPool& pool) 
+		: _pool(pool), _latch(std::nullopt) {}
 	~JobGraph();
 
 	JobGraph(const JobGraph&) = delete;
@@ -53,6 +54,9 @@ public:
 
 	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
+
+	void AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef);
+	void AddManualDependency(System* before, System* after);
 
 	void Schedule(JobNode* node);
 	void Build();

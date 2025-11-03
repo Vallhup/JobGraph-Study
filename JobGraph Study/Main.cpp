@@ -17,7 +17,7 @@ int main()
 	for(int i = 0; i < 500; ++i)
 		game.AddInstance();
 
-	game.UpdateParallel(0.016f);
+	game.Update(0.016f);
 
 	for (int frame = 0; frame < 5; ++frame)
 	{
@@ -25,7 +25,7 @@ int main()
 
 		auto start = std::chrono::steady_clock::now();
 
-		game.UpdateParallel(0.016f);
+		game.Update(0.016f);
 
 		auto end = std::chrono::steady_clock::now();
 
