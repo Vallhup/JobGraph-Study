@@ -67,6 +67,12 @@ void InputSystem::Update(const float dT)
 		v.dx = (in.right - in.left) * 3.0f;
 		v.dy = (in.up - in.down) * 3.0f;
 	}
+
+#ifdef _DEBUG
+	std::cout << "[InputSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> InputSystem::ReadComponents() const
@@ -100,6 +106,12 @@ void AISystem::Update(const float dT)
 		float val = sinf(t.x * 0.1f) * cosf(t.y * 0.1f);
 		a.state = (val > 0.5f ? 1 : 0);
 	}
+
+#ifdef _DEBUG
+	std::cout << "[AISystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> AISystem::ReadComponents() const
@@ -142,6 +154,12 @@ void CollisionSystem::Update(const float dT)
 			// localCount´Â atomic ÇÕ»ê
 			_collisions += localCount;
 		});
+
+#ifdef _DEBUG
+	std::cout << "[CollisionSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> CollisionSystem::ReadComponents() const
@@ -204,6 +222,12 @@ void CombatSystem::Update(const float dT)
 			}
 		}
 	}
+
+#ifdef _DEBUG
+	std::cout << "[CombatSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> CombatSystem::ReadComponents() const
@@ -226,6 +250,12 @@ void StatRegenSystem::Update(const float dT)
 		s.hp += 1;
 		if (s.hp > 100) s.hp = 100;
 	}
+
+#ifdef _DEBUG
+	std::cout << "[StatRegenSystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> StatRegenSystem::ReadComponents() const
@@ -274,6 +304,12 @@ void VisibilitySystem::Update(const float dT)
 				}
 			}
 		});
+
+#ifdef _DEBUG
+	std::cout << "[VisibilitySystem] Thread: " << std::this_thread::get_id()
+		<< " dT: " << dT << std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+#endif
 }
 
 std::vector<std::type_index> VisibilitySystem::ReadComponents() const

@@ -74,14 +74,19 @@ struct ParallelForJob : public Job {
 	int end;
 	std::function<void(int, int)> func;
 	std::latch* latch;
+	std::atomic<bool> executed;
 
 	ParallelForJob(int b, int e, const std::function<void(int, int)>& f, std::latch* l)
-		: begin(b), end(e), func(f), latch(l) {}
+		: begin(b), end(e), func(f), latch(l), executed(false) {}
 	static void Execute(void* ctx)
 	{
 		ParallelForJob* job = static_cast<ParallelForJob*>(ctx);
-		job->func(job->begin, job->end);
-		job->latch->count_down();
-		delete job;
+
+		bool expected{ false };
+		if (job->executed.compare_exchange_strong(expected, true)) {
+			job->func(job->begin, job->end);
+			job->latch->count_down();
+			delete job;
+		}
 	}
 };
