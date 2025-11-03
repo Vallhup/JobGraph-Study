@@ -12,26 +12,39 @@ int max_threads{ 16 };
 
 int main()
 {
-	for (size_t num_threads = 1; num_threads <= max_threads; num_threads *= 2)
+	GameFramework& game = GameFramework::Get();
+
+	for (int instance = 0; instance < 1000; ++instance)
 	{
-		GameFramework game(num_threads);
+		Instance* inst = game._world.CreateInstance();
 
-		double total{ 0.0f };
-		for (int frame = 0; frame < 100; ++frame)
-			game.Update(0.016f);
-
-		for (int frame = 0; frame < 10000; ++frame)
+		for (int entity = 0; entity < 600; ++entity)
 		{
-			auto start = std::chrono::steady_clock::now();
+			Entity e = game._ecs.entityMng.Create();
+			e.instanceId = inst->GetId();
 
-			game.Update(0.016f);
+			auto* t = game._ecs.GetStorage<Transform>().AddComponent(e);
+			auto* v = game._ecs.GetStorage<Velocity>().AddComponent(e);
 
-			auto end = std::chrono::steady_clock::now();
+			t->x = float(instance * 100 + entity * 10);
+			t->y = 0.0f;
+			v->dx = 1.0f + entity * 0.1f;
+			v->dy = 0.0f;
 
-			total += std::chrono::duration<double, std::milli>(end - start).count();
+			inst->AddEntity(e);
 		}
+	}
 
-		std::cout << num_threads << "threads Frame time Avg: "
-			<< total / 10000.0 << " ms\n";
+	for (int frame = 0; frame < 10; ++frame)
+	{
+		std::cout << "=== Frame " << frame << " ===\n";
+
+		auto start = std::chrono::steady_clock::now();
+
+		game.Update(0.016f);
+
+		auto end = std::chrono::steady_clock::now();
+		double frameTime = std::chrono::duration<double, std::milli>(end - start).count();
+		std::cout << "Frame Time: " << frameTime << " ms\n";
 	}
 }

@@ -26,6 +26,7 @@ public:
 		_entities.push_back(entity);
 		_dense.emplace_back();
 
+
 		return &_dense.back();
 	}
 

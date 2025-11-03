@@ -6,6 +6,10 @@
 struct Entity {
 	int id;
 	int generation;
+	int instanceId;
+
+	Entity(int id = -1, int g = 0, int inst = 0) 
+		: id(id), generation(g), instanceId(inst) {}
 };
 
 class EntityManager {

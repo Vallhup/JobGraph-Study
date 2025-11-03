@@ -15,7 +15,7 @@
       <Filter>ECS\Component</Filter>
     </ClCompile>
     <ClCompile Include="Instance.cpp">
-      <Filter>Instance</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>ECS\Entity</Filter>
@@ -32,8 +32,13 @@
     <ClCompile Include="ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
-    <ClCompile Include="GameFramework.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
+    <ClCompile Include="GameFramework.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWorld.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -49,7 +54,7 @@
       <Filter>ECS\Component</Filter>
     </ClInclude>
     <ClInclude Include="Instance.h">
-      <Filter>Instance</Filter>
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>ECS\System</Filter>
@@ -66,8 +71,13 @@
     <ClInclude Include="ECS.h">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="GameFramework.h" />
     <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="GameFramework.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWorld.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JobGraph">
@@ -88,7 +98,7 @@
     <Filter Include="ECS\System">
       <UniqueIdentifier>{645bf1cb-5527-43f7-85e1-57413d26d84d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Instance">
+    <Filter Include="Game">
       <UniqueIdentifier>{8e67c3e1-a39b-484a-86dd-6069d645f3d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
