@@ -13,15 +13,18 @@ void JobNode::AddDependency(JobNode* dependency)
 
 void JobNode::Execute()
 {
-	_job.func(_job.context);
+	bool expected{ false };
+	if (_done.compare_exchange_strong(expected, true)) {
+		_job.func(_job.context);
 
-	for (JobNode* dep : _dependents)
-	{
-		if (dep->_deps.fetch_sub(1) == 1)
-			_graph->Schedule(dep);
+		for (JobNode* dep : _dependents)
+		{
+			if (dep->_deps.fetch_sub(1) == 1)
+				_graph->Schedule(dep);
+		}
+
+		_graph->NotifyJobDone();
 	}
-
-	_graph->NotifyJobDone();
 }
 
 /*--------------------[ JobGraph ]--------------------*/
@@ -65,7 +68,23 @@ void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& s
 			}
 
 			if (conflict)
-				nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+			{
+				int priA = A->GetPriority();
+				int priB = B->GetPriority();
+
+				if (priA == priB)
+				{
+					if (A.get() < B.get())
+						nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+					else
+						nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
+				}
+				else if (priA < priB)
+					nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+				else
+					nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
+			}
+		
 #ifdef _DEBUG
 			if (conflict)
 			{
@@ -128,8 +147,7 @@ void JobGraph::Build()
 
 void JobGraph::Run()
 {
-	if (_latch) _latch.reset();
-	_latch.emplace(static_cast<int>(_nodes.size()));
+	_latch = std::make_unique<std::latch>(static_cast<int>(_nodes.size()));
 
 	for (JobNode* node : _nodes)
 		node->ResetDeps();
@@ -141,6 +159,7 @@ void JobGraph::Run()
 	}
 
 	_latch->wait();
+	_latch.reset();
 }
 
 void JobGraph::NotifyJobDone()

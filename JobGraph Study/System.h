@@ -6,11 +6,17 @@
 
 class System {
 public:
+	System(int p = 0) : _priority(p) {}
 	virtual ~System() = default;
 	virtual void Update(const float dT) = 0;
 
 	virtual std::vector<std::type_index> ReadComponents() const { return {}; }
 	virtual std::vector<std::type_index> WriteComponents() const { return {}; }
+
+	int GetPriority() const { return _priority; }
+
+protected:
+	int _priority;
 };
 
 // System 설계 원칙
@@ -38,7 +44,7 @@ struct ECS;
 
 class MovementSystem : public System {
 public:
-	explicit MovementSystem(ECS& ecs) : _ecs(ecs) {}
+	explicit MovementSystem(ECS& ecs) : System(2), _ecs(ecs) {}
 	virtual ~MovementSystem() = default;
 
 	virtual void Update(const float) override;
@@ -52,7 +58,7 @@ private:
 
 class InputSystem : public System {
 public:
-	explicit InputSystem(ECS& ecs) : _ecs(ecs) {}
+	explicit InputSystem(ECS& ecs) : System(0), _ecs(ecs) {}
 	virtual ~InputSystem() = default;
 
 	virtual void Update(const float) override;
@@ -66,7 +72,7 @@ private:
 
 class AISystem : public System {
 public:
-	explicit AISystem(ECS& ecs) : _ecs(ecs) {}
+	explicit AISystem(ECS& ecs) : System(1), _ecs(ecs) {}
 	virtual ~AISystem() = default;
 
 	virtual void Update(const float) override;
@@ -80,7 +86,7 @@ private:
 
 class CollisionSystem : public System {
 public:
-	explicit CollisionSystem(ECS& ecs) : _ecs(ecs) {}
+	explicit CollisionSystem(ECS& ecs) : System(3), _ecs(ecs) {}
 	virtual ~CollisionSystem() = default;
 
 	virtual void Update(const float) override;
@@ -95,7 +101,7 @@ private:
 
 class CombatSystem : public System {
 public:
-	explicit CombatSystem(ECS& ecs) : _ecs(ecs) {}
+	explicit CombatSystem(ECS& ecs) : System(4), _ecs(ecs) {}
 	virtual ~CombatSystem() = default;
 
 	virtual void Update(const float) override;
@@ -109,7 +115,7 @@ private:
 
 class StatRegenSystem : public System {
 public:
-	explicit StatRegenSystem(ECS& ecs) : _ecs(ecs) {}
+	explicit StatRegenSystem(ECS& ecs) : System(5), _ecs(ecs) {}
 	virtual ~StatRegenSystem() = default;
 
 	virtual void Update(const float) override;
@@ -123,7 +129,7 @@ private:
 
 class VisibilitySystem : public System {
 public:
-	explicit VisibilitySystem(ECS& ecs) : _ecs(ecs) {}
+	explicit VisibilitySystem(ECS& ecs) : System(6), _ecs(ecs) {}
 	virtual ~VisibilitySystem() = default;
 
 	virtual void Update(const float) override;

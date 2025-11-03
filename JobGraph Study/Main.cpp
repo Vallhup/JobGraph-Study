@@ -14,11 +14,11 @@ int main()
 {
 	GameFramework& game = GameFramework::Get();
 
-	for (int instance = 0; instance < 1; ++instance)
+	for (int instance = 0; instance < 100000; ++instance)
 	{
 		Instance* inst = game._world.CreateInstance();
 
-		for (int entity = 0; entity < 1; ++entity)
+		for (int entity = 0; entity < 1000; ++entity)
 		{
 			Entity e = game._ecs.entityMng.Create();
 			e.instanceId = inst->GetId();
@@ -26,16 +26,16 @@ int main()
 		}
 	}
 
-	for (int frame = 0; frame < 10; ++frame)
+	double total{ 0.0 };
+	for (int frame = 0; frame < 100; ++frame)
 	{
-		std::cout << "=== Frame " << frame << " ===\n";
-
 		auto start = std::chrono::steady_clock::now();
 
 		game.Update(0.016f);
 
 		auto end = std::chrono::steady_clock::now();
-		double frameTime = std::chrono::duration<double, std::milli>(end - start).count();
-		std::cout << "Frame Time: " << frameTime << " ms\n";
+		total += std::chrono::duration<double, std::milli>(end - start).count();
 	}
+
+	std::cout << "Frame Time Avg: " << total / 10.0 << " ms\n";
 }

@@ -4,7 +4,7 @@
 #include <atomic>
 #include <latch>
 #include <optional>
-#include <barrier>
+#include <unordered_set>
 
 #include "ObjectPool.h"
 #include "Job.h"
@@ -22,20 +22,23 @@ class alignas(64) JobNode {
 
 public:
 	explicit JobNode(const JobData& job, JobGraph* graph) 
-		: _job(job), _graph(graph), _deps(0), _initDeps(0) {}
+		: _job(job), _graph(graph), _deps(0), _initDeps(0), _done(false) {}
 
 	void AddDependency(JobNode* dependency);
 	void Execute();
 
 	bool Ready() const { return _deps == 0; }
-	void ResetDeps() { _deps = _initDeps; }
+	void ResetDeps() { _deps = _initDeps; _done = false; }
+	const std::vector<JobNode*>& Dependents() const { return _dependents; }
 	
-private:
+protected:
 	JobData _job;
 	JobGraph* _graph;
 	std::vector<JobNode*> _dependents;
 	std::atomic<int> _deps;
 	int _initDeps;
+
+	std::atomic<bool> _done;
 };
 
 template<typename T>
@@ -46,7 +49,7 @@ class JobGraph {
 
 public:
 	explicit JobGraph(ThreadPool& pool) 
-		: _pool(pool), _latch(std::nullopt) {}
+		: _pool(pool), _latch(nullptr) {}
 	~JobGraph();
 
 	JobGraph(const JobGraph&) = delete;
@@ -72,7 +75,7 @@ private:
 	std::vector<JobNode*> _nodes;
 	std::vector<Job*> _allocatedJobs;
 
-	std::optional<std::latch> _latch;
+	std::unique_ptr<std::latch> _latch;
 };
 
 template<JobT T, typename... Args>
