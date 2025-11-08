@@ -4,15 +4,15 @@
 
 #include "ECS.h"
 #include "System.h"
-#include "GameFramework.h"
+#include "Game.h"
 
 #include <array>
 
-int max_threads{ 16 };
+size_t max_threads{ 16 };
 
-int main()
+void benchmark() 
 {
-	GameFramework& game = GameFramework::Get();
+	Game game{ std::thread::hardware_concurrency() };
 
 	for (int instance = 0; instance < 1000; ++instance)
 	{
@@ -47,4 +47,48 @@ int main()
 	}
 
 	std::cout << "Frame Time Avg: " << total / 100.0 << " ms\n";
+}
+
+#define ASIO_STANDALONE
+#include <asio.hpp>
+
+#include "Network.h"
+
+int main()
+{
+	try {
+		int threadCount = std::thread::hardware_concurrency();
+		asio::io_context ioCtx(threadCount);
+
+		Network net(7777, ioCtx);
+		net.Start();
+
+		std::vector<std::thread> workers;
+		for (int i = 0; i < threadCount; ++i)
+		{
+			workers.emplace_back([&ioCtx]() {
+				try {
+					ioCtx.run();
+				}
+				catch (std::exception& e) {
+					std::cerr << "Worker exception: " << e.what() << '\n';
+				}
+				});
+		}
+
+		std::cout << "Asio Echo Server running on port 7777" << std::endl;
+		std::cout << "Press Enter to stop..." << std::endl;
+		std::cin.get(); // 엔터 입력 시 종료
+
+		ioCtx.stop();
+		for (auto& t : workers)
+			if (t.joinable()) t.join();
+
+		std::cout << "Server stopped." << std::endl;
+	}
+
+	catch (const std::exception& e)
+	{
+		std::cerr << "Fatal error: " << e.what() << std::endl;
+	}
 }

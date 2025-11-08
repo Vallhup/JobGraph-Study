@@ -33,11 +33,23 @@
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp" />
-    <ClCompile Include="GameFramework.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="GameWorld.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Listener.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +84,23 @@
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPool.h" />
-    <ClInclude Include="GameFramework.h">
+    <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +124,12 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{8e67c3e1-a39b-484a-86dd-6069d645f3d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{1cc8f2d8-cedc-4db9-a709-640d8c45e052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{411b7074-0b5e-4be4-a7f0-ddd29cf54223}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

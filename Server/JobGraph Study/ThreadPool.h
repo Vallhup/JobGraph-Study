@@ -6,11 +6,8 @@
 #include <mutex>
 #include <condition_variable>
 #include <queue>
-#include <concurrent_queue.h>
 
 #include "JobGraph.h"
-
-using namespace concurrency;
 
 class ThreadPool {
 public:

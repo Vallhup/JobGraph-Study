@@ -1,0 +1,15 @@
+digraph JobGraph {
+  "class MovementSystem" -> "class CollisionSystem";
+  "class MovementSystem" -> "class CombatSystem";
+  "class MovementSystem" -> "class VisibilitySystem";
+  "class InputSystem" -> "class MovementSystem";
+  "class InputSystem" -> "class AISystem";
+  "class InputSystem" -> "class AISystem";
+  "class AISystem" -> "class MovementSystem";
+  "class AISystem" -> "class MovementSystem";
+  "class CollisionSystem";
+  "class CombatSystem" -> "class StatRegenSystem";
+  "class CombatSystem" -> "class StatRegenSystem";
+  "class StatRegenSystem";
+  "class VisibilitySystem";
+}

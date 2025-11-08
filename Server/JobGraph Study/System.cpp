@@ -1,7 +1,7 @@
 #include "System.h"
 #include "ECS.h"
 #include "Component.h"
-#include "GameFramework.h"
+#include "Game.h"
 
 #include <thread>
 #include <iostream>
@@ -13,17 +13,11 @@ void MovementSystem::Update(const float dT)
 	auto& transform = _ecs.GetStorage<Transform>();
 	auto& velocity = _ecs.GetStorage<Velocity>();
 
-	const auto& entitiesT = transform.Entities();
-	auto& denseT = transform.Dense();
-
-	for (size_t i = 0; i < denseT.size(); ++i)
+	for (auto [entity, t] : transform)
 	{
-		Entity e = entitiesT[i];
-		int velIdx = velocity.DenseIndex(e);
-
+		int velIdx = velocity.DenseIndex(entity);
 		if (velIdx == -1) continue;
 
-		auto& t = denseT[i];
 		auto& v = velocity.Dense()[velIdx];
 
 		t.x += v.dx * dT;
@@ -128,32 +122,32 @@ std::vector<std::type_index> AISystem::WriteComponents() const
 
 void CollisionSystem::Update(const float dT)
 {
-	auto& tr = _ecs.GetStorage<Transform>();
-	auto& dense = tr.Dense();
-	const size_t N = dense.size();
-	auto& pool = GameFramework::Get()._threadPool;
+	//auto& tr = _ecs.GetStorage<Transform>();
+	//auto& dense = tr.Dense();
+	//const size_t N = dense.size();
+	//auto& pool = Game::Get()._threadPool;
 
-	_collisions = 0;
+	//_collisions = 0;
 
-	const int chunkSize = 500; // Batch 단위
-	pool.ParallelFor(N, chunkSize, [&](int begin, int end)
-		{
-			int localCount = 0;
-			for (int i = begin; i < end; ++i)
-			{
-				for (size_t j = i + 1; j < N; ++j)
-				{
-					float dx = dense[i].x - dense[j].x;
-					float dy = dense[i].y - dense[j].y;
-					float dist2 = dx * dx + dy * dy;
-					if (dist2 < 16.0f)
-						localCount++;
-				}
-			}
+	//const int chunkSize = 500; // Batch 단위
+	//pool.ParallelFor(N, chunkSize, [&](int begin, int end)
+	//	{
+	//		int localCount = 0;
+	//		for (int i = begin; i < end; ++i)
+	//		{
+	//			for (size_t j = i + 1; j < N; ++j)
+	//			{
+	//				float dx = dense[i].x - dense[j].x;
+	//				float dy = dense[i].y - dense[j].y;
+	//				float dist2 = dx * dx + dy * dy;
+	//				if (dist2 < 16.0f)
+	//					localCount++;
+	//			}
+	//		}
 
-			// localCount는 atomic 합산
-			_collisions += localCount;
-		});
+	//		// localCount는 atomic 합산
+	//		_collisions += localCount;
+	//	});
 
 #ifdef _DEBUG
 	std::cout << "[CollisionSystem] Thread: " << std::this_thread::get_id()
@@ -272,14 +266,14 @@ std::vector<std::type_index> StatRegenSystem::WriteComponents() const
 
 void VisibilitySystem::Update(const float dT)
 {
-	auto& transform = _ecs.GetStorage<Transform>();
+	/*auto& transform = _ecs.GetStorage<Transform>();
 	auto& view = _ecs.GetStorage<View>();
 
 	const auto& entities = transform.Entities();
 	auto& denseTr = transform.Dense();
 	auto& denseView = view.Dense();
 	const size_t N = denseTr.size();
-	auto& pool = GameFramework::Get()._threadPool;
+	auto& pool = Game::Get()._threadPool;
 
 	const int chunk = 500;
 	pool.ParallelFor(N, chunk, [&](int begin, int end)
@@ -303,7 +297,7 @@ void VisibilitySystem::Update(const float dT)
 						v.nearbyEntities.push_back(entities[j].id);
 				}
 			}
-		});
+		});*/
 
 #ifdef _DEBUG
 	std::cout << "[VisibilitySystem] Thread: " << std::this_thread::get_id()

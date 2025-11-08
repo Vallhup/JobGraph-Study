@@ -1,5 +1,6 @@
 #include "ThreadPool.h"
 #include "JobGraph.h"
+#include "Network.h"
 
 ThreadPool::ThreadPool(size_t size) : _running(true)
 {

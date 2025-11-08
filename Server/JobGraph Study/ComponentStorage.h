@@ -12,6 +12,23 @@ template<CompT T>
 class ComponentStorage {
 	static constexpr int INVALID{ -1 };
 
+	struct Iterator {
+		size_t i;
+		ComponentStorage<T>* storage;
+
+		Iterator(size_t i, ComponentStorage<T>* s) : i(i), storage(s) {}
+		Iterator& operator++() { ++i; return *this; }
+		bool operator!=(const Iterator& other) const { return i != other.i; }
+
+		auto operator*() const
+		{
+			return std::pair<Entity, T&>(
+				storage->_entities[i],
+				storage->_dense[i]
+			);
+		}
+	};
+
 public:
 	T* AddComponent(Entity entity)
 	{
@@ -64,6 +81,9 @@ public:
 	{
 		return (entity.id < _sparse.size()) ? _sparse[entity.id] : INVALID;
 	}
+
+	Iterator begin() { return { 0, this }; }
+	Iterator end() { return { _dense.size(), this}; }
 
 private:
 	std::vector<T> _dense;

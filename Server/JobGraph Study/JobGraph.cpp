@@ -1,5 +1,6 @@
 #include "JobGraph.h"
 #include "ThreadPool.h"
+#include <fstream>
 
 #include <ranges>
 
@@ -43,7 +44,11 @@ void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& s
 	std::unordered_map<System*, JobNode*> nodeMap;
 
 	for (auto& sys : systems)
-		nodeMap[sys.get()] = CreateNode<SystemJob>(sys.get(), dTRef);
+	{
+		JobNode* node = CreateNode<SystemJob>(sys.get(), dTRef);
+		node->_name = typeid(*sys).name();
+		nodeMap[sys.get()] = node;
+	}
 
 	// TODO : O(N^2) 순회 
 	//     -> 나중에 시간나면 고치기... 어짜피 런타임에 돌아갈 함수 아님
@@ -137,6 +142,7 @@ void JobGraph::Build()
 		node->_initDeps = node->_deps;
 
 #ifdef _DEBUG
+	DumpDot("graph.gv");
 	for (JobNode* node : _nodes)
 	{
 		std::cout << "deps = " << node->_deps.load()
@@ -147,7 +153,7 @@ void JobGraph::Build()
 
 void JobGraph::Run()
 {
-	_latch = std::make_unique<std::latch>(static_cast<int>(_nodes.size()));
+	new (&_latch) std::latch(static_cast<int>(_nodes.size()));
 
 	for (JobNode* node : _nodes)
 		node->ResetDeps();
@@ -158,12 +164,27 @@ void JobGraph::Run()
 			Schedule(node);
 	}
 
-	_latch->wait();
-	_latch.reset();
+	_latch.wait();
 }
 
 void JobGraph::NotifyJobDone()
 {
-	if (_latch)
-		_latch->count_down();
+	_latch.count_down();
+}
+
+void JobGraph::DumpDot(std::string_view filename) const
+{
+	std::ofstream file(filename.data());
+	file << "digraph JobGraph {\n";
+	for (auto* node : _nodes)
+	{
+		for (auto* dep : node->Dependents())
+			file << "  \"" << node->_name << "\" -> \"" << dep->_name << "\";\n";
+		if (node->Dependents().empty())
+			file << "  \"" << node->_name << "\";\n";
+	}
+	file << "}\n";
+	file.close();
+
+	std::cout << "[JobGraph] Dumped to " << filename << std::endl;
 }

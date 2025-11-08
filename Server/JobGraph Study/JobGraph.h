@@ -39,6 +39,7 @@ protected:
 	int _initDeps;
 
 	std::atomic<bool> _done;
+	std::string _name;
 };
 
 template<typename T>
@@ -49,7 +50,7 @@ class JobGraph {
 
 public:
 	explicit JobGraph(ThreadPool& pool) 
-		: _pool(pool), _latch(nullptr) {}
+		: _pool(pool), _latch(0) {}
 	~JobGraph();
 
 	JobGraph(const JobGraph&) = delete;
@@ -70,12 +71,13 @@ private:
 	void Build();
 	void NotifyJobDone();
 
+	void DumpDot(std::string_view fileName) const;
+
 private:
 	ThreadPool& _pool;
 	std::vector<JobNode*> _nodes;
 	std::vector<Job*> _allocatedJobs;
-
-	std::unique_ptr<std::latch> _latch;
+	std::latch _latch;
 };
 
 template<JobT T, typename... Args>
@@ -84,7 +86,7 @@ inline JobNode* JobGraph::CreateNode(Args&&... args)
 	T* job = new T(std::forward<Args>(args)...);
 	_allocatedJobs.push_back(job);
 
-	JobData data{ T::Execute, job };							
+	JobData data{ T::Execute, job};
 	JobNode* node = new JobNode(data, this);
 	_nodes.push_back(node);
 

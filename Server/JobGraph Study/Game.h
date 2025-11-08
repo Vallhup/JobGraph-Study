@@ -8,15 +8,11 @@
 #include "Instance.h"
 #include "ECS.h"
 
-class GameFramework {
-public:
-	static GameFramework& Get()
-	{
-		static GameFramework instance;
-		return instance;
-	}
+extern size_t max_threads;
 
-	GameFramework(size_t size = std::thread::hardware_concurrency());
+class Game {
+public:
+	Game(size_t size);
 
 	void Update(const float dT);
 
