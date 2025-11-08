@@ -51,6 +51,9 @@
     <ClCompile Include="Framework.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="RecvBuffer.cpp">
+      <Filter>Utillity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -102,6 +105,9 @@
     <ClInclude Include="Framework.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="RecvBuffer.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JobGraph">
@@ -130,6 +136,9 @@
     </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{411b7074-0b5e-4be4-a7f0-ddd29cf54223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity">
+      <UniqueIdentifier>{c48c93c4-35bf-411d-b55c-2c55427ee4c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

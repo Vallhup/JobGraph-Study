@@ -4,6 +4,8 @@
 #include <asio.hpp>
 #include <memory>
 
+#include "RecvBuffer.h"
+
 using asio::ip::tcp;
 
 class Session : public std::enable_shared_from_this<Session> {
@@ -17,10 +19,11 @@ public:
 
 private:
 	void Recv();
+	void ProcessPacket();
 
 	int _id;
 	tcp::socket _socket;
 
 	std::vector<char> _buffer;
+	RecvBuffer _recvBuffer;
 };
-

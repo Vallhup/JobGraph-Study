@@ -10,9 +10,11 @@ Session::Session(tcp::socket s, int id)
 
 void Session::Start()
 {
+#ifdef _DEBUG
 	std::cout << "[+] Client connected from "
 		<< _socket.remote_endpoint().address().to_string()
 		<< std::endl;
+#endif
 
 	Recv();
 }
@@ -35,7 +37,8 @@ void Session::Send(void* packet)
 void Session::Recv()
 {
 	auto self = shared_from_this();
-	_socket.async_read_some(asio::buffer(_buffer),
+	_socket.async_read_some(
+		asio::buffer(_recvBuffer.GetWritePos(), _recvBuffer.GetContiguousFreeSize()),
 		[this, self](std::error_code ec, size_t bytes)
 		{
 			if (ec)
@@ -48,11 +51,17 @@ void Session::Recv()
 				}
 				return;
 			}
-			// Process Packet : Game 모듈로 데이터 전송(double buffering)
 
-			asio::async_write(_socket, asio::buffer(_buffer, bytes),
-				[this, self](std::error_code, size_t) {});
-
+			_recvBuffer.Write(nullptr, static_cast<int>(bytes));
+			ProcessPacket();
 			Recv();
 		});
+}
+
+void Session::ProcessPacket()
+{
+	// TODO : 패킷 처리
+	//
+	// 1. 패킷 재조립 (RecvBuffer 활용)
+	// 2. Game모듈로 데이터 전송(double buffering / Lock-Free Queue)
 }

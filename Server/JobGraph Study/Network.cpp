@@ -11,12 +11,27 @@ Network::~Network()
 
 void Network::Start()
 {
-	_listener.Start(*this);
+	_listener.Start(this);
 }
 
 void Network::Stop()
 {
 	_listener.Stop();
+}
+
+void Network::Send(int id, const void* data)
+{
+	// TODO : id로 session 찾아서 Send 함수 호출
+}
+
+void Network::QueuePacket(int id, const void* data)
+{
+	// TODO : 별도의 Packet Queue 두고 push
+}
+
+void Network::FlushQueued()
+{
+	// TODO : Packet Queue 모두 꺼내서 Send
 }
 
 void Network::AddSession(int id, const std::shared_ptr<Session>& session)

@@ -12,11 +12,13 @@ class Listener {
 public:
 	Listener(asio::io_context& io, short port);
 
-	void Start(Network& net);
+	void Start(Network* net);
 	void Stop();
 
 private:
-	tcp::acceptor _acceptor;
+	void Accept(Network* net);
+
 	asio::io_context& _ioCtx;
+	tcp::acceptor _acceptor;
 };
 

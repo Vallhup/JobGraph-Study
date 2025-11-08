@@ -11,24 +11,13 @@ Listener::Listener(asio::io_context& io, short port)
 #endif
 }
 
-void Listener::Start(Network& net)
+void Listener::Start(Network* net)
 {
-	_acceptor.async_accept(
-		[this, &net](std::error_code ec, tcp::socket socket)
-		{
-			if (not ec)
-			{
-				int id = net._nextId++;
-				auto session = std::make_shared<Session>(std::move(socket), id);
-				net.AddSession(id, session);
-				session->Start();
-			}
 #ifdef _DEBUG
-			else
-				std::cerr << "Accept error: " << ec.message() << std::endl;
+	std::cout << "Listener Start" << std::endl;
 #endif
-			Start(net);
-		});
+
+	Accept(net);
 }
 
 void Listener::Stop()
@@ -40,4 +29,24 @@ void Listener::Stop()
 	if (ec)
 		std::cerr << "Listener Stop error: " << ec.message() << std::endl;
 #endif
+}
+
+void Listener::Accept(Network* net)
+{
+	_acceptor.async_accept(
+		[this, &net](std::error_code ec, tcp::socket socket)
+		{
+			if (not ec)
+			{
+				int id = net->_nextId++;
+				auto session = std::make_shared<Session>(std::move(socket), id);
+				net->AddSession(id, session);
+				session->Start();
+			}
+#ifdef _DEBUG
+			else
+				std::cerr << "Accept error: " << ec.message() << std::endl;
+#endif
+			Accept(net);
+		});
 }

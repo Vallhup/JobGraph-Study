@@ -18,6 +18,10 @@ public:
 	void Start();
 	void Stop();
 
+	void Send(int id, const void* data);
+	void QueuePacket(int id, const void* data);
+	void FlushQueued();
+
 private:
 	void AddSession(int id, const std::shared_ptr<Session>& session);
 	void RemoveSession(int id);
@@ -29,3 +33,13 @@ private:
 	// boost의 concurrent_flat_map or tbb의 concurrnet_hash_map으로 변경
 };
 
+// Send 함수 호출 정책
+//
+// 1. 즉시 전송
+//  - 반응성이 좋아짐
+//  - 구현도 쉬움
+//  - 성능 부하가 심함
+// 
+// 2. 프레임 전송
+//  - 반응성 좀 떨어짐 (0.5 ~ 1 Tick Delay)
+//  - 성능 부하가 적음 (Send함수 호출이 적어지니까)
