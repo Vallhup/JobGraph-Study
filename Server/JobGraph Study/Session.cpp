@@ -4,7 +4,7 @@
 #include "Listener.h"
 
 Session::Session(tcp::socket s, int id) 
-	: _socket(std::move(s)), _id(id), _buffer(1024)
+	: _socket(std::move(s)), _strand(_socket.get_executor()), _id(id), _buffer(1024)
 {
 }
 
@@ -22,16 +22,29 @@ void Session::Start()
 void Session::Close()
 {
 	std::error_code ec;
+	_socket.shutdown(tcp::socket::shutdown_both, ec);
 	_socket.close(ec);
 
 	if (ec)
 		std::cerr << "Socket close error: " << ec.message() << std::endl;
 }
 
-void Session::Send(void* packet)
+void Session::Send(const void* data, size_t size)
 {
-	//_socket.async_write_some(/*SendBuffer*/,
-	//	[this](std::error_code, size_t) {});
+	if (size == 0) return;
+
+	auto self = shared_from_this();
+	const char* data_ = static_cast<const char*>(data);
+	std::vector<char> buffer(data_, data_ + size);
+
+	asio::dispatch(_strand,
+		[this, self, buffer = std::move(buffer)]()
+		{
+			bool idle = _sendQueue.empty();
+			_sendQueue.emplace_back(std::move(buffer));
+			if (idle)
+				InternalSend();
+		});
 }
 
 void Session::Recv()
@@ -46,7 +59,7 @@ void Session::Recv()
 				if (ec.value() != asio::error::operation_aborted)
 				{
 					std::cout << "Receive Erro on Session[" << _id << "] EC["
-						<< ec.value() << "]\n";
+						<< ec.message() << "]\n";
 					Close();
 				}
 				return;
@@ -56,6 +69,29 @@ void Session::Recv()
 			ProcessPacket();
 			Recv();
 		});
+}
+
+void Session::InternalSend()
+{
+	// TODO : scatter/gather IO นื SendBuffer Pooling
+	auto self = shared_from_this();
+	asio::async_write(
+		_socket, asio::buffer(_sendQueue.front()),
+		asio::bind_executor(_strand,
+			[this, self](std::error_code ec, size_t)
+			{
+				if (ec)
+				{
+					std::cerr << "Send error: " << ec.message() << std::endl;
+					Close();
+					return;
+				}
+
+				_sendQueue.pop_front();
+				if (not _sendQueue.empty())
+					InternalSend();
+			})
+	);
 }
 
 void Session::ProcessPacket()
