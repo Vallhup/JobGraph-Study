@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "Listener.h"
+
+#include "SendBuffer.h"
 #include "ObjectPoolManager.h"
 
 Session::Session(tcp::socket s, int id) 
@@ -34,10 +36,10 @@ void Session::Send(const void* data, size_t size)
 {
 	if (size == 0) return;
 
-	auto self = shared_from_this();
-	const char* data_ = static_cast<const char*>(data);
-	std::vector<char> buffer(data_, data_ + size);
+	SendBuffer* buffer = ObjectPoolManager::Get().sendBuffers.Acquire();
+	buffer->Write(data, size);
 
+	auto self = shared_from_this();
 	asio::dispatch(_strand,
 		[this, self, buffer = std::move(buffer)]()
 		{
@@ -57,12 +59,15 @@ void Session::Recv()
 		{
 			if (ec)
 			{
-				if (ec.value() != asio::error::operation_aborted)
+				// TODO : Error Code 자동으로 거를 수 있게?
+				if (ec != asio::error::eof or
+					ec != asio::error::operation_aborted)
 				{
-					std::cout << "Receive Erro on Session[" << _id << "] EC["
+					std::cout << "Receive Error on Session[" << _id << "] EC["
 						<< ec.message() << "]\n";
-					Close();
 				}
+
+				Close();
 				return;
 			}
 
@@ -74,7 +79,6 @@ void Session::Recv()
 
 void Session::InternalSend()
 {
-	// TODO : scatter/gather IO 및 SendBuffer Pooling
 	if (_sendQueue.empty()) return;
 
 	_gatherBufs.clear();
@@ -83,13 +87,13 @@ void Session::InternalSend()
 	size_t totalBytes{ 0 };
 	size_t batchCount{ 0 };
 
-	for (const auto& data : _sendQueue)
+	for (auto& data : _sendQueue)
 	{
 		if (batchCount >= MAX_BUFFERS) break;
-		if (totalBytes + data.size() > MAX_BYTES) break;
+		if (totalBytes + data->GetSize() > MAX_BYTES) break;
 
-		_gatherBufs.emplace_back(asio::buffer(data));
-		totalBytes += data.size();
+		_gatherBufs.emplace_back(asio::buffer(data->GetBuffer(), data->GetSize()));
+		totalBytes += data->GetSize();
 		++batchCount;
 	}
 
@@ -107,7 +111,12 @@ void Session::InternalSend()
 				}
 
 				for (size_t i = 0; i < batchCount; ++i)
+				{
+					SendBuffer* front = _sendQueue.front();
+					ObjectPoolManager::Get().sendBuffers.Release(front);
+
 					_sendQueue.pop_front();
+				}
 
 				if (not _sendQueue.empty())
 					InternalSend();
@@ -121,4 +130,18 @@ void Session::ProcessPacket()
 	//
 	// 1. 패킷 재조립 (RecvBuffer 활용)
 	// 2. Game모듈로 데이터 전송(double buffering / Lock-Free Queue)
+
+
+	// TEMP : 테스트용 에코 서버
+	int size = _recvBuffer.GetUsedSize();
+
+	if (size > 0)
+	{
+		std::vector<char> temp(size);
+		_recvBuffer.Peek(temp.data(), size);
+
+		Send(temp.data(), size);
+
+		_recvBuffer.Read(nullptr, size);
+	}
 }

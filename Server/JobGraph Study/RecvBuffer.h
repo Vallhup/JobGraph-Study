@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-
-constexpr short BUFFER_SIZE = 4096;
+#include "Constants.h"
 
 class RecvBuffer {
 public:

@@ -10,6 +10,8 @@
 
 using asio::ip::tcp;
 
+class SendBuffer;
+
 class Session : public std::enable_shared_from_this<Session> {
 	static constexpr size_t MAX_BUFFERS{ 32 };
 	static constexpr size_t MAX_BYTES{ 64 * 1024 };
@@ -33,6 +35,6 @@ private:
 
 	std::vector<char> _buffer;
 	RecvBuffer _recvBuffer;
-	std::deque<std::vector<char>> _sendQueue;
+	std::deque<SendBuffer*> _sendQueue;
 	std::vector<asio::const_buffer> _gatherBufs;
 };

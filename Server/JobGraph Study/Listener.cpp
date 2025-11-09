@@ -34,7 +34,7 @@ void Listener::Stop()
 void Listener::Accept(Network* net)
 {
 	_acceptor.async_accept(
-		[this, &net](std::error_code ec, tcp::socket socket)
+		[this, net](std::error_code ec, tcp::socket socket)
 		{
 			if (not ec)
 			{

@@ -17,5 +17,26 @@ size_t max_threads{ 16 };
 
 int main()
 {
+    try {
+        asio::io_context io;
+        Network net(9000, io);
 
+        net.Start();
+
+        std::thread ioThread([&io]() {
+            io.run();
+            });
+
+        std::cout << "[Server] Running on port 9000\n";
+        std::cout << "Press Enter to stop...\n";
+        std::cin.get();
+
+        net.Stop();
+        io.stop();
+        ioThread.join();
+
+    }
+    catch (std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
 }

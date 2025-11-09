@@ -12,7 +12,7 @@ public:
 		return instance;
 	}
 
-	static thread_local ObjectPool<SendBuffer, 8192> sendBuffers;
+	inline static thread_local ObjectPool<SendBuffer, 8192> sendBuffers;
 	// TODO : ObjectPool Ãß°¡
 
 private:

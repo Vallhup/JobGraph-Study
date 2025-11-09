@@ -3,6 +3,8 @@
 #include <stack>
 #include <array>
 
+#include "SendBuffer.h"
+
 template<typename T, size_t Size>
 class ObjectPool {
 	struct ObjectSlot {

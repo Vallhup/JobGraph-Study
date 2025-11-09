@@ -5,38 +5,50 @@
 
 using asio::ip::tcp;
 
-int main() {
+void RunClient(int id)
+{
     try {
         asio::io_context io;
-        tcp::socket socket(io);
+        tcp::socket sock(io);
         tcp::resolver resolver(io);
+        asio::connect(sock, resolver.resolve("127.0.0.1", "9000"));
 
-        auto endpoints = resolver.resolve("127.0.0.1", "7777");
-        asio::connect(socket, endpoints);
+        std::string msg = "Client" + std::to_string(id);
+        for (int i = 0; i < 100; ++i)
+        {
+            asio::write(sock, asio::buffer(msg));
+            char reply[128];
+            size_t len = sock.read_some(asio::buffer(reply));
+            reply[len] = '\0';
 
-        std::cout << "Connected to server.\n";
+            if (std::string(reply) != msg)
+                std::cerr << "Client[" << id << "] mismatch!\n";
 
-        std::thread reader([&]() {
-            char data[1024];
-            while (true) {
-                std::error_code ec;
-                size_t len = socket.read_some(asio::buffer(data), ec);
-                if (ec) break;
-                std::cout << "[Recv] " << std::string(data, len) << "\n";
-            }
-            });
-
-        std::string line;
-        while (std::getline(std::cin, line)) {
-            if (line == "quit") break;
-            line.push_back('\n');
-            asio::write(socket, asio::buffer(line));
+            std::this_thread::sleep_for(std::chrono::milliseconds(2));
         }
 
-        socket.close();
-        reader.join();
+        std::cout << "Client[" << id << "] finished.\n";
     }
-    catch (std::exception& e) {
-        std::cerr << "Error: " << e.what() << '\n';
+    catch (std::exception& e)
+    {
+        std::cerr << "Client[" << id << "] exception: " << e.what() << "\n";
+    }
+}
+
+int main() {
+    constexpr int CLIENT_COUNT = 10;
+    constexpr int ITER = 100;
+
+    for (int iter = 0; iter < ITER; ++iter)
+    {
+        std::vector<std::thread> threads;
+        for (int i = 0; i < CLIENT_COUNT; ++i)
+            threads.emplace_back(RunClient, i);
+
+        for (auto& t : threads)
+            t.join();
+
+        std::cout << "[Cycle " << iter << "] completed.\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }

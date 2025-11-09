@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-
-extern short BUFFER_SIZE;
+#include "Constants.h"
 
 class SendBuffer {
 public:
@@ -10,7 +9,7 @@ public:
 
 	void Write(const void* data, int size);
 
-	const char* GetBuffer() const { return _buffer.data(); }
+	char* GetBuffer() { return _buffer.data(); }
 	int GetSize() const { return _writePos; }
 	void Clear() { _writePos = 0; }
 
