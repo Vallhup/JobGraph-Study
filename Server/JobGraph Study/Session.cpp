@@ -74,11 +74,29 @@ void Session::Recv()
 void Session::InternalSend()
 {
 	// TODO : scatter/gather IO นื SendBuffer Pooling
+	if (_sendQueue.empty()) return;
+
+	_gatherBufs.clear();
+	_gatherBufs.reserve(MAX_BUFFERS);
+
+	size_t totalBytes{ 0 };
+	size_t batchCount{ 0 };
+
+	for (const auto& data : _sendQueue)
+	{
+		if (batchCount >= MAX_BUFFERS) break;
+		if (totalBytes + data.size() > MAX_BYTES) break;
+
+		_gatherBufs.emplace_back(asio::buffer(data));
+		totalBytes += data.size();
+		++batchCount;
+	}
+
 	auto self = shared_from_this();
 	asio::async_write(
-		_socket, asio::buffer(_sendQueue.front()),
+		_socket, _gatherBufs,
 		asio::bind_executor(_strand,
-			[this, self](std::error_code ec, size_t)
+			[this, self, batchCount](std::error_code ec, size_t)
 			{
 				if (ec)
 				{
@@ -87,7 +105,9 @@ void Session::InternalSend()
 					return;
 				}
 
-				_sendQueue.pop_front();
+				for (size_t i = 0; i < batchCount; ++i)
+					_sendQueue.pop_front();
+
 				if (not _sendQueue.empty())
 					InternalSend();
 			})
