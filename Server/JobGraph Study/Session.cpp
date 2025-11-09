@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "Listener.h"
-#include "ObjectPoolManager.h"
 
 Session::Session(tcp::socket s, int id) 
 	: _socket(std::move(s)), _strand(_socket.get_executor()), _id(id), _buffer(1024)

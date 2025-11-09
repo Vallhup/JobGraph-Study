@@ -29,16 +29,18 @@ private:
 template<typename T, size_t Size>
 inline ObjectPool<T, Size>::ObjectPool()
 {
-	for (size_t i = 0; i < Size; ++i)
+	for (size_t i = 0; i < Size; ++i) {
 		_freeIdxs.push(i);
+	}
 }
 
 template<typename T, size_t Size>
 template<typename ...Args>
 inline T* ObjectPool<T, Size>::Acquire(Args&& ...args)
 {
-	if (_freeIdxs.empty())
+	if (_freeIdxs.empty()) {
 		return new T(std::forward<Args>(args)...);
+	}
 
 	size_t idx = _freeIdxs.top(); _freeIdxs.pop();
 	return new (&_objects[idx].data) T(std::forward<Args>(args)...);
@@ -48,15 +50,15 @@ template<typename T, size_t Size>
 inline void ObjectPool<T, Size>::Release(T* obj)
 {
 	if (obj == nullptr) return;
-	if (IsFromPool(obj)) 
-	{
+	if (IsFromPool(obj)) {
 		obj->~T();
 		size_t idx = (reinterpret_cast<std::byte*>(obj) - _objects[0].data) / sizeof(T);
 		_freeIdxs.push(idx);
 	}
 
-	else
+	else {
 		delete obj;
+	}
 }
 
 template<typename T, size_t Size>

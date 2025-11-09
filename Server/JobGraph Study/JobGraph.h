@@ -6,6 +6,7 @@
 #include <optional>
 #include <unordered_set>
 
+#include "ObjectPool.h"
 #include "Job.h"
 
 class ThreadPool;
