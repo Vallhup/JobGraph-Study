@@ -60,7 +60,7 @@ void Session::Recv()
 			if (ec)
 			{
 				// TODO : Error Code 자동으로 거를 수 있게?
-				if (ec != asio::error::eof or
+				if (ec != asio::error::eof and
 					ec != asio::error::operation_aborted)
 				{
 					std::cout << "Receive Error on Session[" << _id << "] EC["
