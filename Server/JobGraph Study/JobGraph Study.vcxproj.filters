@@ -32,7 +32,6 @@
     <ClCompile Include="ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -53,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="RecvBuffer.cpp">
       <Filter>Utillity</Filter>
+    </ClCompile>
+    <ClCompile Include="SendBuffer.cpp">
+      <Filter>Utillity</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPoolManager.cpp">
+      <Filter>ObjectPool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +91,6 @@
     <ClInclude Include="ECS.h">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -107,6 +111,15 @@
     </ClInclude>
     <ClInclude Include="RecvBuffer.h">
       <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.hpp">
+      <Filter>ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="SendBuffer.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPoolManager.h">
+      <Filter>ObjectPool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +152,9 @@
     </Filter>
     <Filter Include="Utillity">
       <UniqueIdentifier>{c48c93c4-35bf-411d-b55c-2c55427ee4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectPool">
+      <UniqueIdentifier>{fbc24831-c2f2-4666-829d-62a8cadfbb2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

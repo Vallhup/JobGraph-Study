@@ -4,11 +4,9 @@
 
 constexpr short BUFFER_SIZE = 4096;
 
-class RecvBuffer
-{
+class RecvBuffer {
 public:
 	RecvBuffer(int bufferSize = BUFFER_SIZE);
-	~RecvBuffer() = default;
 
 public:
 	char* GetBuffer() { return _buffer.data(); }
