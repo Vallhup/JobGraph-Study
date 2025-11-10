@@ -21,4 +21,3 @@ private:
 	Network _network;
 	asio::io_context _ioCtx;
 };
-
