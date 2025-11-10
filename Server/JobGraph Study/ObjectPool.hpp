@@ -4,6 +4,7 @@
 #include <array>
 
 #include "SendBuffer.h"
+#include "LF_Stack.h"
 
 template<typename T, size_t Size>
 class ObjectPool {
@@ -25,7 +26,7 @@ private:
 
 private:
 	std::array<ObjectSlot, Size> _objects;
-	std::stack<size_t> _freeIdxs;
+	LF_Stack _freeIdxs;
 };
 
 template<typename T, size_t Size>
@@ -42,7 +43,7 @@ inline T* ObjectPool<T, Size>::Acquire(Args&& ...args)
 	if (_freeIdxs.empty())
 		return new T(std::forward<Args>(args)...);
 
-	size_t idx = _freeIdxs.top(); _freeIdxs.pop();
+	size_t idx = _freeIdxs.pop();
 	return new (&_objects[idx].data) T(std::forward<Args>(args)...);
 }
 

@@ -1,3 +1,9 @@
+#define ASIO_STANDALONE
+#include <asio.hpp>
+#include <array>
+
+#include "Network.h"
+
 #include "Job.h"
 #include "JobGraph.h"
 #include "ThreadPool.h"
@@ -6,14 +12,7 @@
 #include "System.h"
 #include "Game.h"
 
-#include <array>
-
-size_t max_threads{ 16 };
-
-#define ASIO_STANDALONE
-#include <asio.hpp>
-
-#include "Network.h"
+#include "Constants.h"
 
 int main()
 {
@@ -23,9 +22,16 @@ int main()
 
         net.Start();
 
-        std::thread ioThread([&io]() {
-            io.run();
-            });
+        std::vector<std::thread> workers;
+
+        for (size_t i = 0; i < max_threads; ++i)
+        {
+            workers.emplace_back(
+                [&io]()
+                {
+                    io.run();
+                });
+        }
 
         std::cout << "[Server] Running on port 9000\n";
         std::cout << "Press Enter to stop...\n";
@@ -33,7 +39,10 @@ int main()
 
         net.Stop();
         io.stop();
-        ioThread.join();
+
+        for (std::thread& worker : workers)
+            if (worker.joinable())
+                worker.join();
 
     }
     catch (std::exception& e) {

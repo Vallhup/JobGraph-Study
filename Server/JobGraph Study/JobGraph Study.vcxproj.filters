@@ -59,6 +59,9 @@
     <ClCompile Include="SendBuffer.cpp">
       <Filter>Network\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="LF_Stack.cpp">
+      <Filter>Utillity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -122,6 +125,9 @@
       <Filter>Network\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
+      <Filter>Utillity</Filter>
+    </ClInclude>
+    <ClInclude Include="LF_Stack.h">
       <Filter>Utillity</Filter>
     </ClInclude>
   </ItemGroup>

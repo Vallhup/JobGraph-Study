@@ -8,7 +8,7 @@
 #include "Instance.h"
 #include "ECS.h"
 
-extern size_t max_threads;
+#include "Constants.h"
 
 class Game {
 public:
