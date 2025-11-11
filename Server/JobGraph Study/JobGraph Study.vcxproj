@@ -145,17 +145,22 @@
     <ClCompile Include="RecvBuffer.cpp" />
     <ClCompile Include="SendBuffer.cpp" />
     <ClCompile Include="Session.cpp" />
-    <ClCompile Include="SynchronizationBuffer.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AtomicCounter.hpp" />
+    <ClInclude Include="BatchHandler.hpp" />
+    <ClInclude Include="ClaimStrategy.hpp" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentStorage.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Consumer.hpp" />
+    <ClInclude Include="ConsumerBarrier.hpp" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entry.hpp" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
@@ -167,13 +172,15 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="ObjectPool.hpp" />
     <ClInclude Include="ObjectPoolManager.h" />
+    <ClInclude Include="ProducerBarrier.hpp" />
     <ClInclude Include="RecvBuffer.h" />
+    <ClInclude Include="RingBuffer.hpp" />
     <ClInclude Include="SendBuffer.h" />
     <ClInclude Include="Session.h" />
-    <ClInclude Include="SynchronizationBuffer.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="WaitStrategy.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

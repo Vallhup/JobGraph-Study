@@ -62,9 +62,6 @@
     <ClCompile Include="LF_Stack.cpp">
       <Filter>Utillity\Lock-Free Data Structure</Filter>
     </ClCompile>
-    <ClCompile Include="SynchronizationBuffer.cpp">
-      <Filter>Utillity\Lock-Free Data Structure</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -133,8 +130,32 @@
     <ClInclude Include="LF_Stack.h">
       <Filter>Utillity\Lock-Free Data Structure</Filter>
     </ClInclude>
-    <ClInclude Include="SynchronizationBuffer.h">
-      <Filter>Utillity\Lock-Free Data Structure</Filter>
+    <ClInclude Include="ClaimStrategy.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitStrategy.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="ProducerBarrier.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Producer</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumer.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsumerBarrier.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="BatchHandler.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Consumer</Filter>
+    </ClInclude>
+    <ClInclude Include="RingBuffer.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="AtomicCounter.hpp">
+      <Filter>Utillity\Lock-Free Data Structure\LMAX Disruptor\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +197,24 @@
     </Filter>
     <Filter Include="Utillity\Lock-Free Data Structure">
       <UniqueIdentifier>{d6317159-0fce-4d2f-8dc2-42d4c8a58c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor">
+      <UniqueIdentifier>{b28cf748-c8bf-432a-94ca-70e564da0c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor\Core">
+      <UniqueIdentifier>{4c5ff376-d338-4e0e-ba2c-18c238b4b50f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor\Strategy">
+      <UniqueIdentifier>{0485281d-1c68-44cd-8876-31a179572990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor\Event">
+      <UniqueIdentifier>{9e596967-c7d6-455e-b6f0-481c7c13de6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor\Consumer">
+      <UniqueIdentifier>{5fca5c3d-8ea4-4c05-b22f-215d40faf6ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure\LMAX Disruptor\Producer">
+      <UniqueIdentifier>{69a99364-8a87-455a-9246-e49da6908deb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
