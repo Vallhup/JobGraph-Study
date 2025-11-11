@@ -1,6 +1,6 @@
 #pragma once
 
-#include <array>
+#include <vector>
 #include <atomic>
 #include <thread>
 
@@ -66,3 +66,70 @@
 //  - onAvailable(Entry entry) : 새 데이터가 도착할 때 호출
 //  - onEndOfBatch() : 일괄 처리 끝날 때 호출
 //  - onCompletion() : 종료 전 정리 작업
+
+class Entry {
+	int temp;
+};
+
+class ClaimStrategy {
+	// Interface
+	virtual size_t Claim() = 0;
+};
+
+class WaitStrategy {
+	// Interface
+	virtual void WaitFor() = 0;
+};
+
+class RingBuffer {
+public:
+	size_t Claim();
+	void Publish();
+	void WaitFor();
+
+private:
+	size_t _cursor;
+	const size_t size;
+	std::vector<Entry> _buffer;
+
+	std::unique_ptr<ClaimStrategy> _claimStrategy;
+	std::unique_ptr<WaitStrategy>  _waitStrategy;
+};
+
+class ProducerBarrier {
+public:
+	void GetWriteSequence();
+	void WriteData();
+	void Publish();
+
+private:
+	RingBuffer& _buffer;
+};
+
+class ConsumerBarrier {
+public:
+	void GetReadSequence();
+	void ReadData();
+	void WaitFor();
+
+private:
+	RingBuffer& _buffer;
+};
+
+class Consumer {
+public:
+	void LogicUpdate();
+
+private:
+	size_t _sequence;
+	std::unique_ptr<BatchHandler> _batchHandler;
+};
+
+class BatchHandler {
+public:
+	virtual void onAvailable(Entry entry) = 0;
+	virtual void onEndOfBatch() = 0;
+
+protected:
+	virtual void onCompletion() = 0;
+};
