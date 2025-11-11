@@ -6,6 +6,17 @@
 
 #include "Constants.h"
 
+// 개선해야할 것들
+//
+// 1. 메모리 관리(ABA 문제) 해결
+//  - 현재 ABA 문제 때문에 delete 안하고 있는 중
+//  - EBR 도입해서 개선하기
+// 
+// 2. BackOff 개선
+//  - 나중에 수업 때 배우면 적용하기
+// 
+// 3. (추가) Template으로 바꾸고 인터페이스 정리
+
 class NODE {
 public:
 	size_t value;

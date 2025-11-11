@@ -145,6 +145,7 @@
     <ClCompile Include="RecvBuffer.cpp" />
     <ClCompile Include="SendBuffer.cpp" />
     <ClCompile Include="Session.cpp" />
+    <ClCompile Include="SynchronizationBuffer.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="RecvBuffer.h" />
     <ClInclude Include="SendBuffer.h" />
     <ClInclude Include="Session.h" />
+    <ClInclude Include="SynchronizationBuffer.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="ThreadPool.h" />

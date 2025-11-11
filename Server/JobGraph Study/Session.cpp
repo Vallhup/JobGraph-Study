@@ -132,15 +132,18 @@ void Session::ProcessPacket()
 
 
 	// TEMP : 테스트용 에코 서버
-	int size = _recvBuffer.GetUsedSize();
-
+	int size = _recvBuffer.GetContiguousUsedSize();
 	if (size > 0)
 	{
-		std::vector<char> temp(size);
-		_recvBuffer.Peek(temp.data(), size);
-
-		Send(temp.data(), size);
-
+		Send(_recvBuffer.GetReadPos(), size);
 		_recvBuffer.Read(nullptr, size);
+
+		int remain = _recvBuffer.GetUsedSize();
+		if (remain > 0)
+		{
+			int size2 = _recvBuffer.GetContiguousUsedSize();
+			Send(_recvBuffer.GetReadPos(), size2);
+			_recvBuffer.Read(nullptr, size2);
+		}
 	}
 }

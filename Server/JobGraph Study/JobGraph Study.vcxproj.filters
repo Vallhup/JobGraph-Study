@@ -60,7 +60,10 @@
       <Filter>Network\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="LF_Stack.cpp">
-      <Filter>Utillity</Filter>
+      <Filter>Utillity\Lock-Free Data Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="SynchronizationBuffer.cpp">
+      <Filter>Utillity\Lock-Free Data Structure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +131,10 @@
       <Filter>Utillity</Filter>
     </ClInclude>
     <ClInclude Include="LF_Stack.h">
-      <Filter>Utillity</Filter>
+      <Filter>Utillity\Lock-Free Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="SynchronizationBuffer.h">
+      <Filter>Utillity\Lock-Free Data Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,9 @@
     </Filter>
     <Filter Include="Network\Buffer">
       <UniqueIdentifier>{d08fb638-6546-4b90-8c94-b66cd017fb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Lock-Free Data Structure">
+      <UniqueIdentifier>{d6317159-0fce-4d2f-8dc2-42d4c8a58c8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

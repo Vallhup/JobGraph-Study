@@ -19,6 +19,15 @@ int RecvBuffer::GetFreeSize() const
 	return static_cast<int>(_buffer.size()) - GetUsedSize() - 1;
 }
 
+int RecvBuffer::GetContiguousUsedSize() const
+{
+	if (_writePos >= _readPos)
+		return _writePos - _readPos;
+
+	else
+		return static_cast<int>(_buffer.size()) - _readPos;
+}
+
 int RecvBuffer::GetContiguousFreeSize() const
 {
 	if (_writePos >= _readPos)

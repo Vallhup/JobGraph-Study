@@ -15,7 +15,8 @@ void JobNode::AddDependency(JobNode* dependency)
 void JobNode::Execute()
 {
 	bool expected{ false };
-	if (_done.compare_exchange_strong(expected, true)) {
+	if (_done.compare_exchange_strong(expected, true)) 
+	{
 		_job.func(_job.context);
 
 		for (JobNode* dep : _dependents)
@@ -81,11 +82,14 @@ void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& s
 				{
 					if (A.get() < B.get())
 						nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+
 					else
 						nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
 				}
+
 				else if (priA < priB)
 					nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+
 				else
 					nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
 			}

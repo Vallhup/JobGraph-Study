@@ -9,9 +9,11 @@ public:
 
 public:
 	char* GetBuffer() { return _buffer.data(); }
+	char* GetReadPos() { return &_buffer[_readPos]; }
 	char* GetWritePos() { return &_buffer[_writePos]; }
 	int   GetUsedSize() const;
 	int   GetFreeSize() const;
+	int   GetContiguousUsedSize() const;
 	int	  GetContiguousFreeSize() const;
 
 public:
