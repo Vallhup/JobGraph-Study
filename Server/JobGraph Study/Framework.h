@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "Network.h"
+#include "TripleBuffer.h"
 
 class Framework {
 public:
@@ -16,8 +17,12 @@ public:
 	void Start();
 	void Stop();
 
+	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
+
 private:
-	Game _game;
-	Network _network;
 	asio::io_context _ioCtx;
+	Network _network;
+	Game _game;
+
+	bool _running;
 };

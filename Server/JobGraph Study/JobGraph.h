@@ -11,6 +11,11 @@
 class ThreadPool;
 class JobGraph;
 
+enum class JobLayer {
+	EVENT = 0,
+	LOGIC = 1
+};
+
 struct JobData {
 	void (*func)(void*);
 	void* context;
@@ -32,6 +37,7 @@ public:
 	
 protected:
 	JobData _job;
+	JobLayer _layer;
 	JobGraph* _graph;
 	std::vector<JobNode*> _dependents;
 	std::atomic<int> _deps;
@@ -58,8 +64,9 @@ public:
 	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
 
-	void AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& systems, float* dTRef);
-	void AddManualDependency(System* before, System* after);
+	void AutoDependencyBuild(const std::vector<LogicSystem*>& systems, float* dTRef);
+	void AddManualDependency(LogicSystem* before, LogicSystem* after);
+	void AddEventSystems(const std::vector<EventSystemBase*>& systems);
 
 	void Run();
 

@@ -12,7 +12,7 @@ namespace disruptor {
 	public:
 		ProducerBarrier(RingBuffer& buffer, WaitStrategy* wait) : _buffer(buffer), _waitStrategy(wait)
 		{
-			_claimStrategy = std::make_unique<MultiProducerClaimStrategy>(buffer);
+			_claimStrategy = std::make_unique<SingleProducerClaimStrategy>();
 		}
 
 		ProducerBarrier(RingBuffer& buffer, WaitStrategy* wait, std::unique_ptr<ClaimStrategy> claim) 
@@ -36,11 +36,6 @@ namespace disruptor {
 				std::this_thread::yield();
 
 			return seq;
-		}
-
-		int64_t ClaimBatch(int64_t n, int64_t& startSeq)
-		{
-			return _claimStrategy->ClaimBatch(n, startSeq);
 		}
 
 		void Publish(int64_t seq)

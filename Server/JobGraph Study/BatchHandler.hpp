@@ -16,13 +16,15 @@ namespace disruptor {
 	public:
 		virtual void OnAvailable(Entry& entry) override
 		{
-
+			processed.fetch_add(1);
 		}
 
 		virtual void OnEndOfBatch() override
 		{
 
 		}
+
+		std::atomic<int64_t> processed{ 0 };
 
 	private:
 		virtual void OnCompletion() override

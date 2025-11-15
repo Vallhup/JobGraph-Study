@@ -64,11 +64,11 @@ public:
 
 		std::swap(_dense[di], _dense[last]);
 		std::swap(_entities[di], _entities[last]);
+		_sparse[_entities[di].id] = di;
 
 		_dense.pop_back();
 		_entities.pop_back();
 
-		_sparse[_entities[di].id] = di;
 		_sparse[entity.id] = INVALID;
 	}
 

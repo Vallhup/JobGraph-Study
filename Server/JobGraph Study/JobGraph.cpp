@@ -40,15 +40,16 @@ JobGraph::~JobGraph()
 		delete node;
 }
 
-void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& systems, float* dTRef)
+void JobGraph::AutoDependencyBuild(const std::vector<LogicSystem*>& systems, float* dTRef)
 {
-	std::unordered_map<System*, JobNode*> nodeMap;
+	std::unordered_map<LogicSystem*, JobNode*> nodeMap;
 
 	for (auto& sys : systems)
 	{
-		JobNode* node = CreateNode<SystemJob>(sys.get(), dTRef);
+		JobNode* node = CreateNode<LogicSystemJob>(sys, dTRef);
+		node->_layer = JobLayer::LOGIC;
 		node->_name = typeid(*sys).name();
-		nodeMap[sys.get()] = node;
+		nodeMap[sys] = node;
 	}
 
 	// TODO : O(N^2) ¼øÈ¸ 
@@ -80,18 +81,18 @@ void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& s
 
 				if (priA == priB)
 				{
-					if (A.get() < B.get())
-						nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+					if (A < B)
+						nodeMap[B]->AddDependency(nodeMap[A]);
 
 					else
-						nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
+						nodeMap[A]->AddDependency(nodeMap[B]);
 				}
 
 				else if (priA < priB)
-					nodeMap[B.get()]->AddDependency(nodeMap[A.get()]);
+					nodeMap[B]->AddDependency(nodeMap[A]);
 
 				else
-					nodeMap[A.get()]->AddDependency(nodeMap[B.get()]);
+					nodeMap[A]->AddDependency(nodeMap[B]);
 			}
 		
 #ifdef _DEBUG
@@ -108,24 +109,34 @@ void JobGraph::AutoDependencyBuild(const std::vector<std::unique_ptr<System>>& s
 	Build();
 }
 
-void JobGraph::AddManualDependency(System* before, System* after)
+void JobGraph::AddManualDependency(LogicSystem* before, LogicSystem* after)
 {
 	auto beforeIt = std::find_if(_nodes.begin(), _nodes.end(), 
 		[&](auto* n) 
 		{
-			auto* job = static_cast<SystemJob*>(n->_job.context);
+			auto* job = static_cast<LogicSystemJob*>(n->_job.context);
 			return job->system == before;
 		});
 
 	auto afterIt = std::find_if(_nodes.begin(), _nodes.end(), 
 		[&](auto* n) 
 		{
-			auto* job = static_cast<SystemJob*>(n->_job.context);
+			auto* job = static_cast<LogicSystemJob*>(n->_job.context);
 			return job->system == after;
 		});
 
 	if (beforeIt != _nodes.end() && afterIt != _nodes.end())
 		(*afterIt)->AddDependency(*beforeIt);
+}
+
+void JobGraph::AddEventSystems(const std::vector<EventSystemBase*>& systems)
+{
+	for (auto* system : systems)
+	{
+		auto* node = CreateNode<EventSystemJob>(system);
+		node->_layer = JobLayer::EVENT;
+		_nodes.push_back(node);
+	}
 }
 
 void JobGraph::Schedule(JobNode* node)
@@ -142,6 +153,16 @@ void JobGraph::Schedule(JobNode* node)
 
 void JobGraph::Build()
 {
+	for (auto* A : _nodes)
+	{
+		for (auto* B : _nodes)
+		{
+			if (A == B) continue;
+			if (A->_layer < B->_layer)
+				B->AddDependency(A);
+		}
+	}
+
 	for (JobNode* node : _nodes)
 		node->_initDeps = node->_deps;
 

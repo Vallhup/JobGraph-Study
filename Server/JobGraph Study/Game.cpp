@@ -5,7 +5,7 @@ Game::Game(size_t size)
 	: _threadPool(size), _graph(_threadPool)
 {
 	_ecs.systemMng.Initalize(_ecs);
-	_graph.AutoDependencyBuild(_ecs.systemMng.GetSystems(), &_deltaTime);
+	_graph.AutoDependencyBuild(_ecs.systemMng.GetLogicSystems(), &_deltaTime);
 }
 
 void Game::Update(const float dT)
