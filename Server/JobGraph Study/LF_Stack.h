@@ -12,10 +12,7 @@
 //  - 현재 ABA 문제 때문에 delete 안하고 있는 중
 //  - EBR 도입해서 개선하기
 // 
-// 2. BackOff 개선
-//  - 나중에 수업 때 배우면 적용하기
-// 
-// 3. (추가) Template으로 바꾸고 인터페이스 정리
+// 2. (추가) Template으로 바꾸고 인터페이스 정리
 
 class NODE {
 public:
@@ -41,7 +38,7 @@ public:
 		int delay = rand() % limit;
 		limit = limit * 2;
 		if (limit > maxDelay) limit = maxDelay;
-		std::this_thread::sleep_for(std::chrono::microseconds(delay));
+		_mm_pause();
 	}
 
 private:
@@ -61,13 +58,6 @@ public:
 	void clear()
 	{
 		while (nullptr != top) pop();
-	}
-
-	bool CAS(NODE* volatile* addr, NODE* expected, NODE* desired)
-	{
-		return std::atomic_compare_exchange_strong(
-			reinterpret_cast<std::atomic<NODE*> volatile*>(addr),
-			&expected, desired);
 	}
 
 	void push(size_t v)
@@ -106,16 +96,14 @@ public:
 		return top == nullptr;
 	}
 
-	void print20()
+private:
+	bool CAS(NODE* volatile* addr, NODE* expected, NODE* desired)
 	{
-		NODE* curr = top;
-		for (int i = 0; i < 20 && curr != nullptr; i++, curr = curr->next)
-			std::cout << curr->value << ", ";
-
-		std::cout << std::endl;
+		return std::atomic_compare_exchange_strong(
+			reinterpret_cast<std::atomic<NODE*> volatile*>(addr),
+			&expected, desired);
 	}
 
-private:
 	NODE* top;
 };
 

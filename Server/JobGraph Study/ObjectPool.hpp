@@ -6,6 +6,11 @@
 #include "SendBuffer.h"
 #include "LF_Stack.h"
 
+// 개선점
+//
+// 1. Free Index 구조에서 Object 자체를 Node로 하는 Stack 구조로 변환
+// 2. LF_Stack의 성능 개선
+
 template<typename T, size_t Size>
 class ObjectPool {
 	struct ObjectSlot {
