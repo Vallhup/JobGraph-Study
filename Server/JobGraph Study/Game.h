@@ -16,10 +16,10 @@ public:
 
 	void Update(const float dT);
 
-	ECS _ecs;
-	JobGraph _graph;
-	ThreadPool _threadPool;
-	GameWorld _world;
+	ECS ecs;
+	JobGraph graph;
+	ThreadPool threadPool;
+	GameWorld world;
 
 private:
 	float _deltaTime{ 0.0f };

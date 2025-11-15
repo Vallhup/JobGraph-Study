@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Framework::Framework(size_t size)
-	: _ioCtx(size), _game(size), _network(7777, _ioCtx), _running(false)
+	: _ioCtx((int)size), _game(size), _network(7777, _ioCtx), _running(false)
 {
 }
 
@@ -32,7 +32,7 @@ void Framework::Start()
 	}
 
 	_network.Stop();
-	_game._threadPool.Stop();
+	_game.threadPool.Stop();
 }
 
 void Framework::Stop()

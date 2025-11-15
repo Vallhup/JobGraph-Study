@@ -18,7 +18,6 @@ public:
 private:
 	void Accept(Network* net);
 
-	asio::io_context& _ioCtx;
 	tcp::acceptor _acceptor;
 };
 

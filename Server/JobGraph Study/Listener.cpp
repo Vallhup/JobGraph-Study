@@ -4,7 +4,7 @@
 #include <iostream>
 
 Listener::Listener(asio::io_context& io, short port)
-	: _ioCtx(io), _acceptor(io, tcp::endpoint(tcp::v4(), port))
+	: _acceptor(io, tcp::endpoint(tcp::v4(), port))
 {
 #ifdef _DEBUG
 	std::cout << "Listening on port " << port << "..." << std::endl;
@@ -13,11 +13,11 @@ Listener::Listener(asio::io_context& io, short port)
 
 void Listener::Start(Network* net)
 {
+	Accept(net);
+
 #ifdef _DEBUG
 	std::cout << "Listener Start" << std::endl;
 #endif
-
-	Accept(net);
 }
 
 void Listener::Stop()
@@ -38,7 +38,7 @@ void Listener::Accept(Network* net)
 		{
 			if (not ec)
 			{
-				int id = net->_nextId++;
+				int id = net->_nextId.fetch_add(1);
 				auto session = std::make_shared<Session>(std::move(socket), id);
 				net->AddSession(id, session);
 				session->Start();

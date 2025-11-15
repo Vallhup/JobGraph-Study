@@ -12,11 +12,27 @@ Network::~Network()
 void Network::Start()
 {
 	_listener.Start(this);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		_workers.emplace_back(
+			[this]()
+			{
+				_ioCtx.run();
+			});
+	}
 }
 
 void Network::Stop()
 {
 	_listener.Stop();
+	_ioCtx.stop();
+
+	for (auto& worker : _workers)
+	{
+		if (worker.joinable())
+			worker.join();
+	}
 }
 
 void Network::Send(int id, const void* data)

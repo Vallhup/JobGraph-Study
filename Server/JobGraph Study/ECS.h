@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.h"
-#include "SystemManager.h"
+#include "SystemManager.hpp"
 #include "ComponentStorage.h"
 
 class ThreadPool;

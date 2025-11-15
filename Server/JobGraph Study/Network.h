@@ -26,11 +26,13 @@ private:
 	void AddSession(int id, const std::shared_ptr<Session>& session);
 	void RemoveSession(int id);
 
-	int _nextId;
+	std::atomic<int> _nextId;
 	asio::io_context& _ioCtx;
 	Listener _listener;
 	std::unordered_map<int, std::shared_ptr<Session>> _sessions;
 	// boost의 concurrent_flat_map or tbb의 concurrnet_hash_map으로 변경
+
+	std::vector<std::thread> _workers;
 };
 
 // Send 함수 호출 정책

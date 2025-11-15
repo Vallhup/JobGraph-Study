@@ -1,5 +1,7 @@
 #pragma once
 
+#include <variant>
+
 struct ConnectEvent {
 	int sessionId;
 };
@@ -7,3 +9,8 @@ struct ConnectEvent {
 struct DisconnectEvent {
 	int sessionId;
 };
+
+using GameEvent = std::variant<
+	ConnectEvent,
+	DisconnectEvent
+>;

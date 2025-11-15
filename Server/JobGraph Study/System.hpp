@@ -4,7 +4,8 @@
 #include <vector>
 #include <atomic>
 
-struct ECS;
+#include "Event.h"
+#include "Framework.h"
 
 class System {
 public:
@@ -45,7 +46,14 @@ public:
 	virtual void ProcessEvent(const EventT& e) = 0;
 	void ConsumeEvents()
 	{
-		// TODO : 1. Event Buffer에서 Event 얻기
-		//        2. Event에 대해 처리 (ProcessEvent)
+		GameEvent event;
+		while (Framework::Get().eventQueue.try_pop(event))
+		{
+			std::visit(
+				[&](auto&& e)
+				{
+					ProcessEvent(e);
+				}, event);
+		}
 	}
 };

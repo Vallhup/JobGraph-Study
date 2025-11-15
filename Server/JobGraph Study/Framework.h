@@ -1,8 +1,12 @@
 #pragma once
 
+#include <concurrent_queue.h>
+
 #include "Game.h"
 #include "Network.h"
-#include "TripleBuffer.h"
+#include "Event.h"
+
+using namespace concurrency;
 
 class Framework {
 public:
@@ -18,6 +22,8 @@ public:
 	void Stop();
 
 	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
+
+	concurrent_queue<GameEvent> eventQueue;
 
 private:
 	asio::io_context _ioCtx;

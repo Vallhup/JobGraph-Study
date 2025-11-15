@@ -1,8 +1,10 @@
 #include "Session.h"
 
 #include <iostream>
-#include "Listener.h"
+#include <concurrent_queue.h>
 
+#include "Listener.h"
+#include "Framework.h"
 #include "SendBuffer.h"
 #include "ObjectPoolManager.h"
 
@@ -66,7 +68,7 @@ void Session::Recv()
 						<< ec.message() << "]\n";
 				}
 
-				Close();
+				asio::dispatch(_strand, [this, self]() { Close(); });
 				return;
 			}
 
@@ -128,8 +130,10 @@ void Session::ProcessPacket()
 	// TODO : 패킷 처리
 	//
 	// 1. 패킷 재조립 (RecvBuffer 활용)
-	// 2. Game모듈로 데이터 전송(double buffering / Lock-Free Queue)
+
 	
+	// 2. Game모듈로 데이터 전송(double buffering / Lock-Free Queue)
+	// Framework::Get().eventQueue.push(ConnectEvent{ sessionId })
 
 	// TEMP : 테스트용 에코 서버
 	int size = _recvBuffer.GetContiguousUsedSize();
