@@ -23,9 +23,6 @@
     <ClCompile Include="ComponentStorage.cpp">
       <Filter>ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManager.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
     <ClCompile Include="ECS.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
@@ -56,8 +53,14 @@
     <ClCompile Include="SendBuffer.cpp">
       <Filter>Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="LF_Stack.cpp">
-      <Filter>Utillity\Lock-Free Data Structure</Filter>
+    <ClCompile Include="Protocols\Enum.pb.cc">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocols\Protocol.pb.cc">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocols\Struct.pb.cc">
+      <Filter>Network\Protocol\Output</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +87,6 @@
     </ClInclude>
     <ClInclude Include="ComponentStorage.h">
       <Filter>ECS\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManager.h">
-      <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="ECS.h">
       <Filter>ECS</Filter>
@@ -129,6 +129,21 @@
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Network\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Enum.pb.h">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Protocol.pb.h">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Struct.pb.h">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.hpp">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.hpp">
+      <Filter>Network\Protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,5 +189,25 @@
     <Filter Include="Network\Event">
       <UniqueIdentifier>{f49921b0-d0b4-4d52-8b4f-df8aa9fbc82e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Protocol">
+      <UniqueIdentifier>{943627e3-5e3f-4c52-bd33-ec1d1eb5b217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Protocol\Proto">
+      <UniqueIdentifier>{87aa4b67-ecc0-4d3d-9757-76dc2ee58a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Protocol\Output">
+      <UniqueIdentifier>{ad313583-140e-4d19-8985-df63b89e6425}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Enum.proto">
+      <Filter>Network\Protocol\Proto</Filter>
+    </None>
+    <None Include="protos\Protocol.proto">
+      <Filter>Network\Protocol\Proto</Filter>
+    </None>
+    <None Include="protos\Struct.proto">
+      <Filter>Network\Protocol\Proto</Filter>
+    </None>
   </ItemGroup>
 </Project>

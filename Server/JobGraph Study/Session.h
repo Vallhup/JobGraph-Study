@@ -33,7 +33,6 @@ private:
 	tcp::socket _socket;
 	asio::strand<asio::any_io_executor> _strand;
 
-	std::vector<char> _buffer;
 	RecvBuffer _recvBuffer;
 	std::deque<SendBuffer*> _sendQueue;
 	std::vector<asio::const_buffer> _gatherBufs;

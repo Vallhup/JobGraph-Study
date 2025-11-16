@@ -45,3 +45,9 @@ private:
 // 2. 프레임 전송
 //  - 반응성 좀 떨어짐 (0.5 ~ 1 Tick Delay)
 //  - 성능 부하가 적음 (Send함수 호출이 적어지니까)
+
+// 개선점
+//
+// 1. boost::asio를 사용하면 shared_ptr의 사용이 강제된다
+//  - custom atomic_shared_ptr의 구현
+//  - 흠...

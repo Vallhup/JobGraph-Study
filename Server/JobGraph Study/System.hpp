@@ -38,22 +38,20 @@ public:
 };
 
 template<typename EventT>
-class EventSystem : public System {
+class EventSystem : public EventSystemBase {
 public:
 	EventSystem(int p = 0) : EventSystemBase(p) {}
 	virtual ~EventSystem() = default;
 
 	virtual void ProcessEvent(const EventT& e) = 0;
-	void ConsumeEvents()
+	virtual void ConsumeEvents() override
 	{
 		GameEvent event;
 		while (Framework::Get().eventQueue.try_pop(event))
 		{
 			std::visit(
-				[&](auto&& e)
-				{
-					ProcessEvent(e);
-				}, event);
+				[&](auto&& e) { ProcessEvent(e); }, 
+				event);
 		}
 	}
 };

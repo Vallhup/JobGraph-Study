@@ -167,6 +167,7 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="ObjectPool.hpp" />
     <ClInclude Include="ObjectPoolManager.h" />
+    <ClInclude Include="Protocol.hpp" />
     <ClInclude Include="Protocols\Enum.pb.h" />
     <ClInclude Include="Protocols\Protocol.pb.h" />
     <ClInclude Include="Protocols\Struct.pb.h" />

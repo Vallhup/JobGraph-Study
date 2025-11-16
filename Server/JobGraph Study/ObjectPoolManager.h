@@ -22,4 +22,3 @@ private:
 	ObjectPoolManager(const ObjectPoolManager&) = delete;
 	ObjectPoolManager& operator=(const ObjectPoolManager&) = delete;
 };
-

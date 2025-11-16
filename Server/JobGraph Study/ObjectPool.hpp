@@ -10,6 +10,8 @@
 //
 // 1. Free Index 구조에서 Object 자체를 Node로 하는 Stack 구조로 변환
 // 2. LF_Stack의 성능 개선
+//
+// 3. (추가) 동적 배열 Pooling을 위해 Memory Pool 구현
 
 template<typename T, size_t Size>
 class ObjectPool {

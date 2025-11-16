@@ -9,7 +9,7 @@
 #include "ObjectPoolManager.h"
 
 Session::Session(tcp::socket s, int id) 
-	: _socket(std::move(s)), _strand(_socket.get_executor()), _id(id), _buffer(1024)
+	: _socket(std::move(s)), _strand(_socket.get_executor()), _id(id)
 {
 }
 
@@ -127,27 +127,24 @@ void Session::InternalSend()
 
 void Session::ProcessPacket()
 {
-	// TODO : 패킷 처리
-	//
-	// 1. 패킷 재조립 (RecvBuffer 활용)
-
-	
-	// 2. Game모듈로 데이터 전송(double buffering / Lock-Free Queue)
-	// Framework::Get().eventQueue.push(ConnectEvent{ sessionId })
-
-	// TEMP : 테스트용 에코 서버
+	// TODO : 패킷 구조 재설계 및 패킷 -> GameEvent 처리 Class 구현 필요
+	char* ptr = _recvBuffer.GetReadPos();
 	int size = _recvBuffer.GetContiguousUsedSize();
-	if (size > 0)
-	{
-		Send(_recvBuffer.GetReadPos(), size);
-		_recvBuffer.Read(nullptr, size);
 
-		int remain = _recvBuffer.GetUsedSize();
-		if (remain > 0)
-		{
-			int size2 = _recvBuffer.GetContiguousUsedSize();
-			Send(_recvBuffer.GetReadPos(), size2);
-			_recvBuffer.Read(nullptr, size2);
-		}
+	while (true)
+	{
+		if (size < 0/* 패킷 헤더 사이즈 */) return;
+
+		// 패킷 헤더 파싱
+		if (size < 0/* 패킷 사이즈 (헤더에 포함) */) return;
+
+		GameEvent event;
+		if (/* 패킷 -> GameEvent 처리 Class */0)
+			Framework::Get().eventQueue.push(event);
+
+		_recvBuffer.Read(nullptr, 0/* 패킷 사이즈 */);
+
+		ptr = _recvBuffer.GetReadPos();
+		size = _recvBuffer.GetContiguousUsedSize();
 	}
 }
