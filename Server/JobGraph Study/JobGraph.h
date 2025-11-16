@@ -11,9 +11,13 @@
 class ThreadPool;
 class JobGraph;
 
+class LogicSystem;
+class EventSystemBase;
+
 enum class JobLayer {
-	EVENT = 0,
-	LOGIC = 1
+	NONE = 0,
+	EVENT = 1,
+	LOGIC = 2
 };
 
 struct JobData {
@@ -26,7 +30,8 @@ class alignas(64) JobNode {
 
 public:
 	explicit JobNode(const JobData& job, JobGraph* graph) 
-		: _job(job), _graph(graph), _deps(0), _initDeps(0), _done(false) {}
+		: _job(job), _graph(graph), _deps(0), _initDeps(0), 
+		_done(false), _layer(JobLayer::NONE) {}
 
 	void AddDependency(JobNode* dependency);
 	void Execute();

@@ -62,6 +62,21 @@
     <ClCompile Include="Protocols\Struct.pb.cc">
       <Filter>Network\Protocol\Output</Filter>
     </ClCompile>
+    <ClCompile Include="EventConverter.cpp">
+      <Filter>Network\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="System.inl">
+      <Filter>ECS\System\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>ECS\System\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectEventSystem.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>ECS\System\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
@@ -78,9 +93,6 @@
     </ClInclude>
     <ClInclude Include="Instance.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="System.hpp">
-      <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>ECS\Entity</Filter>
@@ -139,11 +151,20 @@
     <ClInclude Include="Protocols\Struct.pb.h">
       <Filter>Network\Protocol\Output</Filter>
     </ClInclude>
-    <ClInclude Include="SystemManager.hpp">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
     <ClInclude Include="Protocol.hpp">
       <Filter>Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="EventConverter.h">
+      <Filter>Network\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>ECS\System\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>ECS\System\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectEventSystem.h">
+      <Filter>ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +218,9 @@
     </Filter>
     <Filter Include="Network\Protocol\Output">
       <UniqueIdentifier>{ad313583-140e-4d19-8985-df63b89e6425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\System\Base">
+      <UniqueIdentifier>{22b2e846-ea7f-420c-ae8a-4e14abbb2382}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -3,10 +3,11 @@
 #include <memory>
 #include <vector>
 
-#include "System.hpp"
+#include "System.h"
 #include "JobGraph.h"
 
 class ThreadPool;
+struct ECS;
 
 template<typename T>
 concept SysT = std::is_base_of_v<System, T>;
@@ -29,10 +30,7 @@ public:
 		return ptr;
 	}
 
-	void Initalize(ECS& ecs)
-	{
-
-	}
+	void Initalize(ECS& ecs);
 
 	const std::vector<LogicSystem*>& GetLogicSystems() const { return _logicSystems; }
 	const std::vector<EventSystemBase*>& GetEventSystems() const { return _eventSystems; }

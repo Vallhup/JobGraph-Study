@@ -83,7 +83,7 @@ public:
 			if (nullptr == temp) return -2;
 
 			NODE* next = temp->next;
-			int result = temp->value;
+			size_t result = temp->value;
 
 			if (temp != top) continue;
 			if (CAS(&top, temp, next)) return result;

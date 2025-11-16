@@ -6,7 +6,7 @@
 #include <latch>
 
 #include "Component.h"
-#include "System.hpp"
+#include "System.h"
 
 struct Job {
 	virtual ~Job() = default;

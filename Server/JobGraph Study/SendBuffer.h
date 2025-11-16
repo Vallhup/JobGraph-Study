@@ -9,9 +9,9 @@ public:
 
 	void Write(const void* data, int size);
 
-	char* GetBuffer() { return _buffer.data(); }
-	int GetSize() const { return _writePos; }
-	void Clear() { _writePos = 0; }
+	char* data() { return _buffer.data(); }
+	int   size() const { return _writePos; }
+	void  clear() { _writePos = 0; }
 
 private:
 	std::vector<char> _buffer;

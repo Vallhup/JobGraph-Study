@@ -1,10 +1,8 @@
 #pragma once
 
 #include "Entity.h"
-#include "SystemManager.hpp"
+#include "SystemManager.h"
 #include "ComponentStorage.h"
-
-class ThreadPool;
 
 struct ECS {
 	template<CompT T>

@@ -3,52 +3,96 @@
 #include <iostream>
 #include <thread>
 
+#include "../../../Server/JobGraph Study/SendBuffer.h"
+#include "../../../Server/JobGraph Study/Protocol.hpp"
+#include "../../../Server/JobGraph Study/Protocols/Protocol.pb.h"
+
 using asio::ip::tcp;
 
-void RunClient(int id)
-{
-    try {
-        asio::io_context io;
-        tcp::socket sock(io);
+class TestClient {
+public:
+    TestClient(asio::io_context& io, const std::string& host, uint16_t port)
+        : _io(io), _socket(io)
+    {
         tcp::resolver resolver(io);
-        asio::connect(sock, resolver.resolve("127.0.0.1", "9000"));
+        auto endpoints = resolver.resolve(host, std::to_string(port));
 
-        std::string msg = "Client" + std::to_string(id);
-        for (int i = 0; i < 100; ++i)
-        {
-            asio::write(sock, asio::buffer(msg));
-            char reply[128];
-            size_t len = sock.read_some(asio::buffer(reply));
-            reply[len] = '\0';
-
-            if (std::string(reply) != msg)
-                std::cerr << "Client[" << id << "] mismatch!\n";
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(2));
-        }
-
-        std::cout << "Client[" << id << "] finished.\n";
+        asio::async_connect(_socket, endpoints,
+            [&](std::error_code ec, tcp::endpoint)
+            {
+                if (!ec)
+                {
+                    std::cout << "[Client] Connected to server\n";
+                    SendLogin();
+                    StartRead();
+                }
+                else
+                {
+                    std::cout << "[Client] Connect failed: " << ec.message() << "\n";
+                }
+            });
     }
+
+    void SendLogin()
+    {
+        Protocol::CS_LOGIN_PACKET login;
+        login.set_sessionid(777);  // test session id
+
+        auto buf = PacketFactory::Serialize(PacketType::CS_LOGIN, login);
+
+        asio::async_write(_socket, asio::buffer(buf.data(), buf.size()),
+            [](std::error_code ec, std::size_t)
+            {
+                if (!ec)
+                    std::cout << "[Client] Sent CS_LOGIN_PACKET\n";
+                else
+                    std::cout << "[Client] Send failed: " << ec.message() << "\n";
+            });
+    }
+
+    void StartRead()
+    {
+        _socket.async_read_some(asio::buffer(_recvBuf),
+            [&](std::error_code ec, size_t bytes)
+            {
+                if (ec)
+                {
+                    std::cout << "[Client] Read error: " << ec.message() << "\n";
+                    return;
+                }
+
+                std::cout << "[Client] Received [" << bytes << "] bytes\n";
+                std::cout << "Data: ";
+
+                for (size_t i = 0; i < bytes; ++i)
+                    std::cout << std::hex << (unsigned)(_recvBuf[i] & 0xFF) << " ";
+
+                std::cout << std::dec << "\n";
+
+                StartRead();
+            });
+    }
+
+private:
+    asio::io_context& _io;
+    tcp::socket _socket;
+    std::array<char, 4096> _recvBuf{};
+};
+
+int main()
+{
+    try
+    {
+        asio::io_context io;
+
+        TestClient client(io, "127.0.0.1", 7777);
+
+        std::thread t([&]() { io.run(); });
+        t.join();
+    }
+
     catch (std::exception& e)
     {
-        std::cerr << "Client[" << id << "] exception: " << e.what() << "\n";
-    }
-}
-
-int main() {
-    constexpr int CLIENT_COUNT = 10;
-    constexpr int ITER = 100;
-
-    for (int iter = 0; iter < ITER; ++iter)
-    {
-        std::vector<std::thread> threads;
-        for (int i = 0; i < CLIENT_COUNT; ++i)
-            threads.emplace_back(RunClient, i);
-
-        for (auto& t : threads)
-            t.join();
-
-        std::cout << "[Cycle " << iter << "] completed.\n";
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::cout << "Exception: " << e.what() << "\n";
     }
 }

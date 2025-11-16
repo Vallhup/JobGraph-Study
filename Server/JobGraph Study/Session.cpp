@@ -3,6 +3,8 @@
 #include <iostream>
 #include <concurrent_queue.h>
 
+#include "Protocol.hpp"
+#include "EventConverter.h"
 #include "Listener.h"
 #include "Framework.h"
 #include "SendBuffer.h"
@@ -91,10 +93,10 @@ void Session::InternalSend()
 	for (auto& data : _sendQueue)
 	{
 		if (batchCount >= MAX_BUFFERS) break;
-		if (totalBytes + data->GetSize() > MAX_BYTES) break;
+		if (totalBytes + data->size() > MAX_BYTES) break;
 
-		_gatherBufs.emplace_back(asio::buffer(data->GetBuffer(), data->GetSize()));
-		totalBytes += data->GetSize();
+		_gatherBufs.emplace_back(asio::buffer(data->data(), data->size()));
+		totalBytes += data->size();
 		++batchCount;
 	}
 
@@ -127,22 +129,31 @@ void Session::InternalSend()
 
 void Session::ProcessPacket()
 {
-	// TODO : 패킷 구조 재설계 및 패킷 -> GameEvent 처리 Class 구현 필요
 	char* ptr = _recvBuffer.GetReadPos();
 	int size = _recvBuffer.GetContiguousUsedSize();
 
 	while (true)
 	{
-		if (size < 0/* 패킷 헤더 사이즈 */) return;
+		if (size < sizeof(PacketHeader)) return;
 
-		// 패킷 헤더 파싱
-		if (size < 0/* 패킷 사이즈 (헤더에 포함) */) return;
+		PacketHeader header;
+		PacketFactory::PeekHeader(ptr, size, &header);
+
+		if (size < header.size) return;
 
 		GameEvent event;
-		if (/* 패킷 -> GameEvent 처리 Class */0)
+		if (EventConverter::Get().Convert(header, ptr, &event))
 			Framework::Get().eventQueue.push(event);
 
-		_recvBuffer.Read(nullptr, 0/* 패킷 사이즈 */);
+#ifdef _DEBUG
+		else
+		{
+			std::cout << "Packet ->GameEvent Error, type = " << header.type << std::endl;
+			return;
+		}
+#endif
+
+		_recvBuffer.Read(nullptr, header.size);
 
 		ptr = _recvBuffer.GetReadPos();
 		size = _recvBuffer.GetContiguousUsedSize();

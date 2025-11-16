@@ -2,13 +2,16 @@
 
 #include <vector>
 
+#include "SendBuffer.h"
 #include "Protocols/Protocol.pb.h"
 
 #pragma pack(push, 1)
+
 struct PacketHeader {
 	uint16_t size;
 	uint16_t type;
 };
+
 #pragma pack(pop)
 
 enum class PacketType : uint16_t {
@@ -16,7 +19,7 @@ enum class PacketType : uint16_t {
 	CS_MOVE,
 
 	SC_LOGIN,
-	SC_MOVE,
+	SC_MOVE_OBJECT,
 	SC_ADD,
 	SC_REMOVE
 };
@@ -26,33 +29,30 @@ concept ProtoT = std::is_base_of_v<google::protobuf::MessageLite, T>;
 
 struct PacketFactory {
 	template<ProtoT T>
-	static std::vector<char> Serialize(PacketType type, const T& data)
+	static SendBuffer Serialize(PacketType type, const T& data)
 	{
 		uint16_t bodySize = data.ByteSizeLong();
 		uint16_t packetSize = sizeof(PacketHeader) + bodySize;
 
-		std::vector<char> buffer(packetSize);
+		SendBuffer buffer(packetSize);
 
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer.data());
 		header->size = packetSize;
 		header->type = static_cast<uint16_t>(type);
 
-		if (not msg.SerializeToArray(buffer.data() + sizeof(PacketHeader), bodySize))
+		if (not data.SerializeToArray(buffer.data() + sizeof(PacketHeader), bodySize))
 			throw std::runtime_error("SerializeToArray failed");
 
 		return buffer;
 	}
 
 	template<ProtoT T>
-	static bool Deserialize(const char* data, uint16_t dataSize, T* out)
+	static bool Deserialize(const PacketHeader& header, const char* data, T* out)
 	{
-		if (dataSize < sizeof(PacketHeader)) return false;
-
-		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
-		if (header->size != dataSize) return false;
+		if (header.size < sizeof(PacketHeader)) return false;
 
 		const char* body = data + sizeof(PacketHeader);
-		int bodySize = static_cast<int>(dataSize - sizeof(PacketHeader));
+		int bodySize = static_cast<int>(header.size - sizeof(PacketHeader));
 
 		return out->ParseFromArray(body, bodySize);
 	}

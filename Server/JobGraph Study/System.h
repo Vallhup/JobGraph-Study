@@ -5,7 +5,6 @@
 #include <atomic>
 
 #include "Event.h"
-#include "Framework.h"
 
 class System {
 public:
@@ -44,14 +43,5 @@ public:
 	virtual ~EventSystem() = default;
 
 	virtual void ProcessEvent(const EventT& e) = 0;
-	virtual void ConsumeEvents() override
-	{
-		GameEvent event;
-		while (Framework::Get().eventQueue.try_pop(event))
-		{
-			std::visit(
-				[&](auto&& e) { ProcessEvent(e); }, 
-				event);
-		}
-	}
+	virtual void ConsumeEvents() override;
 };
