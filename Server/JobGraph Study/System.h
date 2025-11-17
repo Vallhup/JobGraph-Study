@@ -6,9 +6,11 @@
 
 #include "Event.h"
 
+struct ECS;
+
 class System {
 public:
-	System(int p = 0) : _priority(p) {}
+	System(ECS& e, int p = 0) : ecs(e), _priority(p) {}
 	virtual ~System() = default;
 
 	virtual std::vector<std::type_index> ReadComponents() const { return {}; }
@@ -17,12 +19,13 @@ public:
 	int GetPriority() const { return _priority; }
 
 protected:
+	ECS& ecs;
 	int _priority;
 };
 
 class LogicSystem : public System {
 public:
-	LogicSystem(int p = 0) : System(p) {}
+	LogicSystem(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~LogicSystem() = default;
 
 	virtual void Update(const float dT) = 0;
@@ -30,18 +33,18 @@ public:
 
 class EventSystemBase : public System {
 public:
-	EventSystemBase(int p = 0) : System(p) {}
+	EventSystemBase(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~EventSystemBase() = default;
 
 	virtual void ConsumeEvents() = 0;
 };
 
-template<typename EventT>
-class EventSystem : public EventSystemBase {
-public:
-	EventSystem(int p = 0) : EventSystemBase(p) {}
-	virtual ~EventSystem() = default;
-
-	virtual void ProcessEvent(const EventT& e) = 0;
-	virtual void ConsumeEvents() override;
-};
+//template<typename EventT>
+//class EventSystem : public EventSystemBase {
+//public:
+//	EventSystem(ECS& e, int p = 0) : EventSystemBase(e, p) {}
+//	virtual ~EventSystem() = default;
+//
+//	virtual void ProcessEvent(const EventT& e) = 0;
+//	virtual void ConsumeEvents() override;
+//};

@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Framework.h"
 
 Entity EntityManager::Create()
 {
@@ -17,6 +18,16 @@ Entity EntityManager::Create()
     }
 
     return Entity{ id, _generations[id] };
+}
+
+Entity EntityManager::CreatePlayer(int sessionId)
+{
+    Entity e = Create();
+
+    Framework::Get().sessionToEntity[sessionId] = e;
+    Framework::Get().entityToSession[e] = sessionId;
+
+    return e;
 }
 
 void EntityManager::Destroy(Entity entity)

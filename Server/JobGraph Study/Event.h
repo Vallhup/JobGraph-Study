@@ -10,7 +10,14 @@ struct DisconnectEvent {
 	int sessionId;
 };
 
-using GameEvent = std::variant<
-	ConnectEvent,
-	DisconnectEvent
->;
+struct MoveEvent {
+	int sessionId;
+	int dirX;
+	int dirZ;
+};
+
+//using GameEvent = std::variant<
+//	ConnectEvent,
+//	DisconnectEvent,
+//	MoveEvent
+//>;

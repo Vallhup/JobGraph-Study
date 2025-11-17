@@ -1,6 +1,6 @@
 #include "SendBuffer.h"
 
-SendBuffer::SendBuffer(int size) : _writePos(0)
+SendBuffer::SendBuffer(int size) : _writePos(size)
 {
 	_buffer.resize(size);
 }

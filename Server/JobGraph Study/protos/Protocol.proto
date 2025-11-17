@@ -4,7 +4,26 @@ package Protocol;
 import "Enum.proto";
 import "Struct.proto";
 
+/* ------------------------------ [ Client -> Server ]  ------------------------------ */
+
 message CS_LOGIN_PACKET
 {
 	int32 sessionId = 1;
+}
+
+message CS_MOVE_PACKET
+{
+	int32 sessionId = 1;
+	int32 dx = 2;
+	int32 dy = 3;
+}
+
+/* ------------------------------ [ Server -> Client ]  ------------------------------ */
+
+message SC_MOVE_PACKET
+{
+	int32 sessionId = 1;
+	int32 x = 2;
+	int32 y = 3;
+	int32 z = 4;
 }

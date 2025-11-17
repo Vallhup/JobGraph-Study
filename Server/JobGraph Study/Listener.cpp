@@ -6,6 +6,8 @@
 Listener::Listener(asio::io_context& io, short port)
 	: _acceptor(io, tcp::endpoint(tcp::v4(), port))
 {
+	_acceptor.set_option(asio::socket_base::reuse_address(true));
+
 #ifdef _DEBUG
 	std::cout << "Listening on port " << port << "..." << std::endl;
 #endif
@@ -39,6 +41,8 @@ void Listener::Accept(Network* net)
 			if (not ec)
 			{
 				int id = net->_nextId.fetch_add(1);
+
+				socket.set_option(tcp::no_delay(true));
 				auto session = std::make_shared<Session>(std::move(socket), id);
 				net->AddSession(id, session);
 				session->Start();

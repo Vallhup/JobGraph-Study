@@ -1,7 +1,9 @@
 #include "Network.h"
+#include <iostream>
 
-Network::Network(short port, asio::io_context& ioCtx)
-	: _ioCtx(ioCtx), _listener(_ioCtx, port), _nextId(0)
+Network::Network(short port, int size)
+	: _ioCtx(1), _workGuard(asio::make_work_guard(_ioCtx)),
+	_listener(_ioCtx, port), _nextId(0)
 {
 }
 
@@ -13,18 +15,20 @@ void Network::Start()
 {
 	_listener.Start(this);
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		_workers.emplace_back(
 			[this]()
 			{
 				_ioCtx.run();
+				std::cout << "[io_context] stopped? " << _ioCtx.stopped() << std::endl;
 			});
 	}
 }
 
 void Network::Stop()
 {
+	_workGuard.reset();
 	_listener.Stop();
 	_ioCtx.stop();
 

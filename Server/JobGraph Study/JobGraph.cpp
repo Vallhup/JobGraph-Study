@@ -135,7 +135,7 @@ void JobGraph::AddEventSystems(const std::vector<EventSystemBase*>& systems)
 	{
 		auto* node = CreateNode<EventSystemJob>(system);
 		node->_layer = JobLayer::EVENT;
-		_nodes.push_back(node);
+		node->_name = typeid(*system).name();
 	}
 }
 
@@ -158,7 +158,8 @@ void JobGraph::Build()
 		for (auto* B : _nodes)
 		{
 			if (A == B) continue;
-			if (A->_layer < B->_layer)
+			if (A->_layer == JobLayer::EVENT and
+				B->_layer == JobLayer::LOGIC)
 				B->AddDependency(A);
 		}
 	}

@@ -1,12 +1,8 @@
 #pragma once
 
-#include <concurrent_queue.h>
-
 #include "Game.h"
 #include "Network.h"
-#include "Event.h"
-
-using namespace concurrency;
+#include "EventQueue.h"
 
 class Framework {
 public:
@@ -23,10 +19,13 @@ public:
 
 	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
 
-	concurrent_queue<GameEvent> eventQueue;
+	//concurrent_queue<GameEvent> eventQueue;
+	EventQueue eventQueue;
+
+	std::unordered_map<int, Entity> sessionToEntity;
+	std::unordered_map<Entity, int> entityToSession;
 
 private:
-	asio::io_context _ioCtx;
 	Network _network;
 	Game _game;
 

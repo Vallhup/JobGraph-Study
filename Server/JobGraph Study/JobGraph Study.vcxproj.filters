@@ -53,13 +53,7 @@
     <ClCompile Include="SendBuffer.cpp">
       <Filter>Network\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Protocols\Enum.pb.cc">
-      <Filter>Network\Protocol\Output</Filter>
-    </ClCompile>
     <ClCompile Include="Protocols\Protocol.pb.cc">
-      <Filter>Network\Protocol\Output</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocols\Struct.pb.cc">
       <Filter>Network\Protocol\Output</Filter>
     </ClCompile>
     <ClCompile Include="EventConverter.cpp">
@@ -76,6 +70,21 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>ECS\System\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEventSystem.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSystem.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocols\Struct.pb.cc">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocols\Enum.pb.cc">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="EventQueue.cpp">
+      <Filter>Network\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,13 +151,7 @@
     <ClInclude Include="Event.h">
       <Filter>Network\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Protocols\Enum.pb.h">
-      <Filter>Network\Protocol\Output</Filter>
-    </ClInclude>
     <ClInclude Include="Protocols\Protocol.pb.h">
-      <Filter>Network\Protocol\Output</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocols\Struct.pb.h">
       <Filter>Network\Protocol\Output</Filter>
     </ClInclude>
     <ClInclude Include="Protocol.hpp">
@@ -165,6 +168,21 @@
     </ClInclude>
     <ClInclude Include="ConnectEventSystem.h">
       <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEventSystem.h">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSystem.h">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Enum.pb.h">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\Struct.pb.h">
+      <Filter>Network\Protocol\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.h">
+      <Filter>Network\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,10 +242,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="protos\Enum.proto">
+    <None Include="protos\Protocol.proto">
       <Filter>Network\Protocol\Proto</Filter>
     </None>
-    <None Include="protos\Protocol.proto">
+    <None Include="protos\Enum.proto">
       <Filter>Network\Protocol\Proto</Filter>
     </None>
     <None Include="protos\Struct.proto">

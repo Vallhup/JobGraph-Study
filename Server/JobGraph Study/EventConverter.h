@@ -6,7 +6,7 @@
 #include "Event.h"
 
 class EventConverter {
-	using HandlerFunc = bool(*)(const PacketHeader&, const char*, GameEvent*);
+	using HandlerFunc = bool(*)(const PacketHeader&, const char*);
 
 public:
 	static EventConverter& Get()
@@ -15,11 +15,11 @@ public:
 		return converter;
 	}
 
-	bool Convert(const PacketHeader& header, const char* data, GameEvent* out)
+	bool Convert(const PacketHeader& header, const char* data)
 	{
 		auto it = _handlerTable.find(header.type);
 		if (it != _handlerTable.end())
-			return it->second(header, data, out);
+			return it->second(header, data);
 
 		return false;
 	}
@@ -28,10 +28,12 @@ private:
 	EventConverter()
 	{
 		_handlerTable[(uint16_t)PacketType::CS_LOGIN] = &EventConverter::HandleConnect;
+		_handlerTable[(uint16_t)PacketType::CS_MOVE] = &EventConverter::HandleMove;
 	}
 
 	// TODO : Handler 함수 추가
-	static bool HandleConnect(const PacketHeader& header, const char* data, GameEvent* out);
+	static bool HandleConnect(const PacketHeader& header, const char* data);
+	static bool HandleMove(const PacketHeader& header, const char* data);
 
 	std::unordered_map<uint16_t, HandlerFunc> _handlerTable;
 };

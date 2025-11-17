@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Framework::Framework(size_t size)
-	: _ioCtx((int)size), _game(size), _network(7777, _ioCtx), _running(false)
+	: _game(size), _network(7777, size), _running(false)
 {
 }
 
@@ -14,7 +14,6 @@ void Framework::Start()
 	_running = true;
 	_network.Start();
 	
-	// 메인 루프
 	const float dT = 1.0f / 60.0f;
 	auto prev = steady_clock::now();
 	while (_running)
@@ -25,8 +24,6 @@ void Framework::Start()
 		if (elapsed >= dT)
 		{
 			prev = now;
-
-			// TODO : 네트워크 <-> 로직 스레드 동기화
 			_game.Update(dT);
 		}
 	}

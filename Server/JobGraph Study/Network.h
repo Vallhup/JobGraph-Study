@@ -12,7 +12,7 @@ class Network {
 	friend class Listener;
 
 public:
-	Network(short port, asio::io_context& ioCtx);
+	Network(short port, int size);
 	~Network();
 
 	void Start();
@@ -27,7 +27,8 @@ private:
 	void RemoveSession(int id);
 
 	std::atomic<int> _nextId;
-	asio::io_context& _ioCtx;
+	asio::io_context _ioCtx;
+	asio::executor_work_guard<asio::io_context::executor_type> _workGuard;
 	Listener _listener;
 	std::unordered_map<int, std::shared_ptr<Session>> _sessions;
 	// boost의 concurrent_flat_map or tbb의 concurrnet_hash_map으로 변경

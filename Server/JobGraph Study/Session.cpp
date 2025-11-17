@@ -56,28 +56,33 @@ void Session::Send(const void* data, size_t size)
 
 void Session::Recv()
 {
+	std::cout << "WritePos: " << static_cast<void*>(_recvBuffer.GetWritePos())
+		<< ", FreeSize: " << _recvBuffer.GetContiguousFreeSize() << std::endl;
+
 	auto self = shared_from_this();
 	_socket.async_read_some(
 		asio::buffer(_recvBuffer.GetWritePos(), _recvBuffer.GetContiguousFreeSize()),
-		[this, self](std::error_code ec, size_t bytes)
-		{
-			if (ec)
+		asio::bind_executor(_strand,
+			[this, self](std::error_code ec, size_t bytes)
 			{
-				if (ec != asio::error::eof and
-					ec != asio::error::operation_aborted)
+				if (ec)
 				{
-					std::cout << "Receive Error on Session[" << _id << "] EC["
-						<< ec.message() << "]\n";
+					if (ec != asio::error::eof and
+						ec != asio::error::operation_aborted)
+					{
+						std::cout << "Receive Error on Session[" << _id << "] EC["
+							<< ec.message() << "]\n";
+					}
+
+					asio::dispatch(_strand, [this, self]() { Close(); });
+					return;
 				}
 
-				asio::dispatch(_strand, [this, self]() { Close(); });
-				return;
-			}
-
-			_recvBuffer.Write(nullptr, static_cast<int>(bytes));
-			ProcessPacket();
-			Recv();
-		});
+				_recvBuffer.Write(nullptr, static_cast<int>(bytes));
+				ProcessPacket();
+				Recv();
+			})
+);
 }
 
 void Session::InternalSend()
@@ -137,21 +142,9 @@ void Session::ProcessPacket()
 		if (size < sizeof(PacketHeader)) return;
 
 		PacketHeader header;
-		PacketFactory::PeekHeader(ptr, size, &header);
-
+		if (not PacketFactory::PeekHeader(ptr, size, &header)) return;	
 		if (size < header.size) return;
-
-		GameEvent event;
-		if (EventConverter::Get().Convert(header, ptr, &event))
-			Framework::Get().eventQueue.push(event);
-
-#ifdef _DEBUG
-		else
-		{
-			std::cout << "Packet ->GameEvent Error, type = " << header.type << std::endl;
-			return;
-		}
-#endif
+		if (not EventConverter::Get().Convert(header, ptr)) return;
 
 		_recvBuffer.Read(nullptr, header.size);
 
