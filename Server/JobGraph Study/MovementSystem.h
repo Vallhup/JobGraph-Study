@@ -23,5 +23,15 @@ public:
 			}
 		}
 	}
+
+	virtual std::vector<std::type_index> ReadComponents() const override
+	{
+		return { typeid(Velocity) };
+	}
+
+	virtual std::vector<std::type_index> WriteComponents() const override
+	{
+		return { typeid(Transform) };
+	}
 };
 

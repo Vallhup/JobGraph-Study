@@ -37,4 +37,3 @@ private:
 
 	std::unordered_map<uint16_t, HandlerFunc> _handlerTable;
 };
-

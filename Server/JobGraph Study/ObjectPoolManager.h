@@ -12,8 +12,8 @@ public:
 		return instance;
 	}
 
-	ObjectPool<SendBuffer, 8192> sendBuffers;
 	// TODO : ObjectPool Ãß°¡
+	ObjectPool<SendBuffer, 8192> sendBuffers;
 
 private:
 	ObjectPoolManager() = default;

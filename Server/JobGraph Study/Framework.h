@@ -19,7 +19,6 @@ public:
 
 	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
 
-	//concurrent_queue<GameEvent> eventQueue;
 	EventQueue eventQueue;
 
 	std::unordered_map<int, Entity> sessionToEntity;
