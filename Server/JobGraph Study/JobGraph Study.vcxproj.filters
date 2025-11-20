@@ -202,6 +202,9 @@
     <ClInclude Include="AnimationSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JobGraph">
@@ -257,6 +260,9 @@
     </Filter>
     <Filter Include="ECS\System\Base">
       <UniqueIdentifier>{22b2e846-ea7f-420c-ae8a-4e14abbb2382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{9d68a4d1-7265-4454-b9a9-d3166264a635}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

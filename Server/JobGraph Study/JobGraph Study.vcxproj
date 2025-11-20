@@ -179,6 +179,7 @@
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Job.h" />
     <ClInclude Include="JobGraph.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="LF_Stack.h" />
     <ClInclude Include="Listener.h" />
     <ClInclude Include="MoveEventSystem.h" />
