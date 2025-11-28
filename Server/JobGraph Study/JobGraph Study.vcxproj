@@ -135,6 +135,7 @@
     <ClCompile Include="LoginEventSystem.cpp" />
     <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="MoveEventSystem.cpp" />
     <ClCompile Include="NetworkHandler.cpp" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="Framework.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="ECS.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="MoveEventSystem.h" />
     <ClInclude Include="NetworkHandler.h" />
     <ClInclude Include="EventQueue.h" />
     <ClInclude Include="Framework.h" />

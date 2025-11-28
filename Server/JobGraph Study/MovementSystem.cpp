@@ -26,21 +26,9 @@ void MovementSystem::Update(const float dT)
 			pos = XMVectorAdd(pos, XMVectorScale(dir, speed * dT));
 			XMStoreFloat3(&transform.position, pos);*/
 
-			auto sit = framework.entityToSession.find(entity);
-			if (sit == framework.entityToSession.end()) 
-				continue;
-			int sessionId = sit->second;
-			auto pit = framework.playerStates.find(sessionId);
-			if (pit == framework.playerStates.end()) 
-				continue;
-			PlayerState* ps = pit->second.get();
-
-			printf("%d\n", ps->lastSeq.load());
-
-			int inputX = ps->inputX;
-			int inputZ = ps->inputZ;
-			float yaw = ps->yaw;
-			int lastSeq = ps->lastSeq;
+			int inputX = vel->inputX;
+			int inputZ = vel->inputZ;
+			float yaw = vel->yaw;
 
 			XMVECTOR forward = XMVectorSet(sin(yaw), 0, cos(yaw), 0);
 			XMVECTOR right = XMVector3Cross(XMVectorSet(0, 1, 0, 0), forward);
@@ -64,6 +52,9 @@ void MovementSystem::Update(const float dT)
 			XMStoreFloat4(&transform.rotation, q);
 
 			// TEMP : 이동 패킷 Send
+			auto it = framework.entityToSession.find(entity);
+			if (it == framework.entityToSession.end()) continue;
+			int sessionId = it->second;
 
 			Protocol::SC_MOVE_PACKET move;
 			move.set_sessionid(sessionId);

@@ -14,11 +14,7 @@ message CS_MOVE_PACKET
 {
 	int32 inputX = 1;
 	int32 inputZ = 2;
-	float 
-	
-	
-	= 3;
-	int64 sequence = 4;
+	float yaw= 3;
 }
 
 /* ------------------------------ [ Server -> Client ]  ------------------------------ */

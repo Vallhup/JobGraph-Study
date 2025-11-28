@@ -1078,7 +1078,6 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
   enum : int {
     kInputXFieldNumber = 1,
     kInputZFieldNumber = 2,
-    kSequenceFieldNumber = 4,
     kYawFieldNumber = 3,
   };
   // int32 inputX = 1;
@@ -1101,16 +1100,6 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
   void _internal_set_inputz(::int32_t value);
 
   public:
-  // int64 sequence = 4;
-  void clear_sequence() ;
-  ::int64_t sequence() const;
-  void set_sequence(::int64_t value);
-
-  private:
-  ::int64_t _internal_sequence() const;
-  void _internal_set_sequence(::int64_t value);
-
-  public:
   // float yaw = 3;
   void clear_yaw() ;
   float yaw() const;
@@ -1126,7 +1115,7 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
+      2, 3, 0,
       0, 2>
       _table_;
 
@@ -1146,7 +1135,6 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
                           const CS_MOVE_PACKET& from_msg);
     ::int32_t inputx_;
     ::int32_t inputz_;
-    ::int64_t sequence_;
     float yaw_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -1384,28 +1372,6 @@ inline float CS_MOVE_PACKET::_internal_yaw() const {
 inline void CS_MOVE_PACKET::_internal_set_yaw(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.yaw_ = value;
-}
-
-// int64 sequence = 4;
-inline void CS_MOVE_PACKET::clear_sequence() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sequence_ = ::int64_t{0};
-}
-inline ::int64_t CS_MOVE_PACKET::sequence() const {
-  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.sequence)
-  return _internal_sequence();
-}
-inline void CS_MOVE_PACKET::set_sequence(::int64_t value) {
-  _internal_set_sequence(value);
-  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.sequence)
-}
-inline ::int64_t CS_MOVE_PACKET::_internal_sequence() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.sequence_;
-}
-inline void CS_MOVE_PACKET::_internal_set_sequence(::int64_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sequence_ = value;
 }
 
 // -------------------------------------------------------------------

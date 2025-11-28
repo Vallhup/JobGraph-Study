@@ -59,17 +59,8 @@
     <ClCompile Include="NetworkHandler.cpp">
       <Filter>Network\Event</Filter>
     </ClCompile>
-    <ClCompile Include="System.inl">
-      <Filter>ECS\System\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemManager.cpp">
-      <Filter>ECS\System\Base</Filter>
-    </ClCompile>
     <ClCompile Include="LoginEventSystem.cpp">
       <Filter>ECS\System</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>ECS\System\Base</Filter>
     </ClCompile>
     <ClCompile Include="MovementSystem.cpp">
       <Filter>ECS\System</Filter>
@@ -90,6 +81,18 @@
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="AnimationSystem.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System.inl">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEventSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -166,12 +169,6 @@
     <ClInclude Include="NetworkHandler.h">
       <Filter>Network\Event</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>ECS\System\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManager.h">
-      <Filter>ECS\System\Base</Filter>
-    </ClInclude>
     <ClInclude Include="LoginEventSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
@@ -201,6 +198,15 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Utillity\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEventSystem.h">
+      <Filter>ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -254,9 +260,6 @@
     </Filter>
     <Filter Include="Network\Protocol\Output">
       <UniqueIdentifier>{ad313583-140e-4d19-8985-df63b89e6425}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\System\Base">
-      <UniqueIdentifier>{22b2e846-ea7f-420c-ae8a-4e14abbb2382}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script">
       <UniqueIdentifier>{9d68a4d1-7265-4454-b9a9-d3166264a635}</UniqueIdentifier>

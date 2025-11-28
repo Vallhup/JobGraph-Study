@@ -137,7 +137,6 @@ inline constexpr CS_MOVE_PACKET::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : inputx_{0},
         inputz_{0},
-        sequence_{::int64_t{0}},
         yaw_{0},
         _cached_size_{0} {}
 
@@ -205,7 +204,6 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.inputx_),
         PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.inputz_),
         PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.yaw_),
-        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.sequence_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::Protocol::SC_LOGIN_PACKET, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -255,10 +253,10 @@ static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::Protocol::CS_LOGIN_PACKET)},
         {8, -1, -1, sizeof(::Protocol::CS_MOVE_PACKET)},
-        {20, -1, -1, sizeof(::Protocol::SC_LOGIN_PACKET)},
-        {29, -1, -1, sizeof(::Protocol::SC_ADD_PACKET)},
-        {41, -1, -1, sizeof(::Protocol::SC_MOVE_PACKET)},
-        {54, -1, -1, sizeof(::Protocol::SC_REMOVE_PACKET)},
+        {19, -1, -1, sizeof(::Protocol::SC_LOGIN_PACKET)},
+        {28, -1, -1, sizeof(::Protocol::SC_ADD_PACKET)},
+        {40, -1, -1, sizeof(::Protocol::SC_MOVE_PACKET)},
+        {53, -1, -1, sizeof(::Protocol::SC_REMOVE_PACKET)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::Protocol::_CS_LOGIN_PACKET_default_instance_._instance,
@@ -271,15 +269,15 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Protocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\016Protocol.proto\022\010Protocol\032\nEnum.proto\032\014"
-    "Struct.proto\"\021\n\017CS_LOGIN_PACKET\"O\n\016CS_MO"
+    "Struct.proto\"\021\n\017CS_LOGIN_PACKET\"=\n\016CS_MO"
     "VE_PACKET\022\016\n\006inputX\030\001 \001(\005\022\016\n\006inputZ\030\002 \001("
-    "\005\022\013\n\003yaw\030\003 \001(\002\022\020\n\010sequence\030\004 \001(\003\"$\n\017SC_L"
-    "OGIN_PACKET\022\021\n\tsessionId\030\001 \001(\005\"C\n\rSC_ADD"
-    "_PACKET\022\021\n\tsessionId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n"
-    "\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\"Q\n\016SC_MOVE_PACKET\022\021\n"
-    "\tsessionId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t"
-    "\n\001z\030\004 \001(\002\022\013\n\003yaw\030\005 \001(\002\"&\n\020SC_REMOVE_PACK"
-    "ET\022\022\n\nssessionId\030\001 \001(\005b\006proto3"
+    "\005\022\013\n\003yaw\030\003 \001(\002\"$\n\017SC_LOGIN_PACKET\022\021\n\tses"
+    "sionId\030\001 \001(\005\"C\n\rSC_ADD_PACKET\022\021\n\tsession"
+    "Id\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001("
+    "\002\"Q\n\016SC_MOVE_PACKET\022\021\n\tsessionId\030\001 \001(\005\022\t"
+    "\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\022\013\n\003yaw\030\005"
+    " \001(\002\"&\n\020SC_REMOVE_PACKET\022\022\n\nssessionId\030\001"
+    " \001(\005b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_deps[2] =
     {
@@ -290,7 +288,7 @@ static ::absl::once_flag descriptor_table_Protocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
     false,
     false,
-    390,
+    372,
     descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once,
@@ -488,15 +486,15 @@ const ::google::protobuf::internal::ClassData* CS_MOVE_PACKET::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    3,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -506,9 +504,7 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
     ::_pbi::TcParser::GetTable<::Protocol::CS_MOVE_PACKET>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int64 sequence = 4;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(CS_MOVE_PACKET, _impl_.sequence_), 63>(),
-     {32, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sequence_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // int32 inputX = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.inputx_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputx_)}},
@@ -530,9 +526,6 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
     // float yaw = 3;
     {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.yaw_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
-    // int64 sequence = 4;
-    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sequence_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
   }},
   // no aux_entries
   {{
@@ -588,13 +581,6 @@ PROTOBUF_NOINLINE void CS_MOVE_PACKET::Clear() {
                 3, this_._internal_yaw(), target);
           }
 
-          // int64 sequence = 4;
-          if (this_._internal_sequence() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt64ToArrayWithField<4>(
-                    stream, this_._internal_sequence(), target);
-          }
-
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -630,11 +616,6 @@ PROTOBUF_NOINLINE void CS_MOVE_PACKET::Clear() {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_inputz());
             }
-            // int64 sequence = 4;
-            if (this_._internal_sequence() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
-                  this_._internal_sequence());
-            }
             // float yaw = 3;
             if (::absl::bit_cast<::uint32_t>(this_._internal_yaw()) != 0) {
               total_size += 5;
@@ -657,9 +638,6 @@ void CS_MOVE_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   }
   if (from._internal_inputz() != 0) {
     _this->_impl_.inputz_ = from._impl_.inputz_;
-  }
-  if (from._internal_sequence() != 0) {
-    _this->_impl_.sequence_ = from._impl_.sequence_;
   }
   if (::absl::bit_cast<::uint32_t>(from._internal_yaw()) != 0) {
     _this->_impl_.yaw_ = from._impl_.yaw_;

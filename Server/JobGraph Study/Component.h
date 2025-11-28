@@ -18,7 +18,9 @@ struct Transform : public Component {
 };
 
 struct Velocity : public Component {
-
+	int inputX{ 0 };
+	int inputZ{ 0 };
+	float yaw{ 0.0f };
 };
 
 struct Collider : public Component {
