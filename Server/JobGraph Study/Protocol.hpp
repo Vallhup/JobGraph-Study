@@ -56,12 +56,4 @@ struct PacketFactory {
 
 		return out->ParseFromArray(body, bodySize);
 	}
-
-	static bool PeekHeader(const char* data, uint16_t size, PacketHeader* out)
-	{
-		if (size < sizeof(PacketHeader)) return false;
-
-		memcpy(out, data, sizeof(PacketHeader));
-		return true;
-	}
 };

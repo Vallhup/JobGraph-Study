@@ -4,7 +4,7 @@
 #include <concurrent_queue.h>
 
 #include "Protocol.hpp"
-#include "EventConverter.h"
+#include "NetworkHandler.h"
 #include "Listener.h"
 #include "Framework.h"
 #include "SendBuffer.h"
@@ -36,7 +36,7 @@ void Session::Close()
 		std::cerr << "Socket close error: " << ec.message() << std::endl;
 }
 
-void Session::Send(const void* data, size_t size)
+void Session::Send(const void* data, uint16_t size)
 {
 	if (size == 0) return;
 
@@ -56,9 +56,6 @@ void Session::Send(const void* data, size_t size)
 
 void Session::Recv()
 {
-	std::cout << "WritePos: " << static_cast<void*>(_recvBuffer.GetWritePos())
-		<< ", FreeSize: " << _recvBuffer.GetContiguousFreeSize() << std::endl;
-
 	auto self = shared_from_this();
 	_socket.async_read_some(
 		asio::buffer(_recvBuffer.GetWritePos(), _recvBuffer.GetContiguousFreeSize()),
@@ -82,7 +79,7 @@ void Session::Recv()
 				ProcessPacket();
 				Recv();
 			})
-);
+	);
 }
 
 void Session::InternalSend()
@@ -134,21 +131,19 @@ void Session::InternalSend()
 
 void Session::ProcessPacket()
 {
-	char* ptr = _recvBuffer.GetReadPos();
-	int size = _recvBuffer.GetContiguousUsedSize();
-
 	while (true)
 	{
+		int size = _recvBuffer.GetUsedSize();
 		if (size < sizeof(PacketHeader)) return;
 
 		PacketHeader header;
-		if (not PacketFactory::PeekHeader(ptr, size, &header)) return;	
+		_recvBuffer.Peek(&header, sizeof(header)); 
+
 		if (size < header.size) return;
-		if (not EventConverter::Get().Convert(header, ptr)) return;
 
-		_recvBuffer.Read(nullptr, header.size);
+		std::vector<char> packet(header.size);
+		_recvBuffer.Read(packet.data(), header.size);
 
-		ptr = _recvBuffer.GetReadPos();
-		size = _recvBuffer.GetContiguousUsedSize();
+		NetworkHandler::Get().Handle(_id, header, packet.data());
 	}
 }

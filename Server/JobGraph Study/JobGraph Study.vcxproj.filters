@@ -56,7 +56,7 @@
     <ClCompile Include="Protocols\Protocol.pb.cc">
       <Filter>Network\Protocol\Output</Filter>
     </ClCompile>
-    <ClCompile Include="EventConverter.cpp">
+    <ClCompile Include="NetworkHandler.cpp">
       <Filter>Network\Event</Filter>
     </ClCompile>
     <ClCompile Include="System.inl">
@@ -65,14 +65,11 @@
     <ClCompile Include="SystemManager.cpp">
       <Filter>ECS\System\Base</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectEventSystem.cpp">
+    <ClCompile Include="LoginEventSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>ECS\System\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveEventSystem.cpp">
-      <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="MovementSystem.cpp">
       <Filter>ECS\System</Filter>
@@ -166,7 +163,7 @@
     <ClInclude Include="Protocol.hpp">
       <Filter>Network\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="EventConverter.h">
+    <ClInclude Include="NetworkHandler.h">
       <Filter>Network\Event</Filter>
     </ClInclude>
     <ClInclude Include="System.h">
@@ -175,10 +172,7 @@
     <ClInclude Include="SystemManager.h">
       <Filter>ECS\System\Base</Filter>
     </ClInclude>
-    <ClInclude Include="ConnectEventSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveEventSystem.h">
+    <ClInclude Include="LoginEventSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="MovementSystem.h">
@@ -204,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utillity\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +260,9 @@
     </Filter>
     <Filter Include="Script">
       <UniqueIdentifier>{9d68a4d1-7265-4454-b9a9-d3166264a635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Math">
+      <UniqueIdentifier>{6eed666f-99de-4259-861d-595e4acde9b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

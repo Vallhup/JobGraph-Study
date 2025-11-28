@@ -30,6 +30,8 @@ private:
 	asio::io_context _ioCtx;
 	asio::executor_work_guard<asio::io_context::executor_type> _workGuard;
 	Listener _listener;
+
+	std::mutex _mtx;
 	std::unordered_map<int, std::shared_ptr<Session>> _sessions;
 	// boost의 concurrent_flat_map or tbb의 concurrnet_hash_map으로 변경
 

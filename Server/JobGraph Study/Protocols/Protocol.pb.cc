@@ -26,12 +26,38 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace Protocol {
 
+inline constexpr SC_REMOVE_PACKET::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : ssessionid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SC_REMOVE_PACKET::SC_REMOVE_PACKET(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SC_REMOVE_PACKETDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_REMOVE_PACKETDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_REMOVE_PACKETDefaultTypeInternal() {}
+  union {
+    SC_REMOVE_PACKET _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_REMOVE_PACKETDefaultTypeInternal _SC_REMOVE_PACKET_default_instance_;
+
 inline constexpr SC_MOVE_PACKET::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : sessionid_{0},
         x_{0},
         y_{0},
         z_{0},
+        yaw_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -54,11 +80,65 @@ struct SC_MOVE_PACKETDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_MOVE_PACKETDefaultTypeInternal _SC_MOVE_PACKET_default_instance_;
 
-inline constexpr CS_MOVE_PACKET::Impl_::Impl_(
+inline constexpr SC_LOGIN_PACKET::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : sessionid_{0},
-        dx_{0},
-        dy_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SC_LOGIN_PACKET::SC_LOGIN_PACKET(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SC_LOGIN_PACKETDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_LOGIN_PACKETDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_LOGIN_PACKETDefaultTypeInternal() {}
+  union {
+    SC_LOGIN_PACKET _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_LOGIN_PACKETDefaultTypeInternal _SC_LOGIN_PACKET_default_instance_;
+
+inline constexpr SC_ADD_PACKET::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : sessionid_{0},
+        x_{0},
+        y_{0},
+        z_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SC_ADD_PACKET::SC_ADD_PACKET(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SC_ADD_PACKETDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_ADD_PACKETDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_ADD_PACKETDefaultTypeInternal() {}
+  union {
+    SC_ADD_PACKET _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_ADD_PACKETDefaultTypeInternal _SC_ADD_PACKET_default_instance_;
+
+inline constexpr CS_MOVE_PACKET::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : inputx_{0},
+        inputz_{0},
+        sequence_{::int64_t{0}},
+        yaw_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -80,21 +160,14 @@ struct CS_MOVE_PACKETDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CS_MOVE_PACKETDefaultTypeInternal _CS_MOVE_PACKET_default_instance_;
-
-inline constexpr CS_LOGIN_PACKET::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : sessionid_{0},
-        _cached_size_{0} {}
-
-template <typename>
+              template <typename>
 PROTOBUF_CONSTEXPR CS_LOGIN_PACKET::CS_LOGIN_PACKET(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
+    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
+    : ::google::protobuf::internal::ZeroFieldsBase() {
 }
+#endif  // PROTOBUF_CUSTOM_VTABLE
 struct CS_LOGIN_PACKETDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CS_LOGIN_PACKETDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~CS_LOGIN_PACKETDefaultTypeInternal() {}
@@ -121,7 +194,6 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::Protocol::CS_LOGIN_PACKET, _impl_.sessionid_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -130,9 +202,31 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.sessionid_),
-        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.dx_),
-        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.dy_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.inputx_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.inputz_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.yaw_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::CS_MOVE_PACKET, _impl_.sequence_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_LOGIN_PACKET, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_LOGIN_PACKET, _impl_.sessionid_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_ADD_PACKET, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_ADD_PACKET, _impl_.sessionid_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_ADD_PACKET, _impl_.x_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_ADD_PACKET, _impl_.y_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_ADD_PACKET, _impl_.z_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::Protocol::SC_MOVE_PACKET, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -145,27 +239,47 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::Protocol::SC_MOVE_PACKET, _impl_.x_),
         PROTOBUF_FIELD_OFFSET(::Protocol::SC_MOVE_PACKET, _impl_.y_),
         PROTOBUF_FIELD_OFFSET(::Protocol::SC_MOVE_PACKET, _impl_.z_),
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_MOVE_PACKET, _impl_.yaw_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_REMOVE_PACKET, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::Protocol::SC_REMOVE_PACKET, _impl_.ssessionid_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::Protocol::CS_LOGIN_PACKET)},
-        {9, -1, -1, sizeof(::Protocol::CS_MOVE_PACKET)},
-        {20, -1, -1, sizeof(::Protocol::SC_MOVE_PACKET)},
+        {8, -1, -1, sizeof(::Protocol::CS_MOVE_PACKET)},
+        {20, -1, -1, sizeof(::Protocol::SC_LOGIN_PACKET)},
+        {29, -1, -1, sizeof(::Protocol::SC_ADD_PACKET)},
+        {41, -1, -1, sizeof(::Protocol::SC_MOVE_PACKET)},
+        {54, -1, -1, sizeof(::Protocol::SC_REMOVE_PACKET)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::Protocol::_CS_LOGIN_PACKET_default_instance_._instance,
     &::Protocol::_CS_MOVE_PACKET_default_instance_._instance,
+    &::Protocol::_SC_LOGIN_PACKET_default_instance_._instance,
+    &::Protocol::_SC_ADD_PACKET_default_instance_._instance,
     &::Protocol::_SC_MOVE_PACKET_default_instance_._instance,
+    &::Protocol::_SC_REMOVE_PACKET_default_instance_._instance,
 };
 const char descriptor_table_protodef_Protocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\016Protocol.proto\022\010Protocol\032\nEnum.proto\032\014"
-    "Struct.proto\"$\n\017CS_LOGIN_PACKET\022\021\n\tsessi"
-    "onId\030\001 \001(\005\";\n\016CS_MOVE_PACKET\022\021\n\tsessionI"
-    "d\030\001 \001(\005\022\n\n\002dx\030\002 \001(\005\022\n\n\002dy\030\003 \001(\005\"D\n\016SC_MO"
-    "VE_PACKET\022\021\n\tsessionId\030\001 \001(\005\022\t\n\001x\030\002 \001(\005\022"
-    "\t\n\001y\030\003 \001(\005\022\t\n\001z\030\004 \001(\005b\006proto3"
+    "Struct.proto\"\021\n\017CS_LOGIN_PACKET\"O\n\016CS_MO"
+    "VE_PACKET\022\016\n\006inputX\030\001 \001(\005\022\016\n\006inputZ\030\002 \001("
+    "\005\022\013\n\003yaw\030\003 \001(\002\022\020\n\010sequence\030\004 \001(\003\"$\n\017SC_L"
+    "OGIN_PACKET\022\021\n\tsessionId\030\001 \001(\005\"C\n\rSC_ADD"
+    "_PACKET\022\021\n\tsessionId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n"
+    "\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\"Q\n\016SC_MOVE_PACKET\022\021\n"
+    "\tsessionId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t"
+    "\n\001z\030\004 \001(\002\022\013\n\003yaw\030\005 \001(\002\"&\n\020SC_REMOVE_PACK"
+    "ET\022\022\n\nssessionId\030\001 \001(\005b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_deps[2] =
     {
@@ -176,13 +290,13 @@ static ::absl::once_flag descriptor_table_Protocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
     false,
     false,
-    229,
+    390,
     descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once,
     descriptor_table_Protocol_2eproto_deps,
     2,
-    3,
+    6,
     schemas,
     file_default_instances,
     TableStruct_Protocol_2eproto::offsets,
@@ -198,36 +312,26 @@ class CS_LOGIN_PACKET::_Internal {
 
 CS_LOGIN_PACKET::CS_LOGIN_PACKET(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Protocol.CS_LOGIN_PACKET)
 }
 CS_LOGIN_PACKET::CS_LOGIN_PACKET(
-    ::google::protobuf::Arena* arena, const CS_LOGIN_PACKET& from)
-    : CS_LOGIN_PACKET(arena) {
-  MergeFrom(from);
-}
-inline PROTOBUF_NDEBUG_INLINE CS_LOGIN_PACKET::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
+    ::google::protobuf::Arena* arena,
+    const CS_LOGIN_PACKET& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  CS_LOGIN_PACKET* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
 
-inline void CS_LOGIN_PACKET::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.sessionid_ = {};
-}
-CS_LOGIN_PACKET::~CS_LOGIN_PACKET() {
-  // @@protoc_insertion_point(destructor:Protocol.CS_LOGIN_PACKET)
-  SharedDtor(*this);
-}
-inline void CS_LOGIN_PACKET::SharedDtor(MessageLite& self) {
-  CS_LOGIN_PACKET& this_ = static_cast<CS_LOGIN_PACKET&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
+  // @@protoc_insertion_point(copy_constructor:Protocol.CS_LOGIN_PACKET)
 }
 
 inline void* CS_LOGIN_PACKET::PlacementNew_(const void*, void* mem,
@@ -247,10 +351,10 @@ const ::google::protobuf::internal::ClassDataFull CS_LOGIN_PACKET::_class_data_ 
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &CS_LOGIN_PACKET::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<CS_LOGIN_PACKET>(),
+        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<CS_LOGIN_PACKET>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &CS_LOGIN_PACKET::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<CS_LOGIN_PACKET>(), &CS_LOGIN_PACKET::ByteSizeLong,
+        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<CS_LOGIN_PACKET>(), &CS_LOGIN_PACKET::ByteSizeLong,
             &CS_LOGIN_PACKET::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(CS_LOGIN_PACKET, _impl_._cached_size_),
@@ -266,15 +370,15 @@ const ::google::protobuf::internal::ClassData* CS_LOGIN_PACKET::GetClassData() c
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> CS_LOGIN_PACKET::_table_ = {
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2> CS_LOGIN_PACKET::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    0, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    4294967295,  // skipmap
+    offsetof(decltype(_table_), field_names),  // no field_entries
+    0,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -284,118 +388,24 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> CS_LOGIN_PACKET::_table_ = {
     ::_pbi::TcParser::GetTable<::Protocol::CS_LOGIN_PACKET>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 sessionId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_LOGIN_PACKET, _impl_.sessionid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(CS_LOGIN_PACKET, _impl_.sessionid_)}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
-  }}, {{
-    // int32 sessionId = 1;
-    {PROTOBUF_FIELD_OFFSET(CS_LOGIN_PACKET, _impl_.sessionid_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
-  // no aux_entries
+  // no field_entries, or aux_entries
   {{
   }},
 };
 
-PROTOBUF_NOINLINE void CS_LOGIN_PACKET::Clear() {
-// @@protoc_insertion_point(message_clear_start:Protocol.CS_LOGIN_PACKET)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.sessionid_ = 0;
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* CS_LOGIN_PACKET::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const CS_LOGIN_PACKET& this_ = static_cast<const CS_LOGIN_PACKET&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* CS_LOGIN_PACKET::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const CS_LOGIN_PACKET& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:Protocol.CS_LOGIN_PACKET)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // int32 sessionId = 1;
-          if (this_._internal_sessionid() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_sessionid(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:Protocol.CS_LOGIN_PACKET)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t CS_LOGIN_PACKET::ByteSizeLong(const MessageLite& base) {
-          const CS_LOGIN_PACKET& this_ = static_cast<const CS_LOGIN_PACKET&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t CS_LOGIN_PACKET::ByteSizeLong() const {
-          const CS_LOGIN_PACKET& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:Protocol.CS_LOGIN_PACKET)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-           {
-            // int32 sessionId = 1;
-            if (this_._internal_sessionid() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_sessionid());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void CS_LOGIN_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<CS_LOGIN_PACKET*>(&to_msg);
-  auto& from = static_cast<const CS_LOGIN_PACKET&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.CS_LOGIN_PACKET)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from._internal_sessionid() != 0) {
-    _this->_impl_.sessionid_ = from._impl_.sessionid_;
-  }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void CS_LOGIN_PACKET::CopyFrom(const CS_LOGIN_PACKET& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.CS_LOGIN_PACKET)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
 
 
-void CS_LOGIN_PACKET::InternalSwap(CS_LOGIN_PACKET* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.sessionid_, other->_impl_.sessionid_);
-}
+
+
+
+
 
 ::google::protobuf::Metadata CS_LOGIN_PACKET::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
@@ -425,11 +435,11 @@ inline PROTOBUF_NDEBUG_INLINE CS_MOVE_PACKET::Impl_::Impl_(
 inline void CS_MOVE_PACKET::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, sessionid_),
+               offsetof(Impl_, inputx_),
            0,
-           offsetof(Impl_, dy_) -
-               offsetof(Impl_, sessionid_) +
-               sizeof(Impl_::dy_));
+           offsetof(Impl_, yaw_) -
+               offsetof(Impl_, inputx_) +
+               sizeof(Impl_::yaw_));
 }
 CS_MOVE_PACKET::~CS_MOVE_PACKET() {
   // @@protoc_insertion_point(destructor:Protocol.CS_MOVE_PACKET)
@@ -478,15 +488,15 @@ const ::google::protobuf::internal::ClassData* CS_MOVE_PACKET::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -496,28 +506,33 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> CS_MOVE_PACKET::_table_ = {
     ::_pbi::TcParser::GetTable<::Protocol::CS_MOVE_PACKET>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // int32 sessionId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.sessionid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sessionid_)}},
-    // int32 dx = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.dx_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.dx_)}},
-    // int32 dy = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.dy_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.dy_)}},
+    // int64 sequence = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(CS_MOVE_PACKET, _impl_.sequence_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sequence_)}},
+    // int32 inputX = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.inputx_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputx_)}},
+    // int32 inputZ = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(CS_MOVE_PACKET, _impl_.inputz_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputz_)}},
+    // float yaw = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 63, 0, PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.yaw_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 sessionId = 1;
-    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sessionid_), 0, 0,
+    // int32 inputX = 1;
+    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputx_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 dx = 2;
-    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.dx_), 0, 0,
+    // int32 inputZ = 2;
+    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputz_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 dy = 3;
-    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.dy_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // float yaw = 3;
+    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.yaw_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // int64 sequence = 4;
+    {PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sequence_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
   }},
   // no aux_entries
   {{
@@ -531,9 +546,9 @@ PROTOBUF_NOINLINE void CS_MOVE_PACKET::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.sessionid_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.dy_) -
-      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.dy_));
+  ::memset(&_impl_.inputx_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.yaw_) -
+      reinterpret_cast<char*>(&_impl_.inputx_)) + sizeof(_impl_.yaw_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -552,25 +567,32 @@ PROTOBUF_NOINLINE void CS_MOVE_PACKET::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int32 sessionId = 1;
-          if (this_._internal_sessionid() != 0) {
+          // int32 inputX = 1;
+          if (this_._internal_inputx() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_sessionid(), target);
+                    stream, this_._internal_inputx(), target);
           }
 
-          // int32 dx = 2;
-          if (this_._internal_dx() != 0) {
+          // int32 inputZ = 2;
+          if (this_._internal_inputz() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_dx(), target);
+                    stream, this_._internal_inputz(), target);
           }
 
-          // int32 dy = 3;
-          if (this_._internal_dy() != 0) {
+          // float yaw = 3;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_yaw()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                3, this_._internal_yaw(), target);
+          }
+
+          // int64 sequence = 4;
+          if (this_._internal_sequence() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
-                    stream, this_._internal_dy(), target);
+                WriteInt64ToArrayWithField<4>(
+                    stream, this_._internal_sequence(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -598,20 +620,24 @@ PROTOBUF_NOINLINE void CS_MOVE_PACKET::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // int32 sessionId = 1;
-            if (this_._internal_sessionid() != 0) {
+            // int32 inputX = 1;
+            if (this_._internal_inputx() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_sessionid());
+                  this_._internal_inputx());
             }
-            // int32 dx = 2;
-            if (this_._internal_dx() != 0) {
+            // int32 inputZ = 2;
+            if (this_._internal_inputz() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_dx());
+                  this_._internal_inputz());
             }
-            // int32 dy = 3;
-            if (this_._internal_dy() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_dy());
+            // int64 sequence = 4;
+            if (this_._internal_sequence() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_sequence());
+            }
+            // float yaw = 3;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_yaw()) != 0) {
+              total_size += 5;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -626,14 +652,17 @@ void CS_MOVE_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_sessionid() != 0) {
-    _this->_impl_.sessionid_ = from._impl_.sessionid_;
+  if (from._internal_inputx() != 0) {
+    _this->_impl_.inputx_ = from._impl_.inputx_;
   }
-  if (from._internal_dx() != 0) {
-    _this->_impl_.dx_ = from._impl_.dx_;
+  if (from._internal_inputz() != 0) {
+    _this->_impl_.inputz_ = from._impl_.inputz_;
   }
-  if (from._internal_dy() != 0) {
-    _this->_impl_.dy_ = from._impl_.dy_;
+  if (from._internal_sequence() != 0) {
+    _this->_impl_.sequence_ = from._impl_.sequence_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_yaw()) != 0) {
+    _this->_impl_.yaw_ = from._impl_.yaw_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -650,14 +679,501 @@ void CS_MOVE_PACKET::InternalSwap(CS_MOVE_PACKET* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.dy_)
-      + sizeof(CS_MOVE_PACKET::_impl_.dy_)
-      - PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.sessionid_)>(
+      PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.yaw_)
+      + sizeof(CS_MOVE_PACKET::_impl_.yaw_)
+      - PROTOBUF_FIELD_OFFSET(CS_MOVE_PACKET, _impl_.inputx_)>(
+          reinterpret_cast<char*>(&_impl_.inputx_),
+          reinterpret_cast<char*>(&other->_impl_.inputx_));
+}
+
+::google::protobuf::Metadata CS_MOVE_PACKET::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SC_LOGIN_PACKET::_Internal {
+ public:
+};
+
+SC_LOGIN_PACKET::SC_LOGIN_PACKET(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Protocol.SC_LOGIN_PACKET)
+}
+SC_LOGIN_PACKET::SC_LOGIN_PACKET(
+    ::google::protobuf::Arena* arena, const SC_LOGIN_PACKET& from)
+    : SC_LOGIN_PACKET(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE SC_LOGIN_PACKET::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void SC_LOGIN_PACKET::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.sessionid_ = {};
+}
+SC_LOGIN_PACKET::~SC_LOGIN_PACKET() {
+  // @@protoc_insertion_point(destructor:Protocol.SC_LOGIN_PACKET)
+  SharedDtor(*this);
+}
+inline void SC_LOGIN_PACKET::SharedDtor(MessageLite& self) {
+  SC_LOGIN_PACKET& this_ = static_cast<SC_LOGIN_PACKET&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* SC_LOGIN_PACKET::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SC_LOGIN_PACKET(arena);
+}
+constexpr auto SC_LOGIN_PACKET::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SC_LOGIN_PACKET),
+                                            alignof(SC_LOGIN_PACKET));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SC_LOGIN_PACKET::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SC_LOGIN_PACKET_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SC_LOGIN_PACKET::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SC_LOGIN_PACKET>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SC_LOGIN_PACKET::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SC_LOGIN_PACKET>(), &SC_LOGIN_PACKET::ByteSizeLong,
+            &SC_LOGIN_PACKET::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SC_LOGIN_PACKET, _impl_._cached_size_),
+        false,
+    },
+    &SC_LOGIN_PACKET::kDescriptorMethods,
+    &descriptor_table_Protocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SC_LOGIN_PACKET::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> SC_LOGIN_PACKET::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Protocol::SC_LOGIN_PACKET>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 sessionId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_LOGIN_PACKET, _impl_.sessionid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SC_LOGIN_PACKET, _impl_.sessionid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 sessionId = 1;
+    {PROTOBUF_FIELD_OFFSET(SC_LOGIN_PACKET, _impl_.sessionid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void SC_LOGIN_PACKET::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.SC_LOGIN_PACKET)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.sessionid_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SC_LOGIN_PACKET::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SC_LOGIN_PACKET& this_ = static_cast<const SC_LOGIN_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SC_LOGIN_PACKET::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SC_LOGIN_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:Protocol.SC_LOGIN_PACKET)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 sessionId = 1;
+          if (this_._internal_sessionid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_sessionid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:Protocol.SC_LOGIN_PACKET)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SC_LOGIN_PACKET::ByteSizeLong(const MessageLite& base) {
+          const SC_LOGIN_PACKET& this_ = static_cast<const SC_LOGIN_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SC_LOGIN_PACKET::ByteSizeLong() const {
+          const SC_LOGIN_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:Protocol.SC_LOGIN_PACKET)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 sessionId = 1;
+            if (this_._internal_sessionid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_sessionid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SC_LOGIN_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SC_LOGIN_PACKET*>(&to_msg);
+  auto& from = static_cast<const SC_LOGIN_PACKET&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.SC_LOGIN_PACKET)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_sessionid() != 0) {
+    _this->_impl_.sessionid_ = from._impl_.sessionid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_LOGIN_PACKET::CopyFrom(const SC_LOGIN_PACKET& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.SC_LOGIN_PACKET)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SC_LOGIN_PACKET::InternalSwap(SC_LOGIN_PACKET* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.sessionid_, other->_impl_.sessionid_);
+}
+
+::google::protobuf::Metadata SC_LOGIN_PACKET::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SC_ADD_PACKET::_Internal {
+ public:
+};
+
+SC_ADD_PACKET::SC_ADD_PACKET(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Protocol.SC_ADD_PACKET)
+}
+SC_ADD_PACKET::SC_ADD_PACKET(
+    ::google::protobuf::Arena* arena, const SC_ADD_PACKET& from)
+    : SC_ADD_PACKET(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE SC_ADD_PACKET::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void SC_ADD_PACKET::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, sessionid_),
+           0,
+           offsetof(Impl_, z_) -
+               offsetof(Impl_, sessionid_) +
+               sizeof(Impl_::z_));
+}
+SC_ADD_PACKET::~SC_ADD_PACKET() {
+  // @@protoc_insertion_point(destructor:Protocol.SC_ADD_PACKET)
+  SharedDtor(*this);
+}
+inline void SC_ADD_PACKET::SharedDtor(MessageLite& self) {
+  SC_ADD_PACKET& this_ = static_cast<SC_ADD_PACKET&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* SC_ADD_PACKET::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SC_ADD_PACKET(arena);
+}
+constexpr auto SC_ADD_PACKET::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SC_ADD_PACKET),
+                                            alignof(SC_ADD_PACKET));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SC_ADD_PACKET::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SC_ADD_PACKET_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SC_ADD_PACKET::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SC_ADD_PACKET>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SC_ADD_PACKET::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SC_ADD_PACKET>(), &SC_ADD_PACKET::ByteSizeLong,
+            &SC_ADD_PACKET::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_._cached_size_),
+        false,
+    },
+    &SC_ADD_PACKET::kDescriptorMethods,
+    &descriptor_table_Protocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SC_ADD_PACKET::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> SC_ADD_PACKET::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Protocol::SC_ADD_PACKET>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // float z = 4;
+    {::_pbi::TcParser::FastF32S1,
+     {37, 63, 0, PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.z_)}},
+    // int32 sessionId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_ADD_PACKET, _impl_.sessionid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.sessionid_)}},
+    // float x = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 63, 0, PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.x_)}},
+    // float y = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 63, 0, PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.y_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 sessionId = 1;
+    {PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.sessionid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // float x = 2;
+    {PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.x_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float y = 3;
+    {PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.y_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float z = 4;
+    {PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.z_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void SC_ADD_PACKET::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.SC_ADD_PACKET)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.sessionid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.z_) -
+      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.z_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SC_ADD_PACKET::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SC_ADD_PACKET& this_ = static_cast<const SC_ADD_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SC_ADD_PACKET::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SC_ADD_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:Protocol.SC_ADD_PACKET)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 sessionId = 1;
+          if (this_._internal_sessionid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_sessionid(), target);
+          }
+
+          // float x = 2;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                2, this_._internal_x(), target);
+          }
+
+          // float y = 3;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                3, this_._internal_y(), target);
+          }
+
+          // float z = 4;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                4, this_._internal_z(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:Protocol.SC_ADD_PACKET)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SC_ADD_PACKET::ByteSizeLong(const MessageLite& base) {
+          const SC_ADD_PACKET& this_ = static_cast<const SC_ADD_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SC_ADD_PACKET::ByteSizeLong() const {
+          const SC_ADD_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:Protocol.SC_ADD_PACKET)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 sessionId = 1;
+            if (this_._internal_sessionid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_sessionid());
+            }
+            // float x = 2;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
+              total_size += 5;
+            }
+            // float y = 3;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
+              total_size += 5;
+            }
+            // float z = 4;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
+              total_size += 5;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SC_ADD_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SC_ADD_PACKET*>(&to_msg);
+  auto& from = static_cast<const SC_ADD_PACKET&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.SC_ADD_PACKET)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_sessionid() != 0) {
+    _this->_impl_.sessionid_ = from._impl_.sessionid_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_x()) != 0) {
+    _this->_impl_.x_ = from._impl_.x_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_y()) != 0) {
+    _this->_impl_.y_ = from._impl_.y_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_z()) != 0) {
+    _this->_impl_.z_ = from._impl_.z_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_ADD_PACKET::CopyFrom(const SC_ADD_PACKET& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.SC_ADD_PACKET)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SC_ADD_PACKET::InternalSwap(SC_ADD_PACKET* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.z_)
+      + sizeof(SC_ADD_PACKET::_impl_.z_)
+      - PROTOBUF_FIELD_OFFSET(SC_ADD_PACKET, _impl_.sessionid_)>(
           reinterpret_cast<char*>(&_impl_.sessionid_),
           reinterpret_cast<char*>(&other->_impl_.sessionid_));
 }
 
-::google::protobuf::Metadata CS_MOVE_PACKET::GetMetadata() const {
+::google::protobuf::Metadata SC_ADD_PACKET::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -690,9 +1206,9 @@ inline void SC_MOVE_PACKET::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, sessionid_),
            0,
-           offsetof(Impl_, z_) -
+           offsetof(Impl_, yaw_) -
                offsetof(Impl_, sessionid_) +
-               sizeof(Impl_::z_));
+               sizeof(Impl_::yaw_));
 }
 SC_MOVE_PACKET::~SC_MOVE_PACKET() {
   // @@protoc_insertion_point(destructor:Protocol.SC_MOVE_PACKET)
@@ -741,15 +1257,15 @@ const ::google::protobuf::internal::ClassData* SC_MOVE_PACKET::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 0, 2> SC_MOVE_PACKET::_table_ = {
+const ::_pbi::TcParseTable<3, 5, 0, 0, 2> SC_MOVE_PACKET::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    5, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967264,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    5,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -759,33 +1275,42 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> SC_MOVE_PACKET::_table_ = {
     ::_pbi::TcParser::GetTable<::Protocol::SC_MOVE_PACKET>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 z = 4;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_MOVE_PACKET, _impl_.z_), 63>(),
-     {32, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.z_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // int32 sessionId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_MOVE_PACKET, _impl_.sessionid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.sessionid_)}},
-    // int32 x = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_MOVE_PACKET, _impl_.x_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.x_)}},
-    // int32 y = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_MOVE_PACKET, _impl_.y_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.y_)}},
+    // float x = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.x_)}},
+    // float y = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.y_)}},
+    // float z = 4;
+    {::_pbi::TcParser::FastF32S1,
+     {37, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.z_)}},
+    // float yaw = 5;
+    {::_pbi::TcParser::FastF32S1,
+     {45, 63, 0, PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.yaw_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
     // int32 sessionId = 1;
     {PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.sessionid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 x = 2;
+    // float x = 2;
     {PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.x_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 y = 3;
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float y = 3;
     {PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.y_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 z = 4;
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float z = 4;
     {PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.z_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float yaw = 5;
+    {PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.yaw_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
   }},
   // no aux_entries
   {{
@@ -800,8 +1325,8 @@ PROTOBUF_NOINLINE void SC_MOVE_PACKET::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.sessionid_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.z_) -
-      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.z_));
+      reinterpret_cast<char*>(&_impl_.yaw_) -
+      reinterpret_cast<char*>(&_impl_.sessionid_)) + sizeof(_impl_.yaw_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -827,25 +1352,32 @@ PROTOBUF_NOINLINE void SC_MOVE_PACKET::Clear() {
                     stream, this_._internal_sessionid(), target);
           }
 
-          // int32 x = 2;
-          if (this_._internal_x() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_x(), target);
+          // float x = 2;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                2, this_._internal_x(), target);
           }
 
-          // int32 y = 3;
-          if (this_._internal_y() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
-                    stream, this_._internal_y(), target);
+          // float y = 3;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                3, this_._internal_y(), target);
           }
 
-          // int32 z = 4;
-          if (this_._internal_z() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<4>(
-                    stream, this_._internal_z(), target);
+          // float z = 4;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                4, this_._internal_z(), target);
+          }
+
+          // float yaw = 5;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_yaw()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                5, this_._internal_yaw(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -878,20 +1410,21 @@ PROTOBUF_NOINLINE void SC_MOVE_PACKET::Clear() {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_sessionid());
             }
-            // int32 x = 2;
-            if (this_._internal_x() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_x());
+            // float x = 2;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
+              total_size += 5;
             }
-            // int32 y = 3;
-            if (this_._internal_y() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_y());
+            // float y = 3;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
+              total_size += 5;
             }
-            // int32 z = 4;
-            if (this_._internal_z() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_z());
+            // float z = 4;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
+              total_size += 5;
+            }
+            // float yaw = 5;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_yaw()) != 0) {
+              total_size += 5;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -909,14 +1442,17 @@ void SC_MOVE_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   if (from._internal_sessionid() != 0) {
     _this->_impl_.sessionid_ = from._impl_.sessionid_;
   }
-  if (from._internal_x() != 0) {
+  if (::absl::bit_cast<::uint32_t>(from._internal_x()) != 0) {
     _this->_impl_.x_ = from._impl_.x_;
   }
-  if (from._internal_y() != 0) {
+  if (::absl::bit_cast<::uint32_t>(from._internal_y()) != 0) {
     _this->_impl_.y_ = from._impl_.y_;
   }
-  if (from._internal_z() != 0) {
+  if (::absl::bit_cast<::uint32_t>(from._internal_z()) != 0) {
     _this->_impl_.z_ = from._impl_.z_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_yaw()) != 0) {
+    _this->_impl_.yaw_ = from._impl_.yaw_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -933,14 +1469,221 @@ void SC_MOVE_PACKET::InternalSwap(SC_MOVE_PACKET* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.z_)
-      + sizeof(SC_MOVE_PACKET::_impl_.z_)
+      PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.yaw_)
+      + sizeof(SC_MOVE_PACKET::_impl_.yaw_)
       - PROTOBUF_FIELD_OFFSET(SC_MOVE_PACKET, _impl_.sessionid_)>(
           reinterpret_cast<char*>(&_impl_.sessionid_),
           reinterpret_cast<char*>(&other->_impl_.sessionid_));
 }
 
 ::google::protobuf::Metadata SC_MOVE_PACKET::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SC_REMOVE_PACKET::_Internal {
+ public:
+};
+
+SC_REMOVE_PACKET::SC_REMOVE_PACKET(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Protocol.SC_REMOVE_PACKET)
+}
+SC_REMOVE_PACKET::SC_REMOVE_PACKET(
+    ::google::protobuf::Arena* arena, const SC_REMOVE_PACKET& from)
+    : SC_REMOVE_PACKET(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE SC_REMOVE_PACKET::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void SC_REMOVE_PACKET::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.ssessionid_ = {};
+}
+SC_REMOVE_PACKET::~SC_REMOVE_PACKET() {
+  // @@protoc_insertion_point(destructor:Protocol.SC_REMOVE_PACKET)
+  SharedDtor(*this);
+}
+inline void SC_REMOVE_PACKET::SharedDtor(MessageLite& self) {
+  SC_REMOVE_PACKET& this_ = static_cast<SC_REMOVE_PACKET&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* SC_REMOVE_PACKET::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SC_REMOVE_PACKET(arena);
+}
+constexpr auto SC_REMOVE_PACKET::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SC_REMOVE_PACKET),
+                                            alignof(SC_REMOVE_PACKET));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SC_REMOVE_PACKET::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SC_REMOVE_PACKET_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SC_REMOVE_PACKET::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SC_REMOVE_PACKET>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SC_REMOVE_PACKET::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SC_REMOVE_PACKET>(), &SC_REMOVE_PACKET::ByteSizeLong,
+            &SC_REMOVE_PACKET::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SC_REMOVE_PACKET, _impl_._cached_size_),
+        false,
+    },
+    &SC_REMOVE_PACKET::kDescriptorMethods,
+    &descriptor_table_Protocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SC_REMOVE_PACKET::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> SC_REMOVE_PACKET::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Protocol::SC_REMOVE_PACKET>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 ssessionId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SC_REMOVE_PACKET, _impl_.ssessionid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SC_REMOVE_PACKET, _impl_.ssessionid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 ssessionId = 1;
+    {PROTOBUF_FIELD_OFFSET(SC_REMOVE_PACKET, _impl_.ssessionid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void SC_REMOVE_PACKET::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.SC_REMOVE_PACKET)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.ssessionid_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SC_REMOVE_PACKET::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SC_REMOVE_PACKET& this_ = static_cast<const SC_REMOVE_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SC_REMOVE_PACKET::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SC_REMOVE_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:Protocol.SC_REMOVE_PACKET)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 ssessionId = 1;
+          if (this_._internal_ssessionid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_ssessionid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:Protocol.SC_REMOVE_PACKET)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SC_REMOVE_PACKET::ByteSizeLong(const MessageLite& base) {
+          const SC_REMOVE_PACKET& this_ = static_cast<const SC_REMOVE_PACKET&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SC_REMOVE_PACKET::ByteSizeLong() const {
+          const SC_REMOVE_PACKET& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:Protocol.SC_REMOVE_PACKET)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 ssessionId = 1;
+            if (this_._internal_ssessionid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_ssessionid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SC_REMOVE_PACKET::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SC_REMOVE_PACKET*>(&to_msg);
+  auto& from = static_cast<const SC_REMOVE_PACKET&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.SC_REMOVE_PACKET)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_ssessionid() != 0) {
+    _this->_impl_.ssessionid_ = from._impl_.ssessionid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_REMOVE_PACKET::CopyFrom(const SC_REMOVE_PACKET& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.SC_REMOVE_PACKET)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SC_REMOVE_PACKET::InternalSwap(SC_REMOVE_PACKET* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.ssessionid_, other->_impl_.ssessionid_);
+}
+
+::google::protobuf::Metadata SC_REMOVE_PACKET::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

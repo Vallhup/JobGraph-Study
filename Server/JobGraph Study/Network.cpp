@@ -1,8 +1,9 @@
 #include "Network.h"
+#include "Protocol.hpp"
 #include <iostream>
 
 Network::Network(short port, int size)
-	: _ioCtx(1), _workGuard(asio::make_work_guard(_ioCtx)),
+	: _ioCtx(4), _workGuard(asio::make_work_guard(_ioCtx)),
 	_listener(_ioCtx, port), _nextId(0)
 {
 }
@@ -15,13 +16,12 @@ void Network::Start()
 {
 	_listener.Start(this);
 
-	for (int i = 0; i < 1; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		_workers.emplace_back(
 			[this]()
 			{
 				_ioCtx.run();
-				std::cout << "[io_context] stopped? " << _ioCtx.stopped() << std::endl;
 			});
 	}
 }
@@ -41,7 +41,13 @@ void Network::Stop()
 
 void Network::Send(int id, const void* data)
 {
-	// TODO : id로 session 찾아서 Send 함수 호출
+	std::lock_guard lock{ _mtx };
+	auto it = _sessions.find(id);
+	if (it != _sessions.end())
+	{
+		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
+		it->second->Send(data, header->size);
+	}
 }
 
 void Network::QueuePacket(int id, const void* data)

@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Framework::Framework(size_t size)
-	: _game(size), _network(7777, size), _running(false)
+	: game(size), network(7000, size), _running(false)
 {
 }
 
@@ -12,7 +12,7 @@ void Framework::Start()
 	SetConsoleCtrlHandler(ConsoleHandler, TRUE);
 
 	_running = true;
-	_network.Start();
+	network.Start();
 	
 	const float dT = 1.0f / 60.0f;
 	auto prev = steady_clock::now();
@@ -24,12 +24,12 @@ void Framework::Start()
 		if (elapsed >= dT)
 		{
 			prev = now;
-			_game.Update(dT);
+			game.Update(dT);
 		}
 	}
 
-	_network.Stop();
-	_game.threadPool.Stop();
+	network.Stop();
+	game.threadPool.Stop();
 }
 
 void Framework::Stop()

@@ -132,10 +132,10 @@
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentStorage.cpp" />
-    <ClCompile Include="ConnectEventSystem.cpp" />
+    <ClCompile Include="LoginEventSystem.cpp" />
     <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EventConverter.cpp" />
+    <ClCompile Include="NetworkHandler.cpp" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -145,7 +145,6 @@
     <ClCompile Include="JobGraph.cpp" />
     <ClCompile Include="Listener.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MoveEventSystem.cpp" />
     <ClCompile Include="MovementSystem.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="ObjectPoolManager.cpp" />
@@ -166,12 +165,12 @@
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentStorage.h" />
-    <ClInclude Include="ConnectEventSystem.h" />
+    <ClInclude Include="LoginEventSystem.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ECS.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="EventConverter.h" />
+    <ClInclude Include="NetworkHandler.h" />
     <ClInclude Include="EventQueue.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
@@ -182,7 +181,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LF_Stack.h" />
     <ClInclude Include="Listener.h" />
-    <ClInclude Include="MoveEventSystem.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="MovementSystem.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="ObjectPool.hpp" />

@@ -20,6 +20,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -60,9 +61,18 @@ extern CS_LOGIN_PACKETDefaultTypeInternal _CS_LOGIN_PACKET_default_instance_;
 class CS_MOVE_PACKET;
 struct CS_MOVE_PACKETDefaultTypeInternal;
 extern CS_MOVE_PACKETDefaultTypeInternal _CS_MOVE_PACKET_default_instance_;
+class SC_ADD_PACKET;
+struct SC_ADD_PACKETDefaultTypeInternal;
+extern SC_ADD_PACKETDefaultTypeInternal _SC_ADD_PACKET_default_instance_;
+class SC_LOGIN_PACKET;
+struct SC_LOGIN_PACKETDefaultTypeInternal;
+extern SC_LOGIN_PACKETDefaultTypeInternal _SC_LOGIN_PACKET_default_instance_;
 class SC_MOVE_PACKET;
 struct SC_MOVE_PACKETDefaultTypeInternal;
 extern SC_MOVE_PACKETDefaultTypeInternal _SC_MOVE_PACKET_default_instance_;
+class SC_REMOVE_PACKET;
+struct SC_REMOVE_PACKETDefaultTypeInternal;
+extern SC_REMOVE_PACKETDefaultTypeInternal _SC_REMOVE_PACKET_default_instance_;
 }  // namespace Protocol
 namespace google {
 namespace protobuf {
@@ -74,6 +84,196 @@ namespace Protocol {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class SC_REMOVE_PACKET final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Protocol.SC_REMOVE_PACKET) */ {
+ public:
+  inline SC_REMOVE_PACKET() : SC_REMOVE_PACKET(nullptr) {}
+  ~SC_REMOVE_PACKET() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SC_REMOVE_PACKET* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SC_REMOVE_PACKET));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SC_REMOVE_PACKET(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SC_REMOVE_PACKET(const SC_REMOVE_PACKET& from) : SC_REMOVE_PACKET(nullptr, from) {}
+  inline SC_REMOVE_PACKET(SC_REMOVE_PACKET&& from) noexcept
+      : SC_REMOVE_PACKET(nullptr, std::move(from)) {}
+  inline SC_REMOVE_PACKET& operator=(const SC_REMOVE_PACKET& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SC_REMOVE_PACKET& operator=(SC_REMOVE_PACKET&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SC_REMOVE_PACKET& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SC_REMOVE_PACKET* internal_default_instance() {
+    return reinterpret_cast<const SC_REMOVE_PACKET*>(
+        &_SC_REMOVE_PACKET_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 5;
+  friend void swap(SC_REMOVE_PACKET& a, SC_REMOVE_PACKET& b) { a.Swap(&b); }
+  inline void Swap(SC_REMOVE_PACKET* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SC_REMOVE_PACKET* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SC_REMOVE_PACKET* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SC_REMOVE_PACKET>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SC_REMOVE_PACKET& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SC_REMOVE_PACKET& from) { SC_REMOVE_PACKET::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SC_REMOVE_PACKET* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "Protocol.SC_REMOVE_PACKET"; }
+
+ protected:
+  explicit SC_REMOVE_PACKET(::google::protobuf::Arena* arena);
+  SC_REMOVE_PACKET(::google::protobuf::Arena* arena, const SC_REMOVE_PACKET& from);
+  SC_REMOVE_PACKET(::google::protobuf::Arena* arena, SC_REMOVE_PACKET&& from) noexcept
+      : SC_REMOVE_PACKET(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kSsessionIdFieldNumber = 1,
+  };
+  // int32 ssessionId = 1;
+  void clear_ssessionid() ;
+  ::int32_t ssessionid() const;
+  void set_ssessionid(::int32_t value);
+
+  private:
+  ::int32_t _internal_ssessionid() const;
+  void _internal_set_ssessionid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:Protocol.SC_REMOVE_PACKET)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SC_REMOVE_PACKET& from_msg);
+    ::int32_t ssessionid_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
 // -------------------------------------------------------------------
 
 class SC_MOVE_PACKET final : public ::google::protobuf::Message
@@ -135,7 +335,7 @@ class SC_MOVE_PACKET final : public ::google::protobuf::Message
     return reinterpret_cast<const SC_MOVE_PACKET*>(
         &_SC_MOVE_PACKET_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(SC_MOVE_PACKET& a, SC_MOVE_PACKET& b) { a.Swap(&b); }
   inline void Swap(SC_MOVE_PACKET* other) {
     if (other == this) return;
@@ -226,6 +426,7 @@ class SC_MOVE_PACKET final : public ::google::protobuf::Message
     kXFieldNumber = 2,
     kYFieldNumber = 3,
     kZFieldNumber = 4,
+    kYawFieldNumber = 5,
   };
   // int32 sessionId = 1;
   void clear_sessionid() ;
@@ -237,37 +438,464 @@ class SC_MOVE_PACKET final : public ::google::protobuf::Message
   void _internal_set_sessionid(::int32_t value);
 
   public:
-  // int32 x = 2;
+  // float x = 2;
   void clear_x() ;
-  ::int32_t x() const;
-  void set_x(::int32_t value);
+  float x() const;
+  void set_x(float value);
 
   private:
-  ::int32_t _internal_x() const;
-  void _internal_set_x(::int32_t value);
+  float _internal_x() const;
+  void _internal_set_x(float value);
 
   public:
-  // int32 y = 3;
+  // float y = 3;
   void clear_y() ;
-  ::int32_t y() const;
-  void set_y(::int32_t value);
+  float y() const;
+  void set_y(float value);
 
   private:
-  ::int32_t _internal_y() const;
-  void _internal_set_y(::int32_t value);
+  float _internal_y() const;
+  void _internal_set_y(float value);
 
   public:
-  // int32 z = 4;
+  // float z = 4;
   void clear_z() ;
-  ::int32_t z() const;
-  void set_z(::int32_t value);
+  float z() const;
+  void set_z(float value);
 
   private:
-  ::int32_t _internal_z() const;
-  void _internal_set_z(::int32_t value);
+  float _internal_z() const;
+  void _internal_set_z(float value);
+
+  public:
+  // float yaw = 5;
+  void clear_yaw() ;
+  float yaw() const;
+  void set_yaw(float value);
+
+  private:
+  float _internal_yaw() const;
+  void _internal_set_yaw(float value);
 
   public:
   // @@protoc_insertion_point(class_scope:Protocol.SC_MOVE_PACKET)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 5, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SC_MOVE_PACKET& from_msg);
+    ::int32_t sessionid_;
+    float x_;
+    float y_;
+    float z_;
+    float yaw_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SC_LOGIN_PACKET final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Protocol.SC_LOGIN_PACKET) */ {
+ public:
+  inline SC_LOGIN_PACKET() : SC_LOGIN_PACKET(nullptr) {}
+  ~SC_LOGIN_PACKET() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SC_LOGIN_PACKET* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SC_LOGIN_PACKET));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SC_LOGIN_PACKET(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SC_LOGIN_PACKET(const SC_LOGIN_PACKET& from) : SC_LOGIN_PACKET(nullptr, from) {}
+  inline SC_LOGIN_PACKET(SC_LOGIN_PACKET&& from) noexcept
+      : SC_LOGIN_PACKET(nullptr, std::move(from)) {}
+  inline SC_LOGIN_PACKET& operator=(const SC_LOGIN_PACKET& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SC_LOGIN_PACKET& operator=(SC_LOGIN_PACKET&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SC_LOGIN_PACKET& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SC_LOGIN_PACKET* internal_default_instance() {
+    return reinterpret_cast<const SC_LOGIN_PACKET*>(
+        &_SC_LOGIN_PACKET_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(SC_LOGIN_PACKET& a, SC_LOGIN_PACKET& b) { a.Swap(&b); }
+  inline void Swap(SC_LOGIN_PACKET* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SC_LOGIN_PACKET* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SC_LOGIN_PACKET* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SC_LOGIN_PACKET>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SC_LOGIN_PACKET& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SC_LOGIN_PACKET& from) { SC_LOGIN_PACKET::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SC_LOGIN_PACKET* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "Protocol.SC_LOGIN_PACKET"; }
+
+ protected:
+  explicit SC_LOGIN_PACKET(::google::protobuf::Arena* arena);
+  SC_LOGIN_PACKET(::google::protobuf::Arena* arena, const SC_LOGIN_PACKET& from);
+  SC_LOGIN_PACKET(::google::protobuf::Arena* arena, SC_LOGIN_PACKET&& from) noexcept
+      : SC_LOGIN_PACKET(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kSessionIdFieldNumber = 1,
+  };
+  // int32 sessionId = 1;
+  void clear_sessionid() ;
+  ::int32_t sessionid() const;
+  void set_sessionid(::int32_t value);
+
+  private:
+  ::int32_t _internal_sessionid() const;
+  void _internal_set_sessionid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:Protocol.SC_LOGIN_PACKET)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SC_LOGIN_PACKET& from_msg);
+    ::int32_t sessionid_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SC_ADD_PACKET final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Protocol.SC_ADD_PACKET) */ {
+ public:
+  inline SC_ADD_PACKET() : SC_ADD_PACKET(nullptr) {}
+  ~SC_ADD_PACKET() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SC_ADD_PACKET* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SC_ADD_PACKET));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SC_ADD_PACKET(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SC_ADD_PACKET(const SC_ADD_PACKET& from) : SC_ADD_PACKET(nullptr, from) {}
+  inline SC_ADD_PACKET(SC_ADD_PACKET&& from) noexcept
+      : SC_ADD_PACKET(nullptr, std::move(from)) {}
+  inline SC_ADD_PACKET& operator=(const SC_ADD_PACKET& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SC_ADD_PACKET& operator=(SC_ADD_PACKET&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SC_ADD_PACKET& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SC_ADD_PACKET* internal_default_instance() {
+    return reinterpret_cast<const SC_ADD_PACKET*>(
+        &_SC_ADD_PACKET_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(SC_ADD_PACKET& a, SC_ADD_PACKET& b) { a.Swap(&b); }
+  inline void Swap(SC_ADD_PACKET* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SC_ADD_PACKET* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SC_ADD_PACKET* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SC_ADD_PACKET>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SC_ADD_PACKET& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SC_ADD_PACKET& from) { SC_ADD_PACKET::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SC_ADD_PACKET* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "Protocol.SC_ADD_PACKET"; }
+
+ protected:
+  explicit SC_ADD_PACKET(::google::protobuf::Arena* arena);
+  SC_ADD_PACKET(::google::protobuf::Arena* arena, const SC_ADD_PACKET& from);
+  SC_ADD_PACKET(::google::protobuf::Arena* arena, SC_ADD_PACKET&& from) noexcept
+      : SC_ADD_PACKET(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kSessionIdFieldNumber = 1,
+    kXFieldNumber = 2,
+    kYFieldNumber = 3,
+    kZFieldNumber = 4,
+  };
+  // int32 sessionId = 1;
+  void clear_sessionid() ;
+  ::int32_t sessionid() const;
+  void set_sessionid(::int32_t value);
+
+  private:
+  ::int32_t _internal_sessionid() const;
+  void _internal_set_sessionid(::int32_t value);
+
+  public:
+  // float x = 2;
+  void clear_x() ;
+  float x() const;
+  void set_x(float value);
+
+  private:
+  float _internal_x() const;
+  void _internal_set_x(float value);
+
+  public:
+  // float y = 3;
+  void clear_y() ;
+  float y() const;
+  void set_y(float value);
+
+  private:
+  float _internal_y() const;
+  void _internal_set_y(float value);
+
+  public:
+  // float z = 4;
+  void clear_z() ;
+  float z() const;
+  void set_z(float value);
+
+  private:
+  float _internal_z() const;
+  void _internal_set_z(float value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:Protocol.SC_ADD_PACKET)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -289,11 +917,11 @@ class SC_MOVE_PACKET final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const SC_MOVE_PACKET& from_msg);
+                          const SC_ADD_PACKET& from_msg);
     ::int32_t sessionid_;
-    ::int32_t x_;
-    ::int32_t y_;
-    ::int32_t z_;
+    float x_;
+    float y_;
+    float z_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -448,38 +1076,49 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSessionIdFieldNumber = 1,
-    kDxFieldNumber = 2,
-    kDyFieldNumber = 3,
+    kInputXFieldNumber = 1,
+    kInputZFieldNumber = 2,
+    kSequenceFieldNumber = 4,
+    kYawFieldNumber = 3,
   };
-  // int32 sessionId = 1;
-  void clear_sessionid() ;
-  ::int32_t sessionid() const;
-  void set_sessionid(::int32_t value);
+  // int32 inputX = 1;
+  void clear_inputx() ;
+  ::int32_t inputx() const;
+  void set_inputx(::int32_t value);
 
   private:
-  ::int32_t _internal_sessionid() const;
-  void _internal_set_sessionid(::int32_t value);
+  ::int32_t _internal_inputx() const;
+  void _internal_set_inputx(::int32_t value);
 
   public:
-  // int32 dx = 2;
-  void clear_dx() ;
-  ::int32_t dx() const;
-  void set_dx(::int32_t value);
+  // int32 inputZ = 2;
+  void clear_inputz() ;
+  ::int32_t inputz() const;
+  void set_inputz(::int32_t value);
 
   private:
-  ::int32_t _internal_dx() const;
-  void _internal_set_dx(::int32_t value);
+  ::int32_t _internal_inputz() const;
+  void _internal_set_inputz(::int32_t value);
 
   public:
-  // int32 dy = 3;
-  void clear_dy() ;
-  ::int32_t dy() const;
-  void set_dy(::int32_t value);
+  // int64 sequence = 4;
+  void clear_sequence() ;
+  ::int64_t sequence() const;
+  void set_sequence(::int64_t value);
 
   private:
-  ::int32_t _internal_dy() const;
-  void _internal_set_dy(::int32_t value);
+  ::int64_t _internal_sequence() const;
+  void _internal_set_sequence(::int64_t value);
+
+  public:
+  // float yaw = 3;
+  void clear_yaw() ;
+  float yaw() const;
+  void set_yaw(float value);
+
+  private:
+  float _internal_yaw() const;
+  void _internal_set_yaw(float value);
 
   public:
   // @@protoc_insertion_point(class_scope:Protocol.CS_MOVE_PACKET)
@@ -487,7 +1126,7 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -505,9 +1144,10 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const CS_MOVE_PACKET& from_msg);
-    ::int32_t sessionid_;
-    ::int32_t dx_;
-    ::int32_t dy_;
+    ::int32_t inputx_;
+    ::int32_t inputz_;
+    ::int64_t sequence_;
+    float yaw_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -516,11 +1156,10 @@ class CS_MOVE_PACKET final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class CS_LOGIN_PACKET final : public ::google::protobuf::Message
+class CS_LOGIN_PACKET final : public ::google::protobuf::internal::ZeroFieldsBase
 /* @@protoc_insertion_point(class_definition:Protocol.CS_LOGIN_PACKET) */ {
  public:
   inline CS_LOGIN_PACKET() : CS_LOGIN_PACKET(nullptr) {}
-  ~CS_LOGIN_PACKET() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(CS_LOGIN_PACKET* msg, std::destroying_delete_t) {
@@ -594,49 +1233,21 @@ class CS_LOGIN_PACKET final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   CS_LOGIN_PACKET* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<CS_LOGIN_PACKET>(arena);
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<CS_LOGIN_PACKET>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const CS_LOGIN_PACKET& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const CS_LOGIN_PACKET& from) { CS_LOGIN_PACKET::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const CS_LOGIN_PACKET& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const CS_LOGIN_PACKET& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
 
   public:
   bool IsInitialized() const {
     return true;
   }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(CS_LOGIN_PACKET* other);
  private:
   template <typename T>
   friend ::absl::string_view(
@@ -661,25 +1272,12 @@ class CS_LOGIN_PACKET final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  enum : int {
-    kSessionIdFieldNumber = 1,
-  };
-  // int32 sessionId = 1;
-  void clear_sessionid() ;
-  ::int32_t sessionid() const;
-  void set_sessionid(::int32_t value);
-
-  private:
-  ::int32_t _internal_sessionid() const;
-  void _internal_set_sessionid(::int32_t value);
-
-  public:
   // @@protoc_insertion_point(class_scope:Protocol.CS_LOGIN_PACKET)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      0, 0, 0,
       0, 2>
       _table_;
 
@@ -697,11 +1295,8 @@ class CS_LOGIN_PACKET final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const CS_LOGIN_PACKET& from_msg);
-    ::int32_t sessionid_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
   friend struct ::TableStruct_Protocol_2eproto;
 };
 
@@ -721,96 +1316,214 @@ class CS_LOGIN_PACKET final : public ::google::protobuf::Message
 
 // CS_LOGIN_PACKET
 
+// -------------------------------------------------------------------
+
+// CS_MOVE_PACKET
+
+// int32 inputX = 1;
+inline void CS_MOVE_PACKET::clear_inputx() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.inputx_ = 0;
+}
+inline ::int32_t CS_MOVE_PACKET::inputx() const {
+  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.inputX)
+  return _internal_inputx();
+}
+inline void CS_MOVE_PACKET::set_inputx(::int32_t value) {
+  _internal_set_inputx(value);
+  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.inputX)
+}
+inline ::int32_t CS_MOVE_PACKET::_internal_inputx() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.inputx_;
+}
+inline void CS_MOVE_PACKET::_internal_set_inputx(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.inputx_ = value;
+}
+
+// int32 inputZ = 2;
+inline void CS_MOVE_PACKET::clear_inputz() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.inputz_ = 0;
+}
+inline ::int32_t CS_MOVE_PACKET::inputz() const {
+  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.inputZ)
+  return _internal_inputz();
+}
+inline void CS_MOVE_PACKET::set_inputz(::int32_t value) {
+  _internal_set_inputz(value);
+  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.inputZ)
+}
+inline ::int32_t CS_MOVE_PACKET::_internal_inputz() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.inputz_;
+}
+inline void CS_MOVE_PACKET::_internal_set_inputz(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.inputz_ = value;
+}
+
+// float yaw = 3;
+inline void CS_MOVE_PACKET::clear_yaw() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.yaw_ = 0;
+}
+inline float CS_MOVE_PACKET::yaw() const {
+  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.yaw)
+  return _internal_yaw();
+}
+inline void CS_MOVE_PACKET::set_yaw(float value) {
+  _internal_set_yaw(value);
+  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.yaw)
+}
+inline float CS_MOVE_PACKET::_internal_yaw() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.yaw_;
+}
+inline void CS_MOVE_PACKET::_internal_set_yaw(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.yaw_ = value;
+}
+
+// int64 sequence = 4;
+inline void CS_MOVE_PACKET::clear_sequence() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sequence_ = ::int64_t{0};
+}
+inline ::int64_t CS_MOVE_PACKET::sequence() const {
+  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.sequence)
+  return _internal_sequence();
+}
+inline void CS_MOVE_PACKET::set_sequence(::int64_t value) {
+  _internal_set_sequence(value);
+  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.sequence)
+}
+inline ::int64_t CS_MOVE_PACKET::_internal_sequence() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.sequence_;
+}
+inline void CS_MOVE_PACKET::_internal_set_sequence(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sequence_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SC_LOGIN_PACKET
+
 // int32 sessionId = 1;
-inline void CS_LOGIN_PACKET::clear_sessionid() {
+inline void SC_LOGIN_PACKET::clear_sessionid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sessionid_ = 0;
 }
-inline ::int32_t CS_LOGIN_PACKET::sessionid() const {
-  // @@protoc_insertion_point(field_get:Protocol.CS_LOGIN_PACKET.sessionId)
+inline ::int32_t SC_LOGIN_PACKET::sessionid() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_LOGIN_PACKET.sessionId)
   return _internal_sessionid();
 }
-inline void CS_LOGIN_PACKET::set_sessionid(::int32_t value) {
+inline void SC_LOGIN_PACKET::set_sessionid(::int32_t value) {
   _internal_set_sessionid(value);
-  // @@protoc_insertion_point(field_set:Protocol.CS_LOGIN_PACKET.sessionId)
+  // @@protoc_insertion_point(field_set:Protocol.SC_LOGIN_PACKET.sessionId)
 }
-inline ::int32_t CS_LOGIN_PACKET::_internal_sessionid() const {
+inline ::int32_t SC_LOGIN_PACKET::_internal_sessionid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.sessionid_;
 }
-inline void CS_LOGIN_PACKET::_internal_set_sessionid(::int32_t value) {
+inline void SC_LOGIN_PACKET::_internal_set_sessionid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sessionid_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// CS_MOVE_PACKET
+// SC_ADD_PACKET
 
 // int32 sessionId = 1;
-inline void CS_MOVE_PACKET::clear_sessionid() {
+inline void SC_ADD_PACKET::clear_sessionid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sessionid_ = 0;
 }
-inline ::int32_t CS_MOVE_PACKET::sessionid() const {
-  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.sessionId)
+inline ::int32_t SC_ADD_PACKET::sessionid() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_ADD_PACKET.sessionId)
   return _internal_sessionid();
 }
-inline void CS_MOVE_PACKET::set_sessionid(::int32_t value) {
+inline void SC_ADD_PACKET::set_sessionid(::int32_t value) {
   _internal_set_sessionid(value);
-  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.sessionId)
+  // @@protoc_insertion_point(field_set:Protocol.SC_ADD_PACKET.sessionId)
 }
-inline ::int32_t CS_MOVE_PACKET::_internal_sessionid() const {
+inline ::int32_t SC_ADD_PACKET::_internal_sessionid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.sessionid_;
 }
-inline void CS_MOVE_PACKET::_internal_set_sessionid(::int32_t value) {
+inline void SC_ADD_PACKET::_internal_set_sessionid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sessionid_ = value;
 }
 
-// int32 dx = 2;
-inline void CS_MOVE_PACKET::clear_dx() {
+// float x = 2;
+inline void SC_ADD_PACKET::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.dx_ = 0;
+  _impl_.x_ = 0;
 }
-inline ::int32_t CS_MOVE_PACKET::dx() const {
-  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.dx)
-  return _internal_dx();
+inline float SC_ADD_PACKET::x() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_ADD_PACKET.x)
+  return _internal_x();
 }
-inline void CS_MOVE_PACKET::set_dx(::int32_t value) {
-  _internal_set_dx(value);
-  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.dx)
+inline void SC_ADD_PACKET::set_x(float value) {
+  _internal_set_x(value);
+  // @@protoc_insertion_point(field_set:Protocol.SC_ADD_PACKET.x)
 }
-inline ::int32_t CS_MOVE_PACKET::_internal_dx() const {
+inline float SC_ADD_PACKET::_internal_x() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.dx_;
+  return _impl_.x_;
 }
-inline void CS_MOVE_PACKET::_internal_set_dx(::int32_t value) {
+inline void SC_ADD_PACKET::_internal_set_x(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.dx_ = value;
+  _impl_.x_ = value;
 }
 
-// int32 dy = 3;
-inline void CS_MOVE_PACKET::clear_dy() {
+// float y = 3;
+inline void SC_ADD_PACKET::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.dy_ = 0;
+  _impl_.y_ = 0;
 }
-inline ::int32_t CS_MOVE_PACKET::dy() const {
-  // @@protoc_insertion_point(field_get:Protocol.CS_MOVE_PACKET.dy)
-  return _internal_dy();
+inline float SC_ADD_PACKET::y() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_ADD_PACKET.y)
+  return _internal_y();
 }
-inline void CS_MOVE_PACKET::set_dy(::int32_t value) {
-  _internal_set_dy(value);
-  // @@protoc_insertion_point(field_set:Protocol.CS_MOVE_PACKET.dy)
+inline void SC_ADD_PACKET::set_y(float value) {
+  _internal_set_y(value);
+  // @@protoc_insertion_point(field_set:Protocol.SC_ADD_PACKET.y)
 }
-inline ::int32_t CS_MOVE_PACKET::_internal_dy() const {
+inline float SC_ADD_PACKET::_internal_y() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.dy_;
+  return _impl_.y_;
 }
-inline void CS_MOVE_PACKET::_internal_set_dy(::int32_t value) {
+inline void SC_ADD_PACKET::_internal_set_y(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.dy_ = value;
+  _impl_.y_ = value;
+}
+
+// float z = 4;
+inline void SC_ADD_PACKET::clear_z() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = 0;
+}
+inline float SC_ADD_PACKET::z() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_ADD_PACKET.z)
+  return _internal_z();
+}
+inline void SC_ADD_PACKET::set_z(float value) {
+  _internal_set_z(value);
+  // @@protoc_insertion_point(field_set:Protocol.SC_ADD_PACKET.z)
+}
+inline float SC_ADD_PACKET::_internal_z() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.z_;
+}
+inline void SC_ADD_PACKET::_internal_set_z(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -839,70 +1552,118 @@ inline void SC_MOVE_PACKET::_internal_set_sessionid(::int32_t value) {
   _impl_.sessionid_ = value;
 }
 
-// int32 x = 2;
+// float x = 2;
 inline void SC_MOVE_PACKET::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
 }
-inline ::int32_t SC_MOVE_PACKET::x() const {
+inline float SC_MOVE_PACKET::x() const {
   // @@protoc_insertion_point(field_get:Protocol.SC_MOVE_PACKET.x)
   return _internal_x();
 }
-inline void SC_MOVE_PACKET::set_x(::int32_t value) {
+inline void SC_MOVE_PACKET::set_x(float value) {
   _internal_set_x(value);
   // @@protoc_insertion_point(field_set:Protocol.SC_MOVE_PACKET.x)
 }
-inline ::int32_t SC_MOVE_PACKET::_internal_x() const {
+inline float SC_MOVE_PACKET::_internal_x() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.x_;
 }
-inline void SC_MOVE_PACKET::_internal_set_x(::int32_t value) {
+inline void SC_MOVE_PACKET::_internal_set_x(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = value;
 }
 
-// int32 y = 3;
+// float y = 3;
 inline void SC_MOVE_PACKET::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
 }
-inline ::int32_t SC_MOVE_PACKET::y() const {
+inline float SC_MOVE_PACKET::y() const {
   // @@protoc_insertion_point(field_get:Protocol.SC_MOVE_PACKET.y)
   return _internal_y();
 }
-inline void SC_MOVE_PACKET::set_y(::int32_t value) {
+inline void SC_MOVE_PACKET::set_y(float value) {
   _internal_set_y(value);
   // @@protoc_insertion_point(field_set:Protocol.SC_MOVE_PACKET.y)
 }
-inline ::int32_t SC_MOVE_PACKET::_internal_y() const {
+inline float SC_MOVE_PACKET::_internal_y() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.y_;
 }
-inline void SC_MOVE_PACKET::_internal_set_y(::int32_t value) {
+inline void SC_MOVE_PACKET::_internal_set_y(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = value;
 }
 
-// int32 z = 4;
+// float z = 4;
 inline void SC_MOVE_PACKET::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
 }
-inline ::int32_t SC_MOVE_PACKET::z() const {
+inline float SC_MOVE_PACKET::z() const {
   // @@protoc_insertion_point(field_get:Protocol.SC_MOVE_PACKET.z)
   return _internal_z();
 }
-inline void SC_MOVE_PACKET::set_z(::int32_t value) {
+inline void SC_MOVE_PACKET::set_z(float value) {
   _internal_set_z(value);
   // @@protoc_insertion_point(field_set:Protocol.SC_MOVE_PACKET.z)
 }
-inline ::int32_t SC_MOVE_PACKET::_internal_z() const {
+inline float SC_MOVE_PACKET::_internal_z() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.z_;
 }
-inline void SC_MOVE_PACKET::_internal_set_z(::int32_t value) {
+inline void SC_MOVE_PACKET::_internal_set_z(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = value;
+}
+
+// float yaw = 5;
+inline void SC_MOVE_PACKET::clear_yaw() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.yaw_ = 0;
+}
+inline float SC_MOVE_PACKET::yaw() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_MOVE_PACKET.yaw)
+  return _internal_yaw();
+}
+inline void SC_MOVE_PACKET::set_yaw(float value) {
+  _internal_set_yaw(value);
+  // @@protoc_insertion_point(field_set:Protocol.SC_MOVE_PACKET.yaw)
+}
+inline float SC_MOVE_PACKET::_internal_yaw() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.yaw_;
+}
+inline void SC_MOVE_PACKET::_internal_set_yaw(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.yaw_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SC_REMOVE_PACKET
+
+// int32 ssessionId = 1;
+inline void SC_REMOVE_PACKET::clear_ssessionid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.ssessionid_ = 0;
+}
+inline ::int32_t SC_REMOVE_PACKET::ssessionid() const {
+  // @@protoc_insertion_point(field_get:Protocol.SC_REMOVE_PACKET.ssessionId)
+  return _internal_ssessionid();
+}
+inline void SC_REMOVE_PACKET::set_ssessionid(::int32_t value) {
+  _internal_set_ssessionid(value);
+  // @@protoc_insertion_point(field_set:Protocol.SC_REMOVE_PACKET.ssessionId)
+}
+inline ::int32_t SC_REMOVE_PACKET::_internal_ssessionid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.ssessionid_;
+}
+inline void SC_REMOVE_PACKET::_internal_set_ssessionid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.ssessionid_ = value;
 }
 
 #ifdef __GNUC__

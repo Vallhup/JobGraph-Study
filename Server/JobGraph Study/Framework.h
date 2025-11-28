@@ -4,6 +4,13 @@
 #include "Network.h"
 #include "EventQueue.h"
 
+struct alignas(64) PlayerState {
+	std::atomic<int> inputX{ 0 };
+	std::atomic<int> inputZ{ 0 };
+	std::atomic<float>  yaw{ 0 };
+	std::atomic<uint64_t> lastSeq{ 0 };
+};
+
 class Framework {
 public:
 	static Framework& Get()
@@ -21,12 +28,13 @@ public:
 
 	EventQueue eventQueue;
 
+	std::unordered_map<int, std::unique_ptr<PlayerState>> playerStates;
 	std::unordered_map<int, Entity> sessionToEntity;
 	std::unordered_map<Entity, int> entityToSession;
 
-private:
-	Network _network;
-	Game _game;
+	Network network;
+	Game game;
 
+private:
 	bool _running;
 };

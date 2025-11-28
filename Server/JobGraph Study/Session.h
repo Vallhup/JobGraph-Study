@@ -22,7 +22,7 @@ public:
 	void Start();
 	void Close();
 
-	void Send(const void* data, size_t size);
+	void Send(const void* data, uint16_t size);
 
 private:
 	void Recv();

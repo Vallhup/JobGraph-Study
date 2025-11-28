@@ -8,22 +8,44 @@ import "Struct.proto";
 
 message CS_LOGIN_PACKET
 {
-	int32 sessionId = 1;
 }
 
 message CS_MOVE_PACKET
 {
-	int32 sessionId = 1;
-	int32 dx = 2;
-	int32 dy = 3;
+	int32 inputX = 1;
+	int32 inputZ = 2;
+	float 
+	
+	
+	= 3;
+	int64 sequence = 4;
 }
 
 /* ------------------------------ [ Server -> Client ]  ------------------------------ */
 
+message SC_LOGIN_PACKET
+{
+	int32 sessionId = 1;
+}
+
+message SC_ADD_PACKET
+{
+	int32 sessionId = 1;
+	float x = 2;
+	float y = 3;
+	float z = 4;
+}
+
 message SC_MOVE_PACKET
 {
 	int32 sessionId = 1;
-	int32 x = 2;
-	int32 y = 3;
-	int32 z = 4;
+	float x = 2;
+	float y = 3;
+	float z = 4;
+	float yaw = 5;
+}
+
+message SC_REMOVE_PACKET
+{
+	int32 ssessionId = 1;
 }

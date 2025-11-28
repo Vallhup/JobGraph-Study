@@ -1,5 +1,4 @@
 digraph JobGraph {
-  "class ConnectEventSystem" -> "class MovementSystem";
-  "class MoveEventSystem" -> "class MovementSystem";
+  "class LoginEventSystem" -> "class MovementSystem";
   "class MovementSystem";
 }
