@@ -60,6 +60,16 @@ void Network::FlushQueued()
 	// TODO : Packet Queue ¸ðµÎ ²¨³»¼­ Send
 }
 
+void Network::Broadcast(const void* data)
+{
+	std::lock_guard lock{ _mtx };
+	for (auto& [id, session] : _sessions)
+	{
+		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
+		session->Send(data, header->size);
+	}
+}
+
 void Network::AddSession(int id, const std::shared_ptr<Session>& session)
 {
 	_sessions[id] = session;

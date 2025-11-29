@@ -4,6 +4,8 @@
 #include <vector>
 #include <DirectXMath.h>
 
+#include "AnimationManager.h"
+
 using namespace DirectX;
 
 struct Component {
@@ -23,12 +25,22 @@ struct Velocity : public Component {
 	float yaw{ 0.0f };
 };
 
-struct Collider : public Component {
-	struct Capsule {
-		XMFLOAT3 p1;
-		XMFLOAT3 p2;
-		float radius;
-	};
+struct AnimationState : public Component {
+	AnimationId id{ AnimationId::None };
+	float time{ 0.0f };
+	float speed{ 1.0f };
+	bool looping{ true };
+};
 
-	std::vector<Capsule> colliders;
+struct AnimationRef : public Component {
+	const PrebakedAnimation* anim{ nullptr };
+};
+
+struct Animator : public Component {
+	int currentFrame{ 0 };
+};
+
+struct Collider : public Component {
+	std::vector<Capsule> localCapsules;
+	std::vector<Capsule> worldCapsules;
 };

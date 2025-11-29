@@ -22,6 +22,8 @@ public:
 	void QueuePacket(int id, const void* data);
 	void FlushQueued();
 
+	void Broadcast(const void* data);
+
 private:
 	void AddSession(int id, const std::shared_ptr<Session>& session);
 	void RemoveSession(int id);

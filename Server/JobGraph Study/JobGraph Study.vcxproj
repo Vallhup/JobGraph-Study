@@ -127,8 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationSystem.cpp" />
-    <ClCompile Include="ColiderUpdateSystem.cpp" />
+    <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="AnimationRefSystem.cpp" />
+    <ClCompile Include="AnimationTimeSystem.cpp" />
+    <ClCompile Include="ColliderUpdateSystem.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentStorage.cpp" />
@@ -161,8 +163,11 @@
     <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationSystem.h" />
-    <ClInclude Include="ColiderUpdateSystem.h" />
+    <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="AnimationRefSystem.h" />
+    <ClInclude Include="AnimationTimeSystem.h" />
+    <ClInclude Include="ColliderUpdateSystem.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentStorage.h" />

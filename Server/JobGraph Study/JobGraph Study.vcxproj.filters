@@ -74,13 +74,13 @@
     <ClCompile Include="EventQueue.cpp">
       <Filter>Network\Event</Filter>
     </ClCompile>
-    <ClCompile Include="ColiderUpdateSystem.cpp">
+    <ClCompile Include="ColliderUpdateSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="CollisionSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationSystem.cpp">
+    <ClCompile Include="AnimationTimeSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
@@ -93,6 +93,10 @@
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="MoveEventSystem.cpp">
+      <Filter>ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="AnimationRefSystem.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -184,13 +188,13 @@
     <ClInclude Include="EventQueue.h">
       <Filter>Network\Event</Filter>
     </ClInclude>
-    <ClInclude Include="ColiderUpdateSystem.h">
+    <ClInclude Include="ColliderUpdateSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="CollisionSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationSystem.h">
+    <ClInclude Include="AnimationTimeSystem.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp">
@@ -207,6 +211,13 @@
     </ClInclude>
     <ClInclude Include="MoveEventSystem.h">
       <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="AnimationRefSystem.h">
+      <Filter>ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Utillity\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +277,9 @@
     </Filter>
     <Filter Include="Utillity\Math">
       <UniqueIdentifier>{6eed666f-99de-4259-861d-595e4acde9b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utillity\Collision">
+      <UniqueIdentifier>{264fe6af-0ba8-4770-8343-5ccbef068c57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

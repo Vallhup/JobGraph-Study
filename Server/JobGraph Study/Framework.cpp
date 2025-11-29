@@ -3,6 +3,7 @@
 Framework::Framework(size_t size)
 	: game(size), network(7000, size), _running(false)
 {
+	AnimationManager::Get().LoadAnimation(AnimationId::Knight_Walk, "C:/Users/Hadenpel/Knight_Walk_COLLIDER_PREBAKED.json");
 }
 
 void Framework::Start()
