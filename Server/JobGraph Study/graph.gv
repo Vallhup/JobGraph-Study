@@ -1,15 +1,18 @@
 digraph JobGraph {
-  "class LoginEventSystem" -> "class MovementSystem";
-  "class LoginEventSystem" -> "class AnimationTimeSystem";
-  "class LoginEventSystem" -> "class AnimationRefSystem";
-  "class LoginEventSystem" -> "class ColliderUpdateSystem";
-  "class LoginEventSystem" -> "class CollisionSystem";
-  "class MoveEventSystem" -> "class MovementSystem";
-  "class MoveEventSystem" -> "class AnimationTimeSystem";
-  "class MoveEventSystem" -> "class AnimationRefSystem";
-  "class MoveEventSystem" -> "class ColliderUpdateSystem";
-  "class MoveEventSystem" -> "class CollisionSystem";
+  "class EventSystem" -> "class MovementSystem";
+  "class EventSystem" -> "class AnimationStateSystem";
+  "class EventSystem" -> "class AnimationTimeSystem";
+  "class EventSystem" -> "class AnimationRefSystem";
+  "class EventSystem" -> "class ColliderUpdateSystem";
+  "class EventSystem" -> "class CollisionSystem";
+  "class EventSystem" -> "class MovementSystem";
+  "class EventSystem" -> "class AnimationStateSystem";
+  "class EventSystem" -> "class AnimationTimeSystem";
+  "class EventSystem" -> "class AnimationRefSystem";
+  "class EventSystem" -> "class ColliderUpdateSystem";
   "class MovementSystem" -> "class ColliderUpdateSystem";
+  "class AnimationStateSystem" -> "class AnimationTimeSystem";
+  "class AnimationStateSystem" -> "class AnimationTimeSystem";
   "class AnimationTimeSystem" -> "class AnimationRefSystem";
   "class AnimationRefSystem" -> "class ColliderUpdateSystem";
   "class AnimationRefSystem" -> "class CollisionSystem";

@@ -1,6 +1,23 @@
 #pragma once
 
 #include <array>
+#include <variant>
+
+enum class EventType {
+	EV_CONNECT,
+	EV_DISCONNECT,
+	EV_MOVE
+};
+
+namespace std {
+	template<>
+	struct hash<EventType> {
+		size_t operator()(const EventType& id) const noexcept
+		{
+			return std::hash<int>()(static_cast<int>(id));
+		}
+	};
+}
 
 struct ConnectEvent {
 	int sessionId;
@@ -17,8 +34,13 @@ struct MoveEvent {
 	float yaw;
 };
 
-//using GameEvent = std::variant<
-//	ConnectEvent,
-//	DisconnectEvent,
-//	MoveEvent
-//>;
+using EventPayload = std::variant<
+	ConnectEvent,
+	DisconnectEvent,
+	MoveEvent
+>;
+
+struct Event {
+	EventType type;
+	EventPayload payload;
+};

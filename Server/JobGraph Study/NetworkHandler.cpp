@@ -7,7 +7,8 @@ bool NetworkHandler::HandleConnect(int id, const PacketHeader& header, const cha
 	if (not PacketFactory::Deserialize(header, data, &login))
 		return false;
 
-	ConnectEvent ev{ id };
+	ConnectEvent cn{ id };
+	Event ev{ EventType::EV_CONNECT, cn };
 	Framework::Get().eventQueue.push(ev);
 
 	return true;
@@ -19,7 +20,8 @@ bool NetworkHandler::HandleMove(int id, const PacketHeader& header, const char* 
 	if (not PacketFactory::Deserialize(header, data, &move))
 		return false;
 
-	MoveEvent ev{ id, move.inputx(), move.inputz(), move.yaw() };
+	MoveEvent mv{ id, move.inputx(), move.inputz(), move.yaw() };
+	Event ev{ EventType::EV_MOVE, mv };
 	Framework::Get().eventQueue.push(ev);
 
 	return true;

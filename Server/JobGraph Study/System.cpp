@@ -1,6 +1,1 @@
 #include "System.h"
-#include "System.inl"
-#include "Event.h"
-
-//template class EventSystem<ConnectEvent>;
-//template class EventSystem<MoveEvent>;

@@ -1,7 +1,7 @@
 #include "CollisionSystem.h"
 #include "Collision.h"
 
-void CollisionSystem::Update(const float dT)
+void CollisionSystem::Execute(const float dT)
 {
 	auto& colliders = ecs.GetStorage<Collider>();
 

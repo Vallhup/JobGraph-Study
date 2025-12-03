@@ -5,7 +5,7 @@
 #include "Protocol.hpp"
 #include "Protocols/Protocol.pb.h"
 
-void MovementSystem::Update(const float dT)
+void MovementSystem::Execute(const float dT)
 {
 	auto& transforms = ecs.GetStorage<Transform>();
 	auto& velocitys = ecs.GetStorage<Velocity>();
@@ -15,17 +15,6 @@ void MovementSystem::Update(const float dT)
 	{
 		if (auto* vel = velocitys.GetComponent(entity))
 		{
-			/*XMVECTOR dir = XMLoadFloat3(&vel->direction);
-			float lenSq = XMVectorGetX(XMVector3LengthSq(dir));
-			if (lenSq < 1e-6f) continue;
-
-			dir = XMVector3Normalize(dir);
-
-			const float speed = 2.0f;
-			XMVECTOR pos = XMLoadFloat3(&transform.position);
-			pos = XMVectorAdd(pos, XMVectorScale(dir, speed * dT));
-			XMStoreFloat3(&transform.position, pos);*/
-
 			int inputX = vel->inputX;
 			int inputZ = vel->inputZ;
 			float yaw = vel->yaw;

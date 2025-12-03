@@ -1,7 +1,6 @@
 #include "JobGraph.h"
 #include "ThreadPool.h"
 #include <fstream>
-
 #include <ranges>
 
 /*--------------------[ JobNode ]--------------------*/
@@ -40,13 +39,13 @@ JobGraph::~JobGraph()
 		delete node;
 }
 
-void JobGraph::AutoDependencyBuild(const std::vector<LogicSystem*>& systems, float* dTRef)
+void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef)
 {
-	std::unordered_map<LogicSystem*, JobNode*> nodeMap;
+	std::unordered_map<System*, JobNode*> nodeMap;
 
 	for (auto& sys : systems)
 	{
-		JobNode* node = CreateNode<LogicSystemJob>(sys, dTRef);
+		JobNode* node = CreateNode<SystemJob>(sys, dTRef);
 		node->_layer = JobLayer::LOGIC;
 		node->_name = typeid(*sys).name();
 		nodeMap[sys] = node;
@@ -109,34 +108,24 @@ void JobGraph::AutoDependencyBuild(const std::vector<LogicSystem*>& systems, flo
 	Build();
 }
 
-void JobGraph::AddManualDependency(LogicSystem* before, LogicSystem* after)
+void JobGraph::AddManualDependency(System* before, System* after)
 {
 	auto beforeIt = std::find_if(_nodes.begin(), _nodes.end(), 
 		[&](auto* n) 
 		{
-			auto* job = static_cast<LogicSystemJob*>(n->_job.context);
+			auto* job = static_cast<SystemJob*>(n->_job.context);
 			return job->system == before;
 		});
 
 	auto afterIt = std::find_if(_nodes.begin(), _nodes.end(), 
 		[&](auto* n) 
 		{
-			auto* job = static_cast<LogicSystemJob*>(n->_job.context);
+			auto* job = static_cast<SystemJob*>(n->_job.context);
 			return job->system == after;
 		});
 
 	if (beforeIt != _nodes.end() && afterIt != _nodes.end())
 		(*afterIt)->AddDependency(*beforeIt);
-}
-
-void JobGraph::AddEventSystems(const std::vector<EventSystemBase*>& systems)
-{
-	for (auto* system : systems)
-	{
-		auto* node = CreateNode<EventSystemJob>(system);
-		node->_layer = JobLayer::EVENT;
-		node->_name = typeid(*system).name();
-	}
 }
 
 void JobGraph::Schedule(JobNode* node)

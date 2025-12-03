@@ -13,6 +13,7 @@ using namespace DirectX;
 
 enum class AnimationId {
 	None,
+	Knight_Idle,
 	Knight_Walk,
 	Knight_Run
 };

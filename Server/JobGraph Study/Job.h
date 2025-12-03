@@ -12,26 +12,15 @@ struct Job {
 	virtual ~Job() = default;
 };
 
-struct LogicSystemJob : public Job {
-	LogicSystem* system;
+struct SystemJob : public Job {
+	System* system;
 	float* dTRef;
 
-	LogicSystemJob(LogicSystem* s, float* ref) : system(s), dTRef(ref) {}
+	SystemJob(System* s, float* ref) : system(s), dTRef(ref) {}
 	static void Execute(void* ctx)
 	{
-		LogicSystemJob* job = static_cast<LogicSystemJob*>(ctx);
-		job->system->Update(*job->dTRef);
-	}
-};
-
-struct EventSystemJob : public Job {
-	EventSystemBase* system;
-
-	EventSystemJob(EventSystemBase* s) : system(s) {}
-	static void Execute(void* ctx)
-	{
-		EventSystemJob* job = static_cast<EventSystemJob*>(ctx);
-		job->system->ConsumeEvents();
+		SystemJob* job = static_cast<SystemJob*>(ctx);
+		job->system->Execute(*job->dTRef);
 	}
 };
 

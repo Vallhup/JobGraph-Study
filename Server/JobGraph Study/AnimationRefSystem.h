@@ -3,12 +3,12 @@
 #include "ECS.h"
 #include "System.h"
 
-class AnimationRefSystem : public LogicSystem {
+class AnimationRefSystem : public System {
 public:
-	AnimationRefSystem(ECS& e, int p = 0) : LogicSystem(e, p) {}
+	AnimationRefSystem(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~AnimationRefSystem() = default;
 
-	virtual void Update(const float dT) override
+	virtual void Execute(const float dT) override
 	{
 		auto& animRefs = ecs.GetStorage<AnimationRef>();
 		auto& anims = ecs.GetStorage<Animator>();
@@ -40,4 +40,3 @@ public:
 		return { typeid(Collider) };
 	}
 };
-

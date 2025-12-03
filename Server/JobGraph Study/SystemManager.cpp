@@ -1,7 +1,7 @@
 #include "SystemManager.h"
-#include "LoginEventSystem.h"
-#include "MoveEventSystem.h"
+#include "EventSystem.h"
 #include "MovementSystem.h"
+#include "AnimationStateSystem.h"
 #include "AnimationTimeSystem.h"
 #include "AnimationRefSystem.h"
 #include "ColliderUpdateSystem.h"
@@ -9,14 +9,20 @@
 
 void SystemManager::Initalize(ECS& ecs)
 {
-	/* ------- [ Event System ] ------- */
-	RegisterSystem<LoginEventSystem>(ecs, 0);
-	RegisterSystem<MoveEventSystem>(ecs, 1);
-
-	/* ------- [ Logic System ] ------- */
-	RegisterSystem<MovementSystem>(ecs, 2);
+	RegisterSystem<EventSystem>(ecs, 0);
+	RegisterSystem<MovementSystem>(ecs, 1);
+	RegisterSystem<AnimationStateSystem>(ecs, 2);
 	RegisterSystem<AnimationTimeSystem>(ecs, 3);
 	RegisterSystem<AnimationRefSystem>(ecs, 4);
 	RegisterSystem<ColliderUpdateSystem>(ecs, 5);
 	RegisterSystem<CollisionSystem>(ecs, 6);
+}
+
+const std::vector<System*> SystemManager::GetSystems() const
+{
+	std::vector<System*> out;
+	for (const auto& system : _systems)
+		out.push_back(system.get());
+
+	return out;
 }

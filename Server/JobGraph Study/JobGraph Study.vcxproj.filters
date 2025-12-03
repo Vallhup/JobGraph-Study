@@ -59,12 +59,6 @@
     <ClCompile Include="NetworkHandler.cpp">
       <Filter>Network\Event</Filter>
     </ClCompile>
-    <ClCompile Include="LoginEventSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
     <ClCompile Include="Protocols\Struct.pb.cc">
       <Filter>Network\Protocol\Output</Filter>
     </ClCompile>
@@ -74,30 +68,33 @@
     <ClCompile Include="EventQueue.cpp">
       <Filter>Network\Event</Filter>
     </ClCompile>
-    <ClCompile Include="ColliderUpdateSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationTimeSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
     <ClCompile Include="System.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
-    <ClCompile Include="System.inl">
       <Filter>ECS\System</Filter>
     </ClCompile>
     <ClCompile Include="SystemManager.cpp">
       <Filter>ECS\System</Filter>
     </ClCompile>
-    <ClCompile Include="MoveEventSystem.cpp">
-      <Filter>ECS\System</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="AnimationRefSystem.cpp">
-      <Filter>ECS\System</Filter>
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationTimeSystem.cpp">
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderUpdateSystem.cpp">
+      <Filter>ECS\System\Logic\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSystem.cpp">
+      <Filter>ECS\System\Logic\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem.cpp">
+      <Filter>ECS\System\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationStateSystem.cpp">
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementSystem.cpp">
+      <Filter>ECS\System\Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,12 +170,6 @@
     <ClInclude Include="NetworkHandler.h">
       <Filter>Network\Event</Filter>
     </ClInclude>
-    <ClInclude Include="LoginEventSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
     <ClInclude Include="Protocols\Enum.pb.h">
       <Filter>Network\Protocol\Output</Filter>
     </ClInclude>
@@ -187,15 +178,6 @@
     </ClInclude>
     <ClInclude Include="EventQueue.h">
       <Filter>Network\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderUpdateSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationTimeSystem.h">
-      <Filter>ECS\System</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Script</Filter>
@@ -209,15 +191,30 @@
     <ClInclude Include="SystemManager.h">
       <Filter>ECS\System</Filter>
     </ClInclude>
-    <ClInclude Include="MoveEventSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="AnimationRefSystem.h">
-      <Filter>ECS\System</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Utillity\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationRefSystem.h">
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTimeSystem.h">
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderUpdateSystem.h">
+      <Filter>ECS\System\Logic\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>ECS\System\Logic\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem.h">
+      <Filter>ECS\System\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationStateSystem.h">
+      <Filter>ECS\System\Logic\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementSystem.h">
+      <Filter>ECS\System\Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +277,18 @@
     </Filter>
     <Filter Include="Utillity\Collision">
       <UniqueIdentifier>{264fe6af-0ba8-4770-8343-5ccbef068c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\System\Event">
+      <UniqueIdentifier>{265f67d2-a48a-4af4-b8cb-7321e3e1dc22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\System\Logic">
+      <UniqueIdentifier>{be646b46-55f2-4757-984d-b735bac23504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\System\Logic\Collision">
+      <UniqueIdentifier>{4a7223c7-60ee-44fb-a726-0b482c64ffc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ECS\System\Logic\Animation">
+      <UniqueIdentifier>{c5c80a94-223b-4142-aa43-9394638577e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

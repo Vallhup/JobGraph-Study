@@ -2,7 +2,7 @@
 
 #include "Game.h"
 #include "Network.h"
-#include "EventQueue.h"
+#include <concurrent_queue.h>
 
 class Framework {
 public:
@@ -19,7 +19,7 @@ public:
 
 	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
 
-	EventQueue eventQueue;
+	concurrency::concurrent_queue<Event> eventQueue;
 
 	std::unordered_map<int, Entity> sessionToEntity;
 	std::unordered_map<Entity, int> entityToSession;

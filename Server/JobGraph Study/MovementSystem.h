@@ -3,12 +3,12 @@
 #include "System.h"
 #include "Component.h"
 
-class MovementSystem : public LogicSystem {
+class MovementSystem : public System {
 public:
-	MovementSystem(ECS& e, int p = 0) : LogicSystem(e, p) {}
+	MovementSystem(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~MovementSystem() = default;
 
-	virtual void Update(const float dT) override;
+	virtual void Execute(const float dT) override;
 
 	virtual std::vector<std::type_index> ReadComponents() const override
 	{

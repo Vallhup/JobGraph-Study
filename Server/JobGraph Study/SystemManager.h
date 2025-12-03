@@ -20,23 +20,13 @@ public:
 		auto sys = std::make_unique<T>(std::forward<Args>(args)...);
 		T* ptr = sys.get();
 		_systems.push_back(std::move(sys));
-
-		if constexpr (std::is_base_of_v<EventSystemBase, T>)
-			_eventSystems.push_back(static_cast<EventSystemBase*>(ptr));
-
-		else
-			_logicSystems.push_back(static_cast<LogicSystem*>(ptr));
-
 		return ptr;
 	}
 
 	void Initalize(ECS& ecs);
 
-	const std::vector<LogicSystem*>& GetLogicSystems() const { return _logicSystems; }
-	const std::vector<EventSystemBase*>& GetEventSystems() const { return _eventSystems; }
+	const std::vector<System*> GetSystems() const;
 
 private:
 	std::vector<std::unique_ptr<System>> _systems;
-	std::vector<LogicSystem*> _logicSystems;
-	std::vector<EventSystemBase*> _eventSystems;
 };

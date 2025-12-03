@@ -1,7 +1,7 @@
 #include "ColliderUpdateSystem.h"
 #include "Math.h"
 
-void ColliderUpdateSystem::Update(const float dT)
+void ColliderUpdateSystem::Execute(const float dT)
 {
 	auto& transforms = ecs.GetStorage<Transform>();
 	auto& colliders = ecs.GetStorage<Collider>();

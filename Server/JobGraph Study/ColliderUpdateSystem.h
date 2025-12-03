@@ -3,12 +3,12 @@
 #include "ECS.h"
 #include "System.h"
 
-class ColliderUpdateSystem : public LogicSystem {
+class ColliderUpdateSystem : public System {
 public:
-	ColliderUpdateSystem(ECS& e, int p = 0) : LogicSystem(e, p) {}
+	ColliderUpdateSystem(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~ColliderUpdateSystem() = default;
 
-	virtual void Update(const float dT) override;
+	virtual void Execute(const float dT) override;
 
 	virtual std::vector<std::type_index> ReadComponents() const override
 	{

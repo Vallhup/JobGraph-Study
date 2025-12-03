@@ -11,8 +11,7 @@
 class ThreadPool;
 class JobGraph;
 
-class LogicSystem;
-class EventSystemBase;
+class System;
 
 enum class JobLayer {
 	NONE = 0,
@@ -69,9 +68,8 @@ public:
 	template<JobT T, typename... Args>
 	JobNode* CreateNode(Args&&... args);
 
-	void AutoDependencyBuild(const std::vector<LogicSystem*>& systems, float* dTRef);
-	void AddManualDependency(LogicSystem* before, LogicSystem* after);
-	void AddEventSystems(const std::vector<EventSystemBase*>& systems);
+	void AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef);
+	void AddManualDependency(System* before, System* after);
 
 	void Run();
 

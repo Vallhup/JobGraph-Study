@@ -3,12 +3,12 @@
 #include "ECS.h"
 #include "System.h"
 
-class AnimationTimeSystem : public LogicSystem {
+class AnimationTimeSystem : public System {
 public:
-	AnimationTimeSystem(ECS& e, int p = 0) : LogicSystem(e, p) {}
+	AnimationTimeSystem(ECS& e, int p = 0) : System(e, p) {}
 	virtual ~AnimationTimeSystem() = default;
 
-	virtual void Update(const float dT) override
+	virtual void Execute(const float dT) override
 	{
 		auto& states = ecs.GetStorage<AnimationState>();
 		auto& animRefs = ecs.GetStorage<AnimationRef>();
