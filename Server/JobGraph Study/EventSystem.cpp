@@ -50,16 +50,12 @@ void EventSystem::ProcessConnect(const Event& event)
 	ecs.GetStorage<Animator>().AddComponent(entity);
 	ecs.GetStorage<Collider>().AddComponent(entity);
 
-	// TEMP : Login Packet Send
-	int sessionId;
 	auto& ets = Framework::Get().entityToSession;
 	auto it = ets.find(entity);
 	if (it != ets.end())
-		sessionId = it->second;
-	else
-		return;
+		Framework::Get().outEventQueue.push(OutputEvent{ entity, DirtyType::Spawned });
 
-	Protocol::SC_LOGIN_PACKET login;
+	/*Protocol::SC_LOGIN_PACKET login;
 	login.set_sessionid(sessionId);
 
 	SendBuffer data = PacketFactory::Serialize<Protocol::SC_LOGIN_PACKET>(
@@ -74,7 +70,7 @@ void EventSystem::ProcessConnect(const Event& event)
 
 	SendBuffer data2 = PacketFactory::Serialize<Protocol::SC_ADD_PACKET>(
 		PacketType::SC_ADD, add);
-	Framework::Get().network.Broadcast(data2.data());
+	Framework::Get().network.Broadcast(data2.data());*/
 
 	// TODO : 새로 들어온 Session에게 기존 Session ADD Data Send
 }

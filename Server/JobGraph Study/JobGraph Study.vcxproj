@@ -151,6 +151,7 @@
     <ClCompile Include="MovementSystem.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="ObjectPoolManager.cpp" />
+    <ClCompile Include="OutputEventSystem.cpp" />
     <ClCompile Include="Protocols\Enum.pb.cc" />
     <ClCompile Include="Protocols\Protocol.pb.cc" />
     <ClCompile Include="Protocols\Struct.pb.cc" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="ObjectPool.hpp" />
     <ClInclude Include="ObjectPoolManager.h" />
+    <ClInclude Include="OutputEventSystem.h" />
     <ClInclude Include="Protocol.hpp" />
     <ClInclude Include="Protocols\Enum.pb.h" />
     <ClInclude Include="Protocols\Protocol.pb.h" />

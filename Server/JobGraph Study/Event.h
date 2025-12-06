@@ -3,6 +3,8 @@
 #include <array>
 #include <variant>
 
+/* -------- [ Input Event ]-------- */
+
 enum class EventType {
 	EV_CONNECT,
 	EV_DISCONNECT,
@@ -43,4 +45,18 @@ using EventPayload = std::variant<
 struct Event {
 	EventType type;
 	EventPayload payload;
+};
+
+/* -------- [ Output Event ]-------- */
+
+enum class DirtyType {
+	Spawned,
+	Moved,
+	AnimationChanged,
+	StatsChanged
+};
+
+struct OutputEvent {
+	Entity entity;
+	DirtyType type;
 };

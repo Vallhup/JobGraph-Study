@@ -20,6 +20,7 @@ public:
 	static BOOL WINAPI ConsoleHandler(DWORD ctrlType);
 
 	concurrency::concurrent_queue<Event> eventQueue;
+	concurrency::concurrent_queue<OutputEvent> outEventQueue;
 
 	std::unordered_map<int, Entity> sessionToEntity;
 	std::unordered_map<Entity, int> entityToSession;

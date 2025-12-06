@@ -27,10 +27,18 @@ void MovementSystem::Execute(const float dT)
 				XMVectorScale(right, inputX)
 			);
 
+			bool moved{ false };
 			if (XMVectorGetX(XMVector3LengthSq(dir)) > 1e-6f)
+			{
 				dir = XMVector3Normalize(dir);
+				moved = true;
+			}
+				
 			else
+			{
 				dir = XMVectorZero();
+				moved = false;
+			}
 
 			const float speed = 2.0f;
 			XMVECTOR pos = XMLoadFloat3(&transform.position);
@@ -40,8 +48,14 @@ void MovementSystem::Execute(const float dT)
 			XMVECTOR q = XMQuaternionRotationRollPitchYaw(0, yaw, 0);
 			XMStoreFloat4(&transform.rotation, q);
 
+			if (moved)
+			{
+				Framework::Get().outEventQueue.push(OutputEvent{
+					entity, DirtyType::Moved });
+			}
+
 			// TEMP : 이동 패킷 Send
-			auto it = framework.entityToSession.find(entity);
+			/*auto it = framework.entityToSession.find(entity);
 			if (it == framework.entityToSession.end()) continue;
 			int sessionId = it->second;
 
@@ -54,7 +68,9 @@ void MovementSystem::Execute(const float dT)
 
 			SendBuffer data = PacketFactory::Serialize<Protocol::SC_MOVE_PACKET>(
 				PacketType::SC_MOVE_OBJECT, move);
-			Framework::Get().network.Send(sessionId, data.data());
+			Framework::Get().network.Send(sessionId, data.data());*/
+
+
 		}
 	}
 }
