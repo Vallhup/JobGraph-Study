@@ -152,6 +152,7 @@
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="ObjectPoolManager.cpp" />
     <ClCompile Include="OutputEventSystem.cpp" />
+    <ClCompile Include="Protocol.cpp" />
     <ClCompile Include="Protocols\Enum.pb.cc" />
     <ClCompile Include="Protocols\Protocol.pb.cc" />
     <ClCompile Include="Protocols\Struct.pb.cc" />

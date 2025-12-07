@@ -22,7 +22,7 @@ public:
 	void QueuePacket(int id, const void* data);
 	void FlushQueued();
 
-	void Broadcast(const void* data);
+	void Broadcast(const void* data, int exepted = -1);
 
 private:
 	void AddSession(int id, const std::shared_ptr<Session>& session);

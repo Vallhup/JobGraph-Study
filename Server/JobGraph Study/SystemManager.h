@@ -23,10 +23,25 @@ public:
 		return ptr;
 	}
 
-	void Initalize(ECS& ecs);
+	void Initalize(ECS& ecs, JobGraph& graph);
+
+	template<SysT T>
+	System* GetSystem();
 
 	const std::vector<System*> GetSystems() const;
 
 private:
 	std::vector<std::unique_ptr<System>> _systems;
 };
+
+template<SysT T>
+inline System* SystemManager::GetSystem()
+{
+	for (const auto& sys : _systems)
+	{
+		if (auto* casted = dynamic_cast<T*>(sys.get()))
+			return casted;
+	}
+
+	return nullptr;
+}

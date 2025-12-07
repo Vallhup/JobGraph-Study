@@ -4,10 +4,6 @@
 #include "Entity.h"
 #include "Component.h"
 
-#include "Protocol.hpp"
-#include "Protocols/Protocol.pb.h"
-#include "EventSystem.h"
-
 EventSystem::EventSystem(ECS& e, int p) : System(e, p) 
 {
 	_handlers[EventType::EV_CONNECT] = [&](const Event& ev) { ProcessConnect(ev); };
@@ -54,29 +50,11 @@ void EventSystem::ProcessConnect(const Event& event)
 	auto it = ets.find(entity);
 	if (it != ets.end())
 		Framework::Get().outEventQueue.push(OutputEvent{ entity, DirtyType::Spawned });
-
-	/*Protocol::SC_LOGIN_PACKET login;
-	login.set_sessionid(sessionId);
-
-	SendBuffer data = PacketFactory::Serialize<Protocol::SC_LOGIN_PACKET>(
-		PacketType::SC_LOGIN, login);
-	Framework::Get().network.Send(sessionId, data.data());
-
-	Protocol::SC_ADD_PACKET add;
-	add.set_sessionid(sessionId);
-	add.set_x(0);
-	add.set_y(0);
-	add.set_z(0);
-
-	SendBuffer data2 = PacketFactory::Serialize<Protocol::SC_ADD_PACKET>(
-		PacketType::SC_ADD, add);
-	Framework::Get().network.Broadcast(data2.data());*/
-
-	// TODO : 새로 들어온 Session에게 기존 Session ADD Data Send
 }
 
 void EventSystem::ProcessDisconnect(const Event& event)
 {
+
 }
 
 void EventSystem::ProcessMove(const Event& event)
@@ -84,12 +62,14 @@ void EventSystem::ProcessMove(const Event& event)
 	const auto* p = std::get_if<MoveEvent>(&event.payload);
 	if (!p) return;
 
-	auto& velocity = ecs.GetStorage<Velocity>();
+	auto it = Framework::Get().sessionToEntity.find(p->sessionId);
+	if (it == Framework::Get().sessionToEntity.end()) return;
+	Entity entity = it->second;
 
-	for (const auto& [entity, vel] : velocity)
+	if (auto* velocity = ecs.GetStorage<Velocity>().GetComponent(entity))
 	{
-		vel.inputX = p->inputX;
-		vel.inputZ = p->inputZ;
-		vel.yaw = p->yaw;
+		velocity->inputX = p->inputX;
+		velocity->inputZ = p->inputZ;
+		velocity->yaw = p->yaw;
 	}
 }

@@ -46,7 +46,6 @@ void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* d
 	for (auto& sys : systems)
 	{
 		JobNode* node = CreateNode<SystemJob>(sys, dTRef);
-		node->_layer = JobLayer::LOGIC;
 		node->_name = typeid(*sys).name();
 		nodeMap[sys] = node;
 	}
@@ -105,7 +104,7 @@ void JobGraph::AutoDependencyBuild(const std::vector<System*>& systems, float* d
 		}
 	}
 
-	Build();
+	//Build();
 }
 
 void JobGraph::AddManualDependency(System* before, System* after)
@@ -142,17 +141,6 @@ void JobGraph::Schedule(JobNode* node)
 
 void JobGraph::Build()
 {
-	for (auto* A : _nodes)
-	{
-		for (auto* B : _nodes)
-		{
-			if (A == B) continue;
-			if (A->_layer == JobLayer::EVENT and
-				B->_layer == JobLayer::LOGIC)
-				B->AddDependency(A);
-		}
-	}
-
 	for (JobNode* node : _nodes)
 		node->_initDeps = node->_deps;
 

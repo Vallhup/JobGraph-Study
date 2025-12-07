@@ -3,6 +3,8 @@
 #include <array>
 #include <variant>
 
+#include "Entity.h"
+
 /* -------- [ Input Event ]-------- */
 
 enum class EventType {

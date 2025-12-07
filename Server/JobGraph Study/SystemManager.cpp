@@ -6,8 +6,9 @@
 #include "AnimationRefSystem.h"
 #include "ColliderUpdateSystem.h"
 #include "CollisionSystem.h"
+#include "OutputEventSystem.h"
 
-void SystemManager::Initalize(ECS& ecs)
+void SystemManager::Initalize(ECS& ecs, JobGraph& graph)
 {
 	RegisterSystem<EventSystem>(ecs, 0);
 	RegisterSystem<MovementSystem>(ecs, 1);
@@ -16,6 +17,7 @@ void SystemManager::Initalize(ECS& ecs)
 	RegisterSystem<AnimationRefSystem>(ecs, 4);
 	RegisterSystem<ColliderUpdateSystem>(ecs, 5);
 	RegisterSystem<CollisionSystem>(ecs, 6);
+	RegisterSystem<OutputEventSystem>(ecs, 7);
 }
 
 const std::vector<System*> SystemManager::GetSystems() const

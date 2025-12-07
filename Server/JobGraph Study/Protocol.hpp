@@ -28,6 +28,10 @@ template<typename T>
 concept ProtoT = std::is_base_of_v<google::protobuf::MessageLite, T>;
 
 struct PacketFactory {
+	static SendBuffer SCLoginPacket(int sessionId);
+	static SendBuffer SCAddPacket(int sessionId, float x, float y, float z);
+	static SendBuffer SCMovePacket(int sessionId, float x, float y, float z, float yaw);
+
 	template<ProtoT T>
 	static SendBuffer Serialize(PacketType type, const T& data)
 	{

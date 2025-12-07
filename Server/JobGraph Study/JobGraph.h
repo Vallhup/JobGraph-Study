@@ -13,12 +13,6 @@ class JobGraph;
 
 class System;
 
-enum class JobLayer {
-	NONE = 0,
-	EVENT = 1,
-	LOGIC = 2
-};
-
 struct JobData {
 	void (*func)(void*);
 	void* context;
@@ -30,7 +24,7 @@ class alignas(64) JobNode {
 public:
 	explicit JobNode(const JobData& job, JobGraph* graph) 
 		: _job(job), _graph(graph), _deps(0), _initDeps(0), 
-		_done(false), _layer(JobLayer::NONE) {}
+		_done(false) {}
 
 	void AddDependency(JobNode* dependency);
 	void Execute();
@@ -41,7 +35,6 @@ public:
 	
 protected:
 	JobData _job;
-	JobLayer _layer;
 	JobGraph* _graph;
 	std::vector<JobNode*> _dependents;
 	std::atomic<int> _deps;
@@ -71,13 +64,13 @@ public:
 	void AutoDependencyBuild(const std::vector<System*>& systems, float* dTRef);
 	void AddManualDependency(System* before, System* after);
 
+	void Build();
 	void Run();
 
 	const std::vector<Job*>& GetJobs() const { return _allocatedJobs; }
 
 private:
 	void Schedule(JobNode* node);
-	void Build();
 	void NotifyJobDone();
 
 	void DumpDot(std::string_view fileName) const;

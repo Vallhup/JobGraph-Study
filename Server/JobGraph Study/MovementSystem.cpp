@@ -53,24 +53,6 @@ void MovementSystem::Execute(const float dT)
 				Framework::Get().outEventQueue.push(OutputEvent{
 					entity, DirtyType::Moved });
 			}
-
-			// TEMP : 이동 패킷 Send
-			/*auto it = framework.entityToSession.find(entity);
-			if (it == framework.entityToSession.end()) continue;
-			int sessionId = it->second;
-
-			Protocol::SC_MOVE_PACKET move;
-			move.set_sessionid(sessionId);
-			move.set_x(transform.position.x);
-			move.set_y(transform.position.y);
-			move.set_z(transform.position.z);
-			move.set_yaw(yaw);
-
-			SendBuffer data = PacketFactory::Serialize<Protocol::SC_MOVE_PACKET>(
-				PacketType::SC_MOVE_OBJECT, move);
-			Framework::Get().network.Send(sessionId, data.data());*/
-
-
 		}
 	}
 }

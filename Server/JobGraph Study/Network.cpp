@@ -60,11 +60,12 @@ void Network::FlushQueued()
 	// TODO : Packet Queue ¸ðµÎ ²¨³»¼­ Send
 }
 
-void Network::Broadcast(const void* data)
+void Network::Broadcast(const void* data, int exepted)
 {
 	std::lock_guard lock{ _mtx };
 	for (auto& [id, session] : _sessions)
 	{
+		if (exepted == id) continue;
 		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
 		session->Send(data, header->size);
 	}

@@ -99,6 +99,9 @@
     <ClCompile Include="OutputEventSystem.cpp">
       <Filter>ECS\System\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Protocol.cpp">
+      <Filter>Network\Protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Job.h">
